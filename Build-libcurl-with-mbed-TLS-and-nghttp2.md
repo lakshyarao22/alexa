@@ -1,5 +1,3 @@
-# Build libcurl with mbed TLS and nghttp2
-
 This document provides step-by-step instructions to build libcurl with mbed TLS and nghttp2 in `*nix` systems.
 
 We recommend that you use separate directories to keep track of your optimized builds, especially if you use these libraries elsewhere. For example, if you are building the Alexa Client SDK on a Linux machine that you use daily, installing these optimized versions will most likely break other operations. Therefore, in this document we will assume that the principle working directory is `$WD`.
