@@ -1,5 +1,5 @@
 **Guides**  
 
-* [Quick Start Guide](https://github.com/alexa/alexa-client-sdk)   
+* [Quick Start Guide](https://github.com/alexa/alexa-client-sdk/blob/master/README.md)   
 * [Optimize libcurl for Size](https://github.com/alexa/alexa-client-sdk/wiki/Optimize-libcurl)
 * [Build libcurl with mbed TLS and nghttp2](https://github.com/alexa/alexa-client-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2)
