@@ -157,6 +157,8 @@ Run these commands to download and build from source:
 ```bash
 cd $SOURCE_FOLDER
 wget http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+tar xzf pa_stable_v190600)20161030.tgz
+cd portaudio
 ./configure --prefix=/usr
 make
 sudo make install
