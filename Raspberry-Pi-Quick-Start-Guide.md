@@ -8,11 +8,14 @@ Here's what you need to do:
 2. Install and configure dependencies for AVS Device SDK on your Raspberry Pi.
 3. Build the SDK and run the sample app on your Raspberry Pi.
 
+
 ### 1. Register Your Device with Amazon
 
 Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You’ll use the client ID and client secret to retrieve access and refresh tokens that are used to communicate with Alexa. Please note that the allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
 
 After you register the device, go to the *General* tab under *Security Profile*, and make a note of the clientID, clientSecret, and deviceTypeID. You will need this information to configure the AuthServer.
+
+
 
 ### 2. Install and Configure Dependencies for AVS Device SDK on Your Raspberry Pi
 
@@ -107,9 +110,9 @@ SQLite is required for Alerts. To install, run this command:
 sudo apt-get install libsqlite3-dev
 ```
 
----
-**IMPORTANT**: The following dependencies are required to use the included `MediaPlayer` implementation and to build the sample app.  
----
+
+The dependencies that follow are required to use the included `MediaPlayer` implementation and to build the sample app.
+
 
 #### 2.5: Build `gstreamer` libraries
 
