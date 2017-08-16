@@ -2,7 +2,8 @@
 
 Please note the following for this release:
 * Native components for the following capability agents are **not** included in v1.0 and will be added in future releases: `PlaybackController`, `Speaker`, and `Settings`.
-* iHeartRadio is supported. Support for additional audio codecs, containers, streaming formats, and playlists will be included in future releases.
+* The SDK is compatible with iHeartRadio. Compatibility with additional audio codecs, containers, streaming formats, and playlists is being considered for future releases.  
+
 
 ## Overview
 
@@ -25,15 +26,15 @@ To quickly setup your Raspberry Pi development environment or to learn how to op
 
 ## Common Terms
 
-* **Interface** - A collection of logically grouped messages called **directives** and **events**, which correspond to client functionality, such speech recognition, audio playback, and volume control.
+* **Interface** - A collection of logically grouped messages called **directives** and **events**, which correspond to client functionality, such speech recognition, audio playback, and volume control.  
 * **Directives** - Messages sent from AVS that instruct your product to take action.
 * **Events** - Messages sent from your product to AVS notifying AVS something has occurred.
-* **Downchannel** - A stream you create in your HTTP/2 connection, which is used to deliver directives from AVS to your product. The downchannel remains open in a half-closed state from the device and open from AVS for the life of the connection. The downchannel is primarily used to send cloud-initiated directives to your product.
-* **Cloud-initiated Directives** - Directives sent from AVS to your product. For example, when a user adjusts device volume from the Amazon Alexa App, a directive is sent to your product without a corresponding voice request.
+* **Downchannel** - A stream you create in your HTTP/2 connection, which is used to deliver directives from AVS to your product. The downchannel remains open in a half-closed state from the device and open from AVS for the life of the connection. The downchannel is primarily used to send cloud-initiated directives to your product.  
+* **Cloud-initiated Directives** - Directives sent from AVS to your product. For example, when a user adjusts device volume from the Amazon Alexa App, a directive is sent to your product without a corresponding voice request.  
 
 ## Minimum Requirements and Dependencies
 
-Instructions are available to help you quickly [setup a development environment for RaspberryPi](#resources-and-guides), and [build libcurl with nghttp2 for macOS](#resources-and-guides).
+Instructions are available to help you quickly [setup a development environment for RaspberryPi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide), and [build libcurl with nghttp2 for macOS](https://github.com/alexa/avs-device-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2).  
 
 ### Core Dependencies
 * C++ 11 or later
@@ -131,7 +132,7 @@ To specify a build type, use this command in place of step 4 below:
 
 **Note**: Wake word detector and key word detector (KWD) are used interchangeably.
 
-The AVS Device SDK for C++ supports wake word detectors from [Sensory](https://github.com/Sensory/alexa-rpi) and [KITT.ai](https://github.com/Kitt-AI/snowboy/). The following options are required to build with a wake word detector, please replace `<wake-word-name>` with `SENSORY` for Sensory, and `KITTAI` for KITT.ai:
+The AVS Device SDK for C++ is compatible with wake word detectors from [Sensory](https://github.com/Sensory/alexa-rpi) and [KITT.ai](https://github.com/Kitt-AI/snowboy/). The following options are required to build with a wake word detector, please replace `<wake-word-name>` with `SENSORY` for Sensory, and `KITTAI` for KITT.ai:
 
 * `-D<wake-word-name>_KEY_WORD_DETECTOR=<ON or OFF>` - Specifies if the wake word detector is enabled or disabled during build.
 * `-D<wake-word-name>_KEY_WORD_DETECTOR_LIB_PATH=<path-to-lib>` - The path to the wake word detector library.
@@ -149,7 +150,7 @@ This is an example `cmake` command to build with Sensory:
 cmake <path-to-source> -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=.../alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=.../alexa-rpi/include
 ```
 
-Note that you may need to license the Sensory library for use prior to running cmake and building it into the SDK. A script to license the Sensory library can be found on the Sensory [Github](https://github.com/Sensory/alexa-rpi) page under `bin/license.sh`.
+**Note**: You will need to obtain a license for the Sensory library prior to running CMake and building it into the SDK. A script to license the Sensory library can be found on the Sensory [Github](https://github.com/Sensory/alexa-rpi) page under `bin/license.sh`.
 
 #### KITT.ai
 
@@ -304,7 +305,7 @@ If the project was built with the KITT.ai wake word detector, the following file
 
 **Note**: Building with PortAudio and GStreamer is required.
 
-Before you run the sample app, it's important to note that the application takes two arguments. The first is required, and is the path to `AlexaClientSDKConfig.json`. The second is only required if you are building the sample app with wake word support, and is the path of the of the folder containing the wake word engine models.
+Before you run the sample app, it's important to note that the application takes two arguments. The first is required, and is the path to `AlexaClientSDKConfig.json`. The second is only required if you are building the sample app with wake word support, and is in the path of the folder containing the wake word engine models.
 
 Navigate to the `SampleApp/src` folder from your build directory. Then run this command:
 

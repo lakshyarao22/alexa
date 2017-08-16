@@ -10,8 +10,8 @@ The AVS Device SDK for C++ provides a C++ (11 or later) interface for the Alexa 
 ## Build
 You can set up the SDK on the following platforms:
 
-* [Linux/macOS]()  
-* [Raspberry Pi]() - includes an implementation of the sample app  
+* [Linux/macOS](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)  
+* [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) - includes an implementation of the sample app  
 
 ## Optimize  
 
