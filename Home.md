@@ -1,7 +1,9 @@
 
 ## What is the Alexa Voice Service (AVS)?
 
-The Alexa Voice Service (AVS) enables developers to integrate Alexa directly into their products, bringing the convenience of voice control to any connected device. AVS provides developers with a full suite of resources to quickly and easily build Alexa-enabled products, including APIs, hardware development kits, software development kits, and documentation. Learn more >>
+The Alexa Voice Service (AVS) enables developers to integrate Alexa directly into their products, bringing the convenience of voice control to any connected device. AVS provides developers with a full suite of resources to quickly and easily build Alexa-enabled products, including APIs, hardware development kits, software development kits, and documentation.
+
+[Learn more >>](https://developer.amazon.com/alexa-voice-service)  
 
 ## Overview of the AVS Device SDK
 
