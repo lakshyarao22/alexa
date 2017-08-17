@@ -298,7 +298,7 @@ Make sure that you don’t have any extra characters (or spaces) in the paths. T
 
 You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
 
-A database is required to store scheduled alerts. In your config file, include the file path location to the database you wish to use to store and read alerts from. A database file will be created for you if the database does not already exist.
+A database is required to store scheduled alerts. In your config file, include the file path location to the database you wish to use to store and read alerts from. A database file will be created at that location if the database does not already exist. For example "/home/anExistingFolder/anotherExistingFolder/alerts.db".
 
 
 #### 3.4 Make Install
