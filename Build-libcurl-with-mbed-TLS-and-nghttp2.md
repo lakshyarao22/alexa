@@ -60,9 +60,3 @@ We recommend that you use separate directories to keep track of your optimized b
      * After creating your Integration/AuthDelegate.config file (see [README.md](https://github.com/alexa/alexa-client-sdk)), run integration tests with this command: `make integration`.
 
 That is it, you have build libcurl with mbed TLS and nghttp2. Click here to return to [README.md](https://github.com/alexa/alexa-client-sdk).
-
-## Release Notes   
-
-| Version | Release Date | Notes |
-|---------|--------------|-------|  
-| v1.0 | 3/8/2017 | Initial release. |
