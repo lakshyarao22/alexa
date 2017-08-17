@@ -294,7 +294,7 @@ open the **AlexaClientSDKConfig.json** file in the **Integration** folder. Fill 
  }
 ```
 
-Make sure that you don’t have any extra characters (or spaces) in the paths. The config also contains paths to sound files and the wake word engine. For this exercise, point the wake word engine to the Sensory path (see step 2.7.2).
+Make sure that you don’t have any extra characters (or spaces) in the paths. The config also contains paths to sound files that will be used to play sounds for Alarms and Timers.
 
 You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
 
