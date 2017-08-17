@@ -228,7 +228,7 @@ bash alexa-rpi/bin/license.sh
 
 cp alexa-rpi/lib/libsnsr.a $LOCAL_BUILD/lib
 cp alexa-rpi/include/snsr.h $LOCAL_BUILD/include
-cp alexa-rpi/models/ spot-alexa-rpi-31000.snsr $LOCAL_BUILD/models
+cp alexa-rpi/models/spot-alexa-rpi-31000.snsr $LOCAL_BUILD/models
 ```
 
 #### 2.8: Make sure everything is up to date
