@@ -20,7 +20,11 @@ You can set up the SDK on the following platforms:
 The following guides walk you through SDK optimizations:
 
 * [Optimize libcurl size for *nix systems](https://github.com/alexa/alexa-client-sdk/wiki/Optimize-libcurl)
-* [Build libcurl with mbed TLS and nghttp2 for *nix systems](https://github.com/alexa/alexa-client-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2)
+* [Build libcurl with mbed TLS and nghttp2 for *nix systems](https://github.com/alexa/alexa-client-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2)  
+
+## Read the Docs  
+
+* [AVS Device SDK API Documentation](https://alexa.github.io/avs-device-sdk/)  
 
 ## Support  
 
