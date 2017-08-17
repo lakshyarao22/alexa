@@ -201,6 +201,8 @@ Run these commands to download and build from source:
 ```bash
 cd $SOURCE_FOLDER
 wget http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+tar xf pa_stable_v190600_20161030.tgz
+cd *portaudio*/
 ./configure --prefix=$LOCAL_BUILD
 make
 sudo make install
@@ -228,6 +230,7 @@ bash alexa-rpi/bin/license.sh
 
 cp alexa-rpi/lib/libsnsr.a $LOCAL_BUILD/lib
 cp alexa-rpi/include/snsr.h $LOCAL_BUILD/include
+mkdir $LOCAL_BUILD/models
 cp alexa-rpi/models/spot-alexa-rpi-31000.snsr $LOCAL_BUILD/models
 ```
 
