@@ -107,7 +107,7 @@ sudo make install
 SQLite is required for Alerts. To install, run this command:
 
 ```
-sudo apt-get install libsqlite3-dev
+sudo apt-get install sqlite3 libsqlite3-dev
 ```
 
 
