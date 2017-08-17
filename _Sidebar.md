@@ -10,6 +10,7 @@
 
 **Support** 
 * [How to Build libcurl with nghttp2 for macOS](https://github.com/alexa/alexa-client-sdk/wiki/How-to-build-libcurl-with-nghttp2-for-macos)  
+* [Runtime Configuration for CA Certificates](https://github.com/alexa/avs-device-sdk/wiki/Runtime-Configuration-for-CA-Certificates)
 
 **Issue Reporting**   
 * [Issue Reporting Guide](https://github.com/alexa/avs-device-sdk/wiki/Issue-Reporting-Guide)
