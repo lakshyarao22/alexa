@@ -124,6 +124,13 @@ Run this command:
 sudo apt-get install bison flex libglib2.0-dev libasound2-dev pulseaudio libpulse-dev
 ```
 
+The following are also required to playback audio from iHeartRadio:
+
+```bash
+sudo apt-get install libfaad-dev libsoup2.4-dev libgcrypt20-dev
+```
+ 
+
 ##### 2.5.1: Build `gstreamer-1.10.4`
 
 ```bash
@@ -148,19 +155,7 @@ make
 sudo make install
 ```
 
-##### 2.5.3: Build `gst-plugins-good-1.10.4`  
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.10.4.tar.xz
-tar xf gst-plugins-good-1.10.4.tar.xz
-cd *gst-plugins-good*/
-./configure --prefix=$LOCAL_BUILD
-make
-sudo make install
-```
-
-##### 2.5.4: Build `gst-libav-1.10.4`  
+##### 2.5.3: Build `gst-libav-1.10.4`  
 
 ```bash
 cd $SOURCE_FOLDER
@@ -172,15 +167,19 @@ make
 sudo make install
 ```
 
-##### 2.5.5: Install iHeartRadio Dependencies
-
-The following dependencies are required to playback audio from iHeartRadio:
+##### 2.5.4: Build `gst-plugins-good-1.10.4`  
 
 ```bash
-sudo apt-get install libfaad-dev libsoup2.4-dev libgcrypt20-dev
+cd $SOURCE_FOLDER
+wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.10.4.tar.xz
+tar xf gst-plugins-good-1.10.4.tar.xz
+cd *gst-plugins-good*/
+./configure --prefix=$LOCAL_BUILD
+make
+sudo make install
 ```
 
-##### 2.5.6: Build `gst-plugins-bad-1.10.4` (Needed for iHeartRadio)
+##### 2.5.5: Build `gst-plugins-bad-1.10.4` (Needed for iHeartRadio)
 
 ```bash
 cd $SOURCE_FOLDER
