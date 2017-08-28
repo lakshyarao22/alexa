@@ -66,7 +66,7 @@ Then configure, build, and install with these commands:
 ```bash
 cd $SOURCE_FOLDER/*nghttp2*/
 ./configure --prefix=$LOCAL_BUILD --disable-app
-make
+make -j3
 sudo make install
 ```
 
@@ -82,7 +82,7 @@ wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2a.tar.gz
 tar xzf openssl-1.0.2a.tar.gz
 cd *openssl*/
 ./config --prefix=$LOCAL_BUILD --openssldir=$LOCAL_BUILD shared
-make
+make -j3
 sudo make install
 ```
 
@@ -98,7 +98,7 @@ wget https://curl.haxx.se/download/curl-7.50.2.tar.gz
 tar xzf curl-7.50.2.tar.gz
 cd *curl*/
 ./configure --with-ssl=$LOCAL_BUILD --with-nghttp2=$LOCAL_BUILD --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -139,7 +139,7 @@ wget https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.10.4.tar.xz
 tar xf gstreamer-1.10.4.tar.xz
 cd *gstreamer*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -151,7 +151,7 @@ wget https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.1
 tar xf gst-plugins-base-1.10.4.tar.xz
 cd *gst-plugins-base*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -163,7 +163,7 @@ wget https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.10.4.tar.xz
 tar xf gst-libav-1.10.4.tar.xz
 cd *gst-libav*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -175,7 +175,7 @@ wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.1
 tar xf gst-plugins-good-1.10.4.tar.xz
 cd *gst-plugins-good*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -187,7 +187,7 @@ wget https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.10.
 tar xf gst-plugins-bad-1.10.4.tar.xz
 cd *gst-plugins-bad*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -203,7 +203,7 @@ wget http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
 tar xf pa_stable_v190600_20161030.tgz
 cd *portaudio*/
 ./configure --prefix=$LOCAL_BUILD
-make
+make -j3
 sudo make install
 ```
 
@@ -223,7 +223,7 @@ sudo ldconfig
 
 ```bash
 cd $SOURCE_FOLDER
-git clone https://github.com/Sensory/alexa-rpi.git
+git clone git://github.com/Sensory/alexa-rpi.git
 
 bash alexa-rpi/bin/license.sh
 
@@ -306,7 +306,7 @@ After the JSON file has been filled and double-checked, go into the build direct
 
 ```
 cd $HOME/BUILD
-make
+make -j3
 make install
 ```
 
