@@ -249,6 +249,15 @@ sudo apt-get update
 [Github](https://github.com/alexa/avs-device-sdk) repository on your
 Raspberry Pi.
 
+```
+cd $HOME
+mkdir AVS_SDK
+cd AVS_SDK
+git clone git://github.com/alexa/avs-device-sdk
+echo "export SDK_SRC=$HOME/AVS_SDK/avs-device-sdk" >> $HOME/.bash_aliases
+source $HOME/.bashrc
+```
+
 #### 3.2: Create an SDK build with Sensory, GStreamer, and PortAudio:
 
 Assuming $SDK\_SRC is SDK source location.
