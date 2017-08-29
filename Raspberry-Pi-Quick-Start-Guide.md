@@ -253,7 +253,7 @@ Raspberry Pi.
 cd $HOME
 mkdir AVS_SDK
 cd AVS_SDK
-git clone git://github.com/alexa/avs-device-sdk
+git clone git://github.com/alexa/avs-device-sdk.git
 echo "export SDK_SRC=$HOME/AVS_SDK/avs-device-sdk" >> $HOME/.bash_aliases
 source $HOME/.bashrc
 ```
