@@ -70,7 +70,7 @@ Building the sample app is optional, but requires:
 ### Music Provider Dependencies  
 
 The following codecs and packages are required for iHeartRadio playback:  
-* [GStreamer Bad Plugins 1.8](https://gstreamer.freedesktop.org/releases/gst-plugins-bad/1.8.0.html) or later.  
+* [GStreamer Bad Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-bad/1.10.4.html) or later.  
 * [Crypto Library](https://gnupg.org/software/libgcrypt/index.html) for HLS demuxers.
 * [libsoup]( https://wiki.gnome.org/Projects/libsoup) an HTTP client/server library used by GStreamer.
 * [libfaad-dev](https://github.com/dsvensson/faad2) - AAC and HE-AAC decoding.
