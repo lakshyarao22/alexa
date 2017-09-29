@@ -50,12 +50,13 @@ Instructions are available to help you quickly [setup a development environment 
 
 ### MediaPlayer Reference Implementation Dependencies
 Building the reference implementation of the `MediaPlayerInterface` (the class `MediaPlayer`) is optional, but requires:  
-* [GStreamer 1.8](https://gstreamer.freedesktop.org/documentation/installing/index.html) or later and the following GStreamer plug-ins:  
-**IMPORTANT NOTE FOR MACOS**: GStreamer 1.10.4 has been validated for macOS. GStreamer 1.12 **does not** work.    
-* [GStreamer Base Plugins 1.8](https://gstreamer.freedesktop.org/releases/gst-plugins-base/1.8.0.html) or later.
-* [GStreamer Good Plugins 1.8](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.8.0.html) or later.
-* [GStreamer Libav Plugin 1.8](https://gstreamer.freedesktop.org/releases/gst-libav/1.8.0.html) or later **OR**
-* [GStreamer Ugly Plugins 1.8](https://gstreamer.freedesktop.org/releases/gst-plugins-ugly/1.8.0.html) or later, for decoding MP3 data.
+* [GStreamer 1.10.4](https://gstreamer.freedesktop.org/documentation/installing/index.html) and the following GStreamer plug-ins:  
+**IMPORTANT NOTE FOR MACOS**: GStreamer 1.10.4 has been validated for macOS. GStreamer 1.12 **does not** work. 
+**IMPORTANT NOTE FOR LINUX**: GStreamer 1.8 **does not** work.     
+* [GStreamer Base Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-base/1.10.4.html) or later.
+* [GStreamer Good Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.10.4.html) or later.
+* [GStreamer Libav Plugin 1.10.4](https://gstreamer.freedesktop.org/releases/gst-libav/1.10.4.html) or later **OR**
+* [GStreamer Ugly Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-ugly/1.10.4.html) or later, for decoding MP3 data.
 
 **NOTE**: The plugins may depend on libraries which need to be installed for the GStreamer based `MediaPlayer` to work correctly.  
 
