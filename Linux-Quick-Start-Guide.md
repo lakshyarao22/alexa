@@ -33,7 +33,7 @@ To quickly setup your Raspberry Pi development environment or to learn how to op
 
 ## Minimum Requirements and Dependencies  
 
-Instructions are available to help you quickly [setup a development environment for RaspberryPi](#resources-and-guides), and [build libcurl with nghttp2 for macOS](#resources-and-guides).
+Instructions are available to help you quickly [setup a development environment for RaspberryPi](../Raspberry-Pi-Quick-Start-Guide) and [build libcurl with nghttp2 for macOS](../How-to-build-libcurl-with-nghttp2-for-macos).
 
 ### Core Dependencies  
 * C++ 11 or later
@@ -46,12 +46,12 @@ Instructions are available to help you quickly [setup a development environment 
 * [SQLite 3.19.3](https://www.sqlite.org/download.html) or later (required for Alerts)  
 * For Alerts to work as expected:  
   * The device system clock must be set to UTC time. We recommend using `NTP` to do this   
-  * A filesystem is required  
+  * A file system is required  
 
 ### MediaPlayer Reference Implementation Dependencies
 Building the reference implementation of the `MediaPlayerInterface` (the class `MediaPlayer`) is optional, but requires:  
 * [GStreamer 1.10.4](https://gstreamer.freedesktop.org/documentation/installing/index.html) and the following GStreamer plug-ins:  
-**IMPORTANT NOTE FOR MACOS**: GStreamer 1.10.4 has been validated for macOS. GStreamer 1.12 **does not** work. 
+**IMPORTANT NOTE FOR MACOS**: GStreamer 1.10.4 has been validated for macOS. GStreamer 1.12 **does not** work.
 **IMPORTANT NOTE FOR LINUX**: GStreamer 1.8 **does not** work.     
 * [GStreamer Base Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-base/1.10.4.html) or later.
 * [GStreamer Good Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.10.4.html) or later.
@@ -99,7 +99,7 @@ For Unix/Mac run this command:
 pip install --user flask requests
 ```
 
-### Step 3: Obtain Your Device Type ID, Cliend ID, and Client Secret
+### Step 3: Obtain Your Product ID, Cliend ID, and Client Secret
 
 If you haven't already, follow these instructions to [register a product and create a security profile](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile).
 
@@ -215,10 +215,10 @@ The layout of the file is as follows:
 ```json
 {
   "authDelegate":{
-    "deviceTypeId":"<Device Type ID for your device on the Developer portal>",
-    "clientId":"<ClientID for the security profile of the device>",
-    "clientSecret":"<ClientSecret for the security profile of the device>",
-    "deviceSerialNumber":"<a unique number for your device>"
+    "deviceTypeId":"<Product ID for your device from the Amazon Developer Portal>",
+    "clientId":"<Client ID for your device from the Amazon Developer Portal>",
+    "clientSecret":"<Client Secret for your device from the Amazon Developer Portal>",
+    "deviceSerialNumber":"<A unique value that you create, similar to a SKU or UPC. E.g. "123456">"
   },
   "alertsCapabilityAgent": {
     "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
