@@ -280,7 +280,15 @@ cmake $SDK_SRC -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PA
 #### 3.3 Update AlexaClientSDKConfig.json
 
 After you create the out-of-source build, go to the build directory and use your favorite text editor to
-open the **AlexaClientSDKConfig.json** file in the **Integration** folder. Fill in the information you noted during device registration.
+open the **AlexaClientSDKConfig.json** file in the **Integration** folder. Fill in the information you noted during device registration.  
+
+**IMPORTANT NOTES**  
+
+* The `deviceSerialNumber` is a unique identifier that you create. It is **not** provided by Amazon. For example: `"123456"`.      
+* The `deviceTypeId` must match your device's **Product ID** located in the [Amazon Developer Console](developer.amazon.com/login.html).  
+* Audio assets included in this repository are licensed as "Alexa Materials" under the [Alexa Voice
+Service Agreement](https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/support/terms-and-agreements).  
+* A database is required to store scheduled alerts. In your config file, include the file path location to the database you wish to use to store and read alerts from. A database file will be created at that location if the database does not already exist. For example "/home/anExistingFolder/anotherExistingFolder/alerts.db".  
 
 ```json
  {
@@ -293,20 +301,16 @@ open the **AlexaClientSDKConfig.json** file in the **Integration** folder. Fill 
      },
 
    "alertsCapabilityAgent":{
-     "databaseFilePath":"${SDK_SQLITE_DATABASE_FILE_PATH}",
-     "alarmSoundFilePath":"${SDK_ALARM_DEFAULT_SOUND_FILE_PATH}",
-     "alarmShortSoundFilePath":"${SDK_ALARM_SHORT_SOUND_FILE_PATH}",
-     "timerSoundFilePath":"${SDK_TIMER_DEFAULT_SOUND_FILE_PATH}",
-     "timerShortSoundFilePath":"${SDK_TIMER_SHORT_SOUND_FILE_PATH}"
+       "databaseFilePath":"${SDK_SQLITE_DATABASE_FILE_PATH}",
+       "alarmSoundFilePath":"${SDK_ALARM_DEFAULT_SOUND_FILE_PATH}",
+       "alarmShortSoundFilePath":"${SDK_ALARM_SHORT_SOUND_FILE_PATH}",
+       "timerSoundFilePath":"${SDK_TIMER_DEFAULT_SOUND_FILE_PATH}",
+       "timerShortSoundFilePath":"${SDK_TIMER_SHORT_SOUND_FILE_PATH}"
    }
  }
 ```
 
-Make sure that you don’t have any extra characters (or spaces) in the paths. The config also contains paths to sound files that will be used to play sounds for Alarms and Timers.
-
-You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
-
-A database is required to store scheduled alerts. In your config file, include the file path location to the database you wish to use to store and read alerts from. A database file will be created at that location if the database does not already exist. For example "/home/anExistingFolder/anotherExistingFolder/alerts.db".
+Make sure that you don’t have any extra characters (or spaces) in the paths. 
 
 
 #### 3.4 Make Install
