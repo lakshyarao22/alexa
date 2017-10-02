@@ -33,7 +33,7 @@ To quickly setup your Raspberry Pi development environment or to learn how to op
 
 ## Minimum Requirements and Dependencies  
 
-Instructions are available to help you quickly [setup a development environment for RaspberryPi](../Raspberry-Pi-Quick-Start-Guide) and [build libcurl with nghttp2 for macOS](../How-to-build-libcurl-with-nghttp2-for-macos).
+Instructions are available to help you quickly [setup a development environment for RaspberryPi](../wiki/Raspberry-Pi-Quick-Start-Guide) and [build libcurl with nghttp2 for macOS](../wiki/How-to-build-libcurl-with-nghttp2-for-macos).
 
 ### Core Dependencies  
 * C++ 11 or later
