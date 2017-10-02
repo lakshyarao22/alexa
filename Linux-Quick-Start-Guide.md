@@ -105,7 +105,7 @@ If you haven't already, follow these instructions to [register a product and cre
 
 Make sure you note the following, you'll need these later when you configure `AuthServer`:
 
-* Device Type ID
+* Product ID
 * Client ID
 * Client Secret
 
@@ -214,20 +214,32 @@ The layout of the file is as follows:
 
 ```json
 {
-  "authDelegate":{
-    "deviceTypeId":"<Product ID for your device from the Amazon Developer Portal>",
-    "clientId":"<Client ID for your device from the Amazon Developer Portal>",
-    "clientSecret":"<Client Secret for your device from the Amazon Developer Portal>",
-    "deviceSerialNumber":"<A unique value that you create, similar to a SKU or UPC. E.g. "123456">"
-  },
-  "alertsCapabilityAgent": {
-    "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
-    "alarmSoundFilePath":"/<path-to-alarm-sound>/alarm_normal.mp3",
-    "alarmShortSoundFilePath":"/<path-to-short-alarm-sound>/alarm_short.wav",
-    "timerSoundFilePath":"/<path-to-timer-sound>/timer_normal.mp3",
-    "timerShortSoundFilePath":"/<path-to-short-timer-sound>/timer_short.wav"
-  }
-}
+    "authDelegate":{
+        "clientSecret":"<Client Secret for your device from the Amazon Developer Portal>",
+        "deviceSerialNumber":"<A unique value that you create, similar to a SKU or UPC. E.g. "123456">",
+        "refreshToken":"${SDK_CONFIG_REFRESH_TOKEN}",
+        "clientId":"<Client ID for your device from the Amazon Developer Portal>",
+        "productId":"<Product ID for your device from the Amazon Developer Portal>"
+     },
+
+   "alertsCapabilityAgent":{
+        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
+        "alarmSoundFilePath":"/<path-to-alarm-sound>/alarm_normal.mp3",
+        "alarmShortSoundFilePath":"/<path-to-short-alarm-sound>/alarm_short.wav",
+        "timerSoundFilePath":"/<path-to-timer-sound>/timer_normal.mp3",
+        "timerShortSoundFilePath":"/<path-to-short-timer-sound>/timer_short.wav"
+   },
+
+   "settings":{
+        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
+        "defaultAVSClientSettings":{
+            "locale":"en-US"
+          }
+    },
+   "certifiedSender":{ 
+        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>"
+    }
+ }
 ```
 **NOTE**: The `deviceSerialNumber` is a unique identifier that you create. It is **not** provided by Amazon.
 **NOTE**: Audio assets included in this repository are licensed as "Alexa Materials" under the [Alexa Voice
