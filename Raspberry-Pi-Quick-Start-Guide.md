@@ -96,11 +96,11 @@ open and edit the **AlexaClientSDKConfig.json** file located in **/home/pi/sdk-f
 ```json
  {
     "authDelegate":{
-        "clientSecret":"${SDK_CONFIG_CLIENT_SECRET}",
-        "deviceSerialNumber":"${SDK_CONFIG_DEVICE_SERIAL_NUMBER}",
-        "refreshToken":"${SDK_CONFIG_REFRESH_TOKEN}",
-        "clientId":"${SDK_CONFIG_CLIENT_ID}",
-        "deviceTypeId":"${SDK_CONFIG_DEVICE_TYPE_ID}"
+        "clientSecret":"",
+        "deviceSerialNumber":"",
+        "refreshToken":"",
+        "clientId":"",
+        "deviceTypeId":""
      }
  }
 ```
@@ -131,22 +131,22 @@ The JSON config file also requires several other sections to be filled out prior
 ```json
  {
    "alertsCapabilityAgent":{
-        "databaseFilePath":"${SDK_SQLITE_DATABASE_FILE_PATH}",
-        "alarmSoundFilePath":"${SDK_ALARM_DEFAULT_SOUND_FILE_PATH}",
-        "alarmShortSoundFilePath":"${SDK_ALARM_SHORT_SOUND_FILE_PATH}",
-        "timerSoundFilePath":"${SDK_TIMER_DEFAULT_SOUND_FILE_PATH}",
-        "timerShortSoundFilePath":"${SDK_TIMER_SHORT_SOUND_FILE_PATH}"
+        "databaseFilePath":"",
+        "alarmSoundFilePath":"",
+        "alarmShortSoundFilePath":"",
+        "timerSoundFilePath":"",
+        "timerShortSoundFilePath":""
    },
 
    "settings":{
-        "databaseFilePath":"${SDK_SQLITE_SETTINGS_DATABASE_FILE_PATH}",
+        "databaseFilePath":"",
         "defaultAVSClientSettings":{
-            "locale":"${SETTING_LOCALE_VALUE}"
+            "locale":""
           }
     },
 
    "certifiedSender":{ 
-        "databaseFilePath":"{SDK_CERTIFIED_SENDER_DATABASE_FILE_PATH}"
+        "databaseFilePath":""
     }
  }
 ```
