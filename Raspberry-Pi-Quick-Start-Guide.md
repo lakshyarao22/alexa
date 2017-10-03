@@ -93,6 +93,8 @@ After you register the device, go to the *General* tab under *Security Profile*,
 Use your favorite text editor to
 open and edit the **AlexaClientSDKConfig.json** file located in **/home/pi/sdk-folder/sdk-build/Integration**. Fill in the clientID, clientSecret, and deviceTypeID that you noted during device registration.
 
+**Note**: You should not remove the quotes in the fields but rather insert your values within the quotes
+
 ```json
  {
     "authDelegate":{
