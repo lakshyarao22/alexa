@@ -9,11 +9,11 @@ In this guide, we will be walking you through the steps to set up the Alexa Voic
 To start with, we'll create a few folders to encapsulate the SDK source folder, the build folder where the sample app and compiled libraries will be built, as well as a source folder for any third party libraries we may need.
 
 1. Navigate to /home/pi. To do this you can open a terminal window and enter:
-    `cd /home/pi`.
+    `cd /home/pi`
 2. Let's create a folder to encapsulate everything we will be doing in this guide. To do this, enter:
-    `mkdir sdk-folder`.
+    `mkdir sdk-folder`
 3. Next, navigate to that folder by entering:
-    `cd /home/pi/sdk-folder`.
+    `cd /home/pi/sdk-folder`
 4. Let's create a few more folders so that we can separate the SDK source code, the build artifacts that we'll be creating, and third party libraries. Enter the following:
     `mkdir sdk-build sdk-source third-party`
     
@@ -152,7 +152,7 @@ The JSON config file also requires several other sections to be filled out prior
 ```
 
 
-One such requirement are the paths to sound files that will be used to play sounds for Alarms and Timers.You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
+One such requirement are the paths to sound files that will be used to play sounds for Alarms and Timers. You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
 
 For the purposes of the demo, we will be downloading them directly using the following commands:
 ```
@@ -206,7 +206,7 @@ sudo apt-get install sox
 rec test.wav
 ```
 
-If everything went well, you should see some message indicating that audio is begin recorded. To exit out, hit `Control+C`. If this step went as expected, then great - your microphone is all set up!
+If everything went well, you should see some message indicating that audio is being recorded. To exit out, hit `Control+C`. If this step went as expected, then great - your microphone is all set up!
 
 If not, we'll need to modify the `~/.asoundrc` file. To do this, run the following commands:
 ```
@@ -240,7 +240,7 @@ At this point, your development environment using the AVS Device SDK is fully se
 Before you run the Sample App, make sure the following items are in order:
 * The Alerts Capability Agent will need to be calibrated to the Coordinated Universal Time Zone (UTC).
 * The path to the JSON file we filled out, which contains all the information to get Alexa started.
-* The path to the wake word model file, used to wake up Alexa whenever the wake word is head.
+* The path to the wake word model file, used to wake up Alexa whenever the wake word is heard.
 
 The following command makes sure all that is done:
 
