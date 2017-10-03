@@ -1,8 +1,4 @@
-## AVS Device SDK v1.0.1
-
-Please note the following for this release:  
-* Native components for the following capability agents are **not** included in v1.0.1 and will be added in future releases: `PlaybackController`, `Speaker`, and `Settings`.  
-* iHeartRadio is supported. Support for additional audio codecs, containers, streaming formats, and playlists will be included in future releases.  
+## AVS Device SDK
 
 ## Overview
 
