@@ -77,6 +77,8 @@ In this step, we'll be building the SDK using the dependencies we just installed
     `make SampleApp -j2`
     
 Note that you can also try adding a `-j3` or `-j4` if you're feeling really bold, but you run the risk of overheating the Pi.
+
+Note that if you wish to build the rest of the SDK, including unit and integration tests, you can run `make` instead of `make SampleApp`
     
 ## 3. Set Up Authentication
 At this point, we'll need to update the AlexaClientSDKConfig.json file. This file will contain the necessary authentication credentials in order to run the sample app and run any integration tests.
