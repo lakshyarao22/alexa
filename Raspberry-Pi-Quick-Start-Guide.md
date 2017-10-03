@@ -201,6 +201,8 @@ Lastly, we'll need to set the locale for Alexa to start. To do so, do the follow
 
 Note that the following are also acceptable: `en-GB` for British English, and `de-DE` for German :)
 
+**Note: ** It would probably be a good idea to save or copy this JSON file somewhere as subsequent builds may wipe the information in the file. That way, you won't need to go through all these configuration steps again.
+
 ### 3.5 Check the Microphone
 We'll need to make sure the microphone is set up properly. To test this out, run the following commands:
 
