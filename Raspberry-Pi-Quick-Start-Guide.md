@@ -118,6 +118,8 @@ python AuthServer/AuthServer.py
 
 **Note:** If you run into errors here, which will pop up on your browser, click for more details to ensure that you’re able to go back and correct them.
 
+**Note:** You may need to change the "locale" settings of the Pi, as some Raspberry Pis by default go directly to the `.co.uk` versions of Amazon instead of the `.com` version.
+
 From your Pi, open the browser and navigate to <http://localhost:3000>. Log in with your Amazon developer credentials and close the window when instructed.
 
 ![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
