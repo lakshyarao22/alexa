@@ -1,296 +1,95 @@
-## Get Started with the AVS Device SDK on Raspberry Pi
+In this guide, we will be walking you through the steps to set up the Alexa Voice Service (AVS) Device SDK on a Raspberry Pi running [Raspbian Stretch](https://www.raspberrypi.org/downloads/raspbian/). By following these steps, you can set up your development environment, and run the AVS sample app on your Pi.
 
-In this wiki, we'll walk through the steps to set up the AVS Device SDK and get the C++ sample app running on a Raspberry Pi 3. Before you get started, we recommend watching [Getting Started](https://youtu.be/F5DixCPJYo8) video to establish a working knowledge of how the AVS Device SDK works.
+**IMPORTANT**: This guide assumes your Raspberry Pi is running Raspbian Stretch. If your Raspberry Pi is not running Raspbian Stretch, you'll need to upgrade. Please follow the instructions located [here](https://www.raspberrypi.org/blog/raspbian-stretch/) to do so.
 
-Here's what you need to do:
+## 1. Configure and Install Dependencies for the SDK
 
-1. Register your device with Amazon.
-2. Install and configure dependencies for AVS Device SDK on your Raspberry Pi.
-3. Build the SDK and run the sample app on your Raspberry Pi.
+### 1.1 Set Up Folders
+
+To start with, we'll create a few folders to encapsulate the SDK source folder, the build folder where the sample app and compiled libraries will be built, as well as a source folder for any third party libraries we may need.
+
+1. Navigate to /home/pi. To do this you can open a terminal window and enter:
+    `cd /home/pi`.
+2. Let's create a folder to encapsulate everything we will be doing in this guide. To do this, enter:
+    `mkdir sdk-folder`.
+3. Next, navigate to that folder by entering:
+    `cd /home/pi/sdk-folder`.
+4. Let's create a few more folders so that we can separate the SDK source code, the build artifacts that we'll be creating, and third party libraries. Enter the following:
+    `mkdir sdk-build sdk-source third-party`
+    
+### 1.2 Set Up Necessary Dependencies
+
+The SDK requires the use of a few additional libraries in order to do things including, but not limited to:
+1. Maintaining an `HTTP2` connection required for an AVS connection
+2. Playing Alexa speech and music
+3. Recording microphone audio
+4. Storing records into a database for persistent storage
+
+To install the dependencies, enter the following command:
+
+`sudo apt-get -y install git gcc cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev libsoup2.4-dev libgcrypt20-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-good libasound2-dev`
+
+We'll also need to install PortAudio to record microphone data. Enter the following commands into a terminal to do so:  
+
+```
+cd /home/pi/sdk-folder/third-party
+
+wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+
+tar zxf pa_stable_v190600_20161030.tgz
+
+cd portaudio
+
+./configure --without-jack
+
+make
+```
+
+    
+### 1.2 Clone Necessary Repositories
+
+Here, we will be cloning the SDK and the `Sensory Wake Word Engine` library from Github.
+
+1. Navigate to `sdk-source` by entering the following:
+    `cd /home/pi/sdk-folder/sdk-source`
+2. Clone the AVS Device SDK from Github by entering the following:
+    `git clone git://github.com/alexa/avs-device-sdk.git`
+3. Navigate to `third-party` by entering the following:
+    `cd /home/pi/sdk-folder/third-party`
+4. Clone the `Sensory Wake Word Engine` from Github by entering the following:
+    `git clone git://github.com/Sensory/alexa-rpi.git`
+5. In order to license the Sensory engine for use, we'll need to run the licensing script, as follows:
+    `./alexa-rpi/bin/license.sh` and accept the license agreement
+    
+## 2. Build the SDK
+
+In this step, we'll be building the SDK using the dependencies we just installed.
+
+1. Navigate to `sdk-build` by entering the following:
+    `cd /home/pi/sdk-folder/sdk-build`
+
+2. To build the SDK, first we'll need to run a `CMake` command that will generate our build dependencies. To do so, enter the following:
+     ```
+     cmake /home/pi/sdk-folder/sdk-source/avs-device-sdk -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=/home/pi/sdk-folder/third-party/alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=/home/pi/sdk-folder/third-party/alexa-rpi/include -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/home/pi/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/home/pi/sdk-folder/third-party/portaudio/include
+     ```
+    
+3. Next, let's build our SDK! For the purposes of this demo, we'll be building the Sample App only. Enter the following:
+    `make SampleApp -j2`
+    
+Note that you can also try adding a `-j3` or `-j4` if you're feeling really bold, but you run the risk of overheating the Pi.
+    
+## 3. Set Up Authentication
+At this point, we'll need to update the AlexaClientSDKConfig.json file. This file will contain the necessary authentication credentials in order to run the sample app and run any integration tests.
 
 
-### 1. Register Your Device with Amazon
-
+### 3.1 Register your Device with Amazon
 Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You’ll use the client ID and client secret to retrieve access and refresh tokens that are used to communicate with Alexa. Please note that the allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
 
-After you register the device, go to the *General* tab under *Security Profile*, and make a note of the clientID, clientSecret, and deviceTypeID. You will need this information to configure the AuthServer.
-
-
-
-### 2. Install and Configure Dependencies for AVS Device SDK on Your Raspberry Pi
-
-Use these instructions to setup your development environment on a Raspberry Pi 3 running Raspbian Jessie.
-
-These instructions guide you through building the minimum required version for each dependency. If you plan to use a newer version, please validate each command, specifically configuration steps.  
-
-**TIP**: All tests were performed on Raspbian Jessie Lite if you prefer not to install a GUI distribution.  
-
-#### 2.1 Create a source folder for your dependencies
-
-To get your Raspberry Pi ready to consume the AVS Device SDK, you'll need to build some dependencies from source. It's a best practice to keep source files in a pre-defined folder. Use the command to create your source folder. Feel free to modify the  `SOURCE_FOLDER` value. Keep in mind that this variable will be referenced throughout this document:
-
-```bash
-echo "export SOURCE_FOLDER=$HOME/sources" >> $HOME/.bash_aliases
-echo "export LOCAL_BUILD=$HOME/local-builds" >> $HOME/.bash_aliases
-echo "export LD_LIBRARY_PATH=$HOME/local-builds/lib:$LD_LIBRARY_PATH" >> $HOME/.bash_aliases
-echo "export PATH=$HOME/local-builds/bin:$PATH" >> $HOME/.bash_aliases
-echo "export PKG_CONFIG_PATH=$HOME/local-builds/lib/pkgconfig:$PKG_CONFIG_PATH" >> $HOME/.bash_aliases
-source $HOME/.bashrc
-mkdir $SOURCE_FOLDER
-```
-
-#### 2.2 Download build tools
-
-The next step is to download some essential build tools:  
-
-```bash
-sudo apt-get install git gcc cmake build-essential
-```
-
-#### 2.3 Set up `libcurl` with `nghttp2` and `openssl`
-
-This is the most important part of the setup, since a connection to AVS requires the use of HTTP2, and the SDK uses `libcurl` to establish that connection.
-
-##### 2.3.1: Build `nghttp2` from source
-
-**IMPORTANT**: The `nghttp2` development package provided in Jessie is out-of-date, so you will need to build the correct version from source. The first step is to get the source:
-
-```bash
-cd $SOURCE_FOLDER
-wget https://github.com/nghttp2/nghttp2/releases/download/v1.0.0/nghttp2-1.0.0.tar.gz
-tar xzf nghttp2-1.0.0.tar.gz
-```
-
-Then configure, build, and install with these commands:
-
-```bash
-cd $SOURCE_FOLDER/*nghttp2*/
-./configure --prefix=$LOCAL_BUILD --disable-app
-make -j3
-sudo make install
-```
-
-##### 2.3.2: Build `openssl` from source
-
-**IMPORTANT** The `openssl` package included with Jessie is out-of-date, so you will need to build the correct version from source.
-
-Run these commands to download and build `openssl`:
-
-```bash
-cd $SOURCE_FOLDER
-wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2a.tar.gz
-tar xzf openssl-1.0.2a.tar.gz
-cd *openssl*/
-./config --prefix=$LOCAL_BUILD --openssldir=$LOCAL_BUILD shared
-make -j3
-sudo make install
-```
-
-##### 2.3.3: Build `libcurl` from source
-
-Now that `nghttp2` and `openssl` are built from source, we can build cURL.
-
-Run these commands:
-
-```bash
-cd $SOURCE_FOLDER
-wget https://curl.haxx.se/download/curl-7.50.2.tar.gz
-tar xzf curl-7.50.2.tar.gz
-cd *curl*/
-./configure --with-ssl=$LOCAL_BUILD --with-nghttp2=$LOCAL_BUILD --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-#### 2.4: Install `sqlite`  
-
-SQLite is required for Alerts. To install, run this command:
-
-```
-sudo apt-get install sqlite3 libsqlite3-dev
-```
-
-
-The dependencies that follow are required to use the included `MediaPlayer` implementation and to build the sample app.
-
-
-#### 2.5: Build `gstreamer` libraries
-
-The sample app requires a media player implementation to play MP3 files; our implementation supports GStreamer. Before building GStreamer, you need to install some utilities and dependencies.
-
-Run this command:
-
-```
-sudo apt-get install bison flex libglib2.0-dev libasound2-dev pulseaudio libpulse-dev
-```
-
-The following are also required to playback audio from iHeartRadio:
-
-```bash
-sudo apt-get install libfaad-dev libsoup2.4-dev libgcrypt20-dev
-```
- 
-
-##### 2.5.1: Build `gstreamer-1.10.4`
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.10.4.tar.xz
-tar xf gstreamer-1.10.4.tar.xz
-cd *gstreamer*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-##### 2.5.2: Build `gst-plugins-base-1.10.4`
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.10.4.tar.xz
-tar xf gst-plugins-base-1.10.4.tar.xz
-cd *gst-plugins-base*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-##### 2.5.3: Build `gst-libav-1.10.4`  
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.10.4.tar.xz
-tar xf gst-libav-1.10.4.tar.xz
-cd *gst-libav*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-##### 2.5.4: Build `gst-plugins-good-1.10.4`  
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.10.4.tar.xz
-tar xf gst-plugins-good-1.10.4.tar.xz
-cd *gst-plugins-good*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-##### 2.5.5: Build `gst-plugins-bad-1.10.4` (Needed for iHeartRadio)
-
-```bash
-cd $SOURCE_FOLDER
-wget https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.10.4.tar.xz
-tar xf gst-plugins-bad-1.10.4.tar.xz
-cd *gst-plugins-bad*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-#### 2.6: Build `portaudio`  
-
-PortAudio provides a simple API for recording and playing sound. This is required to use the sample app.
-
-Run these commands to download and build from source:  
-
-```bash
-cd $SOURCE_FOLDER
-wget http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
-tar xf pa_stable_v190600_20161030.tgz
-cd *portaudio*/
-./configure --prefix=$LOCAL_BUILD
-make -j3
-sudo make install
-```
-
-#### 2.7: Install Sensory  
-
-In this guide, we'll use the Sensory wake word engine to detect the wake word Alexa. Follow the instructions below to install required packages and dependencies.  
-
-##### 2.7.1: Install required packages for Sensory
-
-```bash
-sudo apt-get -y install libasound2-dev
-sudo apt-get -y install libatlas-base-dev
-sudo ldconfig
-```
-
-##### 2.7.2: Install Sensory
-
-```bash
-cd $SOURCE_FOLDER
-git clone git://github.com/Sensory/alexa-rpi.git
-
-bash alexa-rpi/bin/license.sh
-
-cp alexa-rpi/lib/libsnsr.a $LOCAL_BUILD/lib
-cp alexa-rpi/include/snsr.h $LOCAL_BUILD/include
-mkdir $LOCAL_BUILD/models
-cp alexa-rpi/models/spot-alexa-rpi-31000.snsr $LOCAL_BUILD/models
-```
-
-#### 2.8: Make sure everything is up to date
-
-Ensure that you have the latest version of each dependency.
-
-```
-sudo apt-get update
-```
-
-
-### 3. Build the SDK and Run the Sample App on Your Raspberry Pi
-
-#### 3.1: Download or clone the AVS Device SDK
-
-[Github](https://github.com/alexa/avs-device-sdk) repository on your
-Raspberry Pi.
-
-```
-cd $HOME
-mkdir AVS_SDK
-cd AVS_SDK
-git clone git://github.com/alexa/avs-device-sdk.git
-echo "export SDK_SRC=$HOME/AVS_SDK/avs-device-sdk" >> $HOME/.bash_aliases
-source $HOME/.bashrc
-```
-
-#### 3.2: Create an SDK build with Sensory, GStreamer, and PortAudio:
-
-Assuming $SDK\_SRC is SDK source location.
-
-Create a build directory.
-
-```
-cd $HOME
-mkdir BUILD
-cd BUILD
-```
-
-Go into the build directory and create an out-of-source SDK build by copying the cmake command below in your terminal.
-
-```
-cmake $SDK_SRC -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=$LOCAL_BUILD/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=$LOCAL_BUILD/include -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON
--DPORTAUDIO_LIB_PATH=$LOCAL_BUILD/lib/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=$LOCAL_BUILD/include -DCMAKE_PREFIX_PATH=$LOCAL_BUILD -DCMAKE_INSTALL_PREFIX=$LOCAL_BUILD
-```
-
-#### 3.3 Update AlexaClientSDKConfig.json
-
-After you create the out-of-source build, go to the build directory and use your favorite text editor to
-open the **AlexaClientSDKConfig.json** file in the **Integration** folder. Fill in the information you noted during device registration.  
-
-**IMPORTANT NOTES**  
-
-* The `deviceSerialNumber` is a unique identifier that you create. It is **not** provided by Amazon. For example: `"123456"`.      
-* The `deviceTypeId` must match your device's **Product ID** located in the [Amazon Developer Console](developer.amazon.com/login.html).  
-* Audio assets included in this repository are licensed as "Alexa Materials" under the [Alexa Voice
-Service Agreement](https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/support/terms-and-agreements).  
-* Several databases are required as several components in the SDK require persistent storage. These include the Alerts Capability Agent, the Settings Capability Agent, and the Certified Sender component. For these components, in your config file, include the file path location to the database you wish to use to store and read records from. A database file will be created at that location if the database does not already exist. For example `/home/anExistingFolder/anotherExistingFolder/alerts.db` could be the value for the `databaseFilePath` located in the `alertsCapabilityAgent` section of the JSON. 
-* Another example could be `/home/anExistingFolder/certifiedSender.db` for the `databaseFilePath` under the `certifiedSender` section.
-* The `settings` requires a `locale` value to be set. IF you wish for Alexa to speak in American English, set this to `en-US`. Other options include: `en-GB` for British English and `de-DE` for German. 
+After you register the device, go to the *General* tab under *Security Profile*, and make a note of the clientID, clientSecret, and deviceTypeID (also known as ProductID). You will need this information to configure the AuthServer.
+
+### 3.2 Enter Credentials into the JSON File
+Use your favorite text editor to
+open and edit the **AlexaClientSDKConfig.json** file located in **/home/pi/sdk-folder/sdk-build/Integration**. Fill in the clientID, clientSecret, and deviceTypeID that you noted during device registration.
 
 ```json
  {
@@ -299,9 +98,36 @@ Service Agreement](https://developer.amazon.com/public/solutions/alexa/alexa-voi
         "deviceSerialNumber":"${SDK_CONFIG_DEVICE_SERIAL_NUMBER}",
         "refreshToken":"${SDK_CONFIG_REFRESH_TOKEN}",
         "clientId":"${SDK_CONFIG_CLIENT_ID}",
-        "productId":"${SDK_CONFIG_PRODUCT_ID}"
-     },
+        "deviceTypeId":"${SDK_CONFIG_DEVICE_TYPE_ID}"
+     }
+ }
+```
 
+Make sure that you don’t have any extra characters (or spaces) in the paths. Note that for the purposes of this demo, the `deviceSerialNumber` isn't strictly required. However, when multiple devices are using the same set of credentials, this value is used to uniquely identify each device within the same device family.
+
+
+### 3.3 Update Refresh Token
+When the build is complete, you need to get a refresh token for the device. Just run AuthServer, a local server implementation that will handle the token exchange:
+
+```
+cd /home/pi/sdk-folder/sdk-build
+python AuthServer/AuthServer.py
+```
+
+**Note:** If you run into errors here, which will pop up on your browser, click for more details to ensure that you’re able to go back and correct them.
+
+From your Pi, open the browser and navigate to <http://localhost:3000>. Log in with your Amazon developer credentials and close the window when instructed.
+
+![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
+
+**Note:** If there are any errors, carefully review them as they will make it clear what went wrong. Incorrect device information in the JSON file is the most common reason for problems. If you want, open the JSON file and verify that there is a new line with your refresh token.
+
+### 3.4 Set Up Other Sections of Config
+
+The JSON config file also requires several other sections to be filled out prior to Alexa being able to fully function. See below:
+
+```json
+ {
    "alertsCapabilityAgent":{
         "databaseFilePath":"${SDK_SQLITE_DATABASE_FILE_PATH}",
         "alarmSoundFilePath":"${SDK_ALARM_DEFAULT_SOUND_FILE_PATH}",
@@ -323,46 +149,102 @@ Service Agreement](https://developer.amazon.com/public/solutions/alexa/alexa-voi
  }
 ```
 
-Make sure that you don’t have any extra characters (or spaces) in the paths. 
 
+One such requirement are the paths to sound files that will be used to play sounds for Alarms and Timers.You can get the required sound files from the Timer and Alarms section at <https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/alexa-voice-service-ux-design-guidelines>
 
-#### 3.4 Make Install
-
-After the JSON file has been filled and double-checked, go into the build directory in your terminal and run “make”. This part will take anywhere between 30 to 45 minutes since we are using a Raspberry Pi.
-
+For the purposes of the demo, we will be downloading them directly using the following commands:
 ```
-cd $HOME/BUILD
-make -j3
-make install
-```
-
-#### 3.5 Run AuthServer
-
-When the build is complete, you need to get a refresh token for the device. Just run AuthServer, a local server implementation that will handle the token exchange:
-
-```
-python AuthServer/AuthServer.py
+cd /home/pi/sdk-folder
+mkdir application-necessities
+cd application-necessities
+mkdir sound-files
+cd sound-files
+wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02._TTH_.mp3
+wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02_short._TTH_.wav
+wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01._TTH_.mp3
+wget https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01_short._TTH_.wav
 ```
 
-**Note:** If you run into errors here, which will pop up on your browser, click for more details to ensure that you’re able to go back and correct them.
+We'll need to point the SDK to these audio files. So, in the config file, enter the following:
 
-#### 3.6 Update Refresh Token
+1. For the `alarmSoundFilePath` section under `alertsCapabilityAgent` , enter the following: 
+    `/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01._TTH_.mp3`
+2. For the `alarmShortSoundFilePath` section under `alertsCapabilityAgent` , enter the following: 
+    `/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01_short._TTH_.wav`
+3. For the `timerSoundFilePath` section under `alertsCapabilityAgent` , enter the following: 
+    `/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02._TTH_.mp3`
+4. For the `timerShortSoundFilePath` section under `alertsCapabilityAgent` , enter the following:
+    `/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02_short._TTH_.wav`
 
-From your Pi, open the browser and navigate to <http://localhost:3000>. Log in with your Amazon developer credentials and close the window when instructed.
 
-![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
+A database is required to read and store records that the SDK requires. In your config file, include the file path location to the database you wish to use to store and read alerts from. A database file will be created at that location if the database does not already exist. For example "/home/anExistingFolder/anotherExistingFolder/alerts.db". The below steps outline a sample for the purposes of this demo:
 
-**Note:** If there are any errors, carefully review them as they will make it clear what went wrong. Incorrect device information in the JSON file is the most common reason for problems. If you want, open the JSON file and verify that there is a new line with your refresh token.
+In the config file, enter the following:
 
-#### 3.7 Run The Sample App
+1. For the `databaseFilePath` section under `alertsCapabilityAgent` , enter the following: 
+    `/home/pi/sdk-folder/application-necessities/alerts.db`
+2. For the `databaseFilePath` section under `settings`, enter the following: 
+    `/home/pi/sdk-folder/application-necessities/settings.db`
+3. For the `databaseFilePath` section under `certifiedSender`, enter the following: 
+    `/home/pi/sdk-folder/application-necessities/certifiedSender.db`
 
-You are now ready to run the sample app. Navigate to the SampleApp/src
-folder from your build directory and run this command:
+
+Lastly, we'll need to set the locale for Alexa to start. To do so, do the following:
+
+1. Under the `locale` section under `settings`, enter the following: `en-US`. This sets Alexa to run in American English.
+
+Note that the following are also acceptable: `en-GB` for British English, and `de-DE` for German :)
+
+### 3.5 Check the Microphone
+We'll need to make sure the microphone is set up properly. To test this out, run the following commands:
 
 ```
-TZ=UTC ./SampleApp <REQUIRED-path-to-config-json> $LOCAL_BUILD/models
+sudo apt-get install sox
+
+rec test.wav
 ```
 
-A command line interface will then pop up. Since you have set up a Wake Word Engine, all you need to do is say “Alexa”.
+If everything went well, you should see some message indicating that audio is begin recorded. To exit out, hit `Control+C`. If this step went as expected, then great - your microphone is all set up!
 
-After you build your first prototype using the SDK and set up the development environment, go to our [Github](https://github.com/alexa/avs-device-sdk) page for more resources and guides.
+If not, we'll need to modify the `~/.asoundrc` file. To do this, run the following commands:
+```
+sudo apt-get -y install gedit
+
+gedit ~/.asoundrc
+```
+
+Enter the following when editing the file:
+```
+pcm.!default {
+  type asym
+   playback.pcm {
+     type plug
+     slave.pcm "hw:0,0"
+   }
+   capture.pcm {
+     type plug
+     slave.pcm "hw:1,0"
+   }
+}
+```
+
+Our microphone should now be ready for use after this.
+
+
+
+## Run the Sample App
+At this point, your development environment using the AVS Device SDK is fully set up and you are ready to test the AVS sample app.
+
+Before you run the Sample App, make sure the following items are in order:
+* The Alerts Capability Agent will need to be calibrated to the Coordinated Universal Time Zone (UTC).
+* The path to the JSON file we filled out, which contains all the information to get Alexa started.
+* The path to the wake word model file, used to wake up Alexa whenever the wake word is head.
+
+The following command makes sure all that is done:
+
+```
+cd /home/pi/sdk-folder/sdk-build/SampleApp/src
+
+TZ=UTC ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models
+```
+
