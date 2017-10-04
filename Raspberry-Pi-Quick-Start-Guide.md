@@ -1,4 +1,4 @@
-In this guide, we will be walking you through the steps to set up the Alexa Voice Service (AVS) Device SDK on a Raspberry Pi running [Raspbian Stretch](https://www.raspberrypi.org/downloads/raspbian/). By following these steps, you can set up your development environment, and run the AVS sample app on your Pi.
+In this guide, we will be walking you through the steps to set up the Alexa Voice Service (AVS) Device SDK on a Raspberry Pi running [Raspbian Stretch With Desktop](https://www.raspberrypi.org/downloads/raspbian/). By following these steps, you can set up your development environment, and run the AVS sample app on your Pi.
 
 **IMPORTANT**: This guide assumes your Raspberry Pi is running Raspbian Stretch. If your Raspberry Pi is not running Raspbian Stretch, you'll need to upgrade. Please follow the instructions located [here](https://www.raspberrypi.org/blog/raspbian-stretch/) to do so.
 
