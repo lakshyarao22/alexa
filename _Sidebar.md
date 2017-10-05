@@ -2,7 +2,8 @@
 
 **Quick Start Guides**    
 * [Quick Start Guide for Linux/macOs](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)
-* [Quick Start Guide for Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide)  
+* [Quick Start Guide for Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) 
+* [Quick Start Guide for xCORE VocalFusion 4-Mic Kit](https://github.com/xmos/vocalfusion-avs-setup) 
 
 **Optimizations**  
 * [Optimize libcurl for Size](https://github.com/alexa/alexa-client-sdk/wiki/Optimize-libcurl)
