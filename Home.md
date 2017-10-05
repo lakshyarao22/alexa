@@ -15,6 +15,8 @@ You can set up the SDK on the following platforms:
 * [Linux/macOS](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)  
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) - includes an implementation of the sample app  
 
+You can also prototype with an [xCORE VocalFusion 4-Mic Kit](https://github.com/xmos/vocalfusion-avs-setup)  from XMOS.
+
 ## Optimize  
 
 The following guides walk you through SDK optimizations:
