@@ -93,11 +93,11 @@ At this point, we'll need to update the AlexaClientSDKConfig.json file. This fil
 ### 3.1 Register your Device with Amazon
 Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You’ll use the client ID and client secret to retrieve access and refresh tokens that are used to communicate with Alexa. Please note that the allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
 
-After you register the device, go to the *General* tab under *Security Profile*, and make a note of the clientID, clientSecret, and deviceTypeID (also known as ProductID). You will need this information to configure the AuthServer.
+After you register the device, go to the *General* tab under *Security Profile*, and make a note of the clientID, clientSecret. Under the *Product information* tab, make note of the Product ID. You will need this information to configure the AuthServer.
 
 ### 3.2 Enter Credentials into the JSON File
 Use your favorite text editor to
-open and edit the **AlexaClientSDKConfig.json** file located in **/home/pi/sdk-folder/sdk-build/Integration**. Fill in the clientID, clientSecret, and deviceTypeID that you noted during device registration.
+open and edit the **AlexaClientSDKConfig.json** file located in **/home/pi/sdk-folder/sdk-build/Integration**. Fill in the clientId, clientSecret, and productId that you noted during device registration.
 
 **Note**: You should not remove the quotes in the fields but rather insert your values within the quotes
 
