@@ -25,7 +25,11 @@ The SDK requires the use of a few additional libraries in order to do things inc
 3. Recording microphone audio
 4. Storing records into a database for persistent storage
 
-To install the dependencies, enter the following command:
+First let's update apt-get to make sure we'll have access to all the dependencies we need to install.
+Run the following command:
+`sudo apt-get update`
+
+Next, install the dependencies by entering the following command:
 
 `sudo apt-get -y install git gcc cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev libsoup2.4-dev libgcrypt20-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-good libasound2-dev`
 
