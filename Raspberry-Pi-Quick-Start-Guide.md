@@ -26,7 +26,9 @@ The SDK requires the use of a few additional libraries in order to do things inc
 4. Storing records into a database for persistent storage
 
 First let's update apt-get to make sure we'll have access to all the dependencies we need to install.
+
 Run the following command:
+
 `sudo apt-get update`
 
 Next, install the dependencies by entering the following command:
