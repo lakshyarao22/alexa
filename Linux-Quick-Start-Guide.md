@@ -121,7 +121,7 @@ The following build types are supported:
 * `MINSIZEREL` - Compiles with `RELEASE` flags and optimizations (`-O`s) for a smaller build size.
 
 To specify a build type, use this command in place of step 4 below:
-`cmake <path-to-source> -DCMAKE_BUILD_TYPE=<build-type>`  
+`cmake <absolute-path-to-source> -DCMAKE_BUILD_TYPE=<build-type>`  
 
 ### Build with a Wake Word Detector  
 
@@ -130,8 +130,8 @@ To specify a build type, use this command in place of step 4 below:
 The AVS Device SDK for C++ supports wake word detectors from [Sensory](https://github.com/Sensory/alexa-rpi) and [KITT.ai](https://github.com/Kitt-AI/snowboy/). The following options are required to build with a wake word detector, please replace `<wake-word-name>` with `SENSORY` for Sensory, and `KITTAI` for KITT.ai:
 
 * `-D<wake-word-name>_KEY_WORD_DETECTOR=<ON or OFF>` - Specifies if the wake word detector is enabled or disabled during build.
-* `-D<wake-word-name>_KEY_WORD_DETECTOR_LIB_PATH=<path-to-lib>` - The path to the wake word detector library.
-* `-D<wake-word-name>_KEY_WORD_DETECTOR_INCLUDE_DIR=<path-to-include-dir>` - The path to the wake word detector include directory.
+* `-D<wake-word-name>_KEY_WORD_DETECTOR_LIB_PATH=<absolute-path-to-lib>` - The path to the wake word detector library.
+* `-D<wake-word-name>_KEY_WORD_DETECTOR_INCLUDE_DIR=<absolute-path-to-include-dir>` - The path to the wake word detector include directory.
 
 **Note**: To list all available CMake options, use the following command: `-LH`.
 
@@ -142,7 +142,7 @@ If using the Sensory wake word detector, version [5.0.0-beta.10.2](https://githu
 This is an example `cmake` command to build with Sensory:
 
 ```
-cmake <path-to-source> -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=.../alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=.../alexa-rpi/include
+cmake <absolute-path-to-source> -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=.../alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=.../alexa-rpi/include
 ```
 
 Note that you may need to license the Sensory library for use prior to running cmake and building it into the SDK. A script to license the Sensory library can be found on the Sensory [Github](https://github.com/Sensory/alexa-rpi) page under `bin/license.sh`.
@@ -156,7 +156,7 @@ A matrix calculation library, known as BLAS, is required to use KITT.ai. The fol
 This is an example `cmake` command to build with KITT.ai:
 
 ```
-cmake <path-to-source> -DKITTAI_KEY_WORD_DETECTOR=ON -DKITTAI_KEY_WORD_DETECTOR_LIB_PATH=.../snowboy-1.2.0/lib/libsnowboy-detect.a -DKITTAI_KEY_WORD_DETECTOR_INCLUDE_DIR=.../snowboy-1.2.0/include
+cmake <absolute-path-to-source> -DKITTAI_KEY_WORD_DETECTOR=ON -DKITTAI_KEY_WORD_DETECTOR_LIB_PATH=.../snowboy-1.2.0/lib/libsnowboy-detect.a -DKITTAI_KEY_WORD_DETECTOR_INCLUDE_DIR=.../snowboy-1.2.0/include
 ```
 
 ### Build with an implementation of `MediaPlayer`
@@ -168,7 +168,7 @@ If GStreamer was [installed from source](https://gstreamer.freedesktop.org/docum
 This is an example `cmake` command:
 
 ```
-cmake <path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DCMAKE_PREFIX_PATH=<path-to-GStreamer-build>
+cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DCMAKE_PREFIX_PATH=<path-to-GStreamer-build>
 ```
 
 ### Build with PortAudio (Required to Run the Sample App)  
@@ -178,14 +178,14 @@ PortAudio is required to build and run the AVS Device SDK for C++ Sample App. Bu
 This is sample CMake command to build the AVS Device SDK for C++ with PortAudio:
 
 ```
-cmake <path-to-source> -DPORTAUDIO=ON
+cmake <absolute-path-to-source> -DPORTAUDIO=ON
 -DPORTAUDIO_LIB_PATH=<path-to-portaudio-lib>
 -DPORTAUDIO_INCLUDE_DIR=<path-to-portaudio-include-dir>
 ```
 
 For example,
 ```
-cmake <path-to-source> -DPORTAUDIO=ON
+cmake <absolute-path-to-source> -DPORTAUDIO=ON
 -DPORTAUDIO_LIB_PATH=.../portaudio/lib/.libs/libportaudio.a
 -DPORTAUDIO_INCLUDE_DIR=.../portaudio/include
 ```
@@ -198,7 +198,7 @@ To create an out-of-source build:
 2. Create a build directory out-of-source. **Important**: The directory cannot be a subdirectory of the source folder.
 3. `cd` into your build directory.
 4. From your build directory, run `cmake` on the source directory to generate make files for the SDK: `cmake <path-to-source-code>`.
-5. After you've successfully run `cmake`, you should see the following message: `-- Please fill <path-to-build-directory>/Integration/AlexaClientSDKConfig.json before you execute integration tests.`. Open `Integration/AlexaClientSDKConfig.json` with your favorite text editor and fill in your product information.
+5. After you've successfully run `cmake`, you should see the following message: `-- Please fill <absolute-path-to-build-directory>/Integration/AlexaClientSDKConfig.json before you execute integration tests.`. Open `Integration/AlexaClientSDKConfig.json` with your favorite text editor and fill in your product information.
 6. From the build directory, run `make` to build the SDK.  
 
 ### Application Settings
@@ -218,21 +218,21 @@ The layout of the file is as follows:
      },
 
    "alertsCapabilityAgent":{
-        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
-        "alarmSoundFilePath":"/<path-to-alarm-sound>/alarm_normal.mp3",
-        "alarmShortSoundFilePath":"/<path-to-short-alarm-sound>/alarm_short.wav",
-        "timerSoundFilePath":"/<path-to-timer-sound>/timer_normal.mp3",
-        "timerShortSoundFilePath":"/<path-to-short-timer-sound>/timer_short.wav"
+        "databaseFilePath":"/<absolute-path-to-db-directory>/<db-file-name>",
+        "alarmSoundFilePath":"/<absolute-path-to-alarm-sound>/alarm_normal.mp3",
+        "alarmShortSoundFilePath":"/<absolute-path-to-short-alarm-sound>/alarm_short.wav",
+        "timerSoundFilePath":"/<absolute-path-to-timer-sound>/timer_normal.mp3",
+        "timerShortSoundFilePath":"/<absolute-path-to-short-timer-sound>/timer_short.wav"
    },
 
    "settings":{
-        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>",
+        "databaseFilePath":"/<absolute-path-to-db-directory>/<db-file-name>",
         "defaultAVSClientSettings":{
             "locale":"en-US"
           }
     },
-   "certifiedSender":{ 
-        "databaseFilePath":"/<path-to-db-directory>/<db-file-name>"
+   "certifiedSender":{
+        "databaseFilePath":"/<absolute-path-to-db-directory>/<db-file-name>"
     }
  }
 ```
@@ -290,7 +290,7 @@ To run the integration tests use this command:
 If your project is built on a GNU/Linux-based platform (Ubuntu, Debian, etc.), there is an optional integration test which tests the ACL for use on slow networks. To enable this test, use this option with CMake:
 
 ```
-cmake <path-to-source> -DNETWORK_INTEGRATION_TESTS=ON –DNETWORK_INTERFACE=eth0
+cmake <absolute-path-to-source> -DNETWORK_INTEGRATION_TESTS=ON –DNETWORK_INTERFACE=eth0
 ```
 
 **Note**: The name of the network interface can be located with this command `ifconfig -a`.
@@ -317,7 +317,7 @@ Before you run the sample app, it's important to note that the application takes
 Navigate to the `SampleApp/src` folder from your build directory. Then run this command:
 
 ```
-TZ=UTC ./SampleApp <REQUIRED-path-to-config-json> <OPTIONAL-path-to-wake-word-engine-folder-enclosing-model-files> <OPTIONAL-log-level>
+TZ=UTC ./SampleApp <REQUIRED-absolute-path-to-config-json> <OPTIONAL-absolute-path-to-wake-word-engine-folder-enclosing-model-files> <OPTIONAL-log-level>
 ```
 
 **Note**: The following logging levels are supported with `DEBUG9` providing the highest and `CRITICAL` the lowest level of logging: `DEBUG9`, `DEBUG8`, `DEBUG7`, `DEBUG6`, `DEBUG5`, `DEBUG4`, `DEBUG3`, `DEBUG2`, `DEBUG1`, `DEBUG0`, `INFO`, `WARN`, `ERROR`, and `CRITICAL`.  
@@ -331,8 +331,8 @@ These instructions assume that you've followed the instructions to create an out
 This is a sample CMake command:
 
 ```
-cmake <path-to-source>
--DCMAKE_INSTALL_PREFIX=<path-to-out-of-source-build>
+cmake <absolute-path-to-source>
+-DCMAKE_INSTALL_PREFIX=<absolute-path-to-out-of-source-build>
 ```
 
 After you've run `cmake`, run `make install` to install the SDK.  
@@ -342,7 +342,7 @@ The library and header files will be installed to the path specified. Additional
 To build your application with the SDK, the prefix path for your installation must be specified to CMake. For example:  
 
 ```  
-cmake -DCMAKE_PREFIX_PATH=<path-to-install>  
+cmake -DCMAKE_PREFIX_PATH=<absolute-path-to-install>  
 ```  
 
 **NOTE**: You may need to specify the `rpath` to link the SDK to your application.  
