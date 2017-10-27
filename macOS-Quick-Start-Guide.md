@@ -1,13 +1,13 @@
 
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on macOS. When finished, you'll have a working sample app to test interactions with Alexa.   
 
-**Table of Contents** 
+**Table of Contents**
 * [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
 * [2. Build the SDK](#2-build-the-sdk)    
 * [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
 * [4. Run the sample app](#4-run-the-sample-app)  
 
-**WARNING**: This guide doesn't include instructions to enable wake word. 
+**WARNING**: This guide doesn't include instructions to enable wake word.
 
 ## 1. Install and configure dependencies for the SDK  
 
@@ -20,12 +20,12 @@ To install Homebrew, run this command:
 ```
 
 
-### 1.1 Create the folder structure 
+### 1.1 Create the folder structure
 
-Let's create a few folders to organize our files: 
+Let's create a few folders to organize our files:
 
 ```
-cd ~/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files && cd ~/sdk-folder 
+cd ~/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files && cd ~/sdk-folder
 ```
 
 ### 1.2 Install dependencies  
@@ -37,7 +37,7 @@ The AVS Device SDK requires libraries to:
 * Record audio from the microphone  
 * Store records in a database (persistent storage)  
 
-1. Update Homebrew. This ensures that you have access to required dependencies: 
+1. Update Homebrew. This ensures that you have access to required dependencies:
 
     ```
     brew update
@@ -48,16 +48,16 @@ The AVS Device SDK requires libraries to:
      ```
      brew install curl --with-nghttp2
      brew link curl --force
-     echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> ~/.bash_profile 
+     echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> ~/.bash_profile
      source ~/.bash_profile
      ```
 
-3. Now run: 
-     
+3. Now run:
+
      ```
      brew install gstreamer gst-plugins-base gst-plugins-good gst-libav sqlite3 repo cmake clang-format doxygen wget git
      ```  
-     
+
      **IMPORTANT**: Make sure that command ran successfully, and that no errors were thrown. If for any reason the install command fails, run brew install for each dependency individually.  
 
 4. PortAudio is required to record microphone data. Run this command to install and configure PortAudio:  
@@ -65,7 +65,7 @@ The AVS Device SDK requires libraries to:
      ```
      cd ~/sdk-folder/third-party && wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz && tar xf pa_stable_v190600_20161030.tgz && cd portaudio && ./configure && make
      ```  
-     
+
      **IMPORTANT**: If you see "error: cannot find 10.5 to 10.12 SDK", then run:
      ```
      ./configure --disable-mac-universal && make
@@ -89,7 +89,7 @@ The AVS Device SDK requires libraries to:
     cd ~/sdk-folder/application-necessities/sound-files/ && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02_short._TTH_.wav && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01_short._TTH_.wav
     ```
 
-### 1.3 Clone the AVS Device SDK 
+### 1.3 Clone the AVS Device SDK
 
 Let's clone the SDK into the sdk-source folder:  
 
@@ -99,25 +99,25 @@ cd ~/sdk-folder/sdk-source && git clone git://github.com/alexa/avs-device-sdk.gi
 
 ## 2. Build the SDK  
 
-1. Run cmake to generate the build dependencies. This command declares that gstreamer is enabled, and provides the path to PortAudio. 
+1. Run cmake to generate the build dependencies. This command declares that gstreamer is enabled, and provides the path to PortAudio.
 
     **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`  
 
     ```
     cd ~/sdk-folder/sdk-build && cmake /{HOME}/sdk-folder/sdk-source/avs-device-sdk -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/{HOME}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/{HOME}/sdk-folder/third-party/portaudio/include
     ```
-    
-2. Here's the fun part, let's build! For this project we're only building the sample app. 
+
+2. Here's the fun part, let's build! For this project we're only building the sample app.
 
     Run this command:
     ```
     make SampleApp -j2
     ```
 
-   **Note**: Try the `-j3` through `-j64` option to run processes in parallel. 
-   
+   **Note**: Try the `-j3` through `-j64` option to run processes in parallel.
+
    If you want to build the full SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
-   
+
 ## 3. Set up and run the local auth server  
 
 In this section we are going to setup and run a local authorization server, which we'll use to obtain a refresh token. This refresh token, along with your **Client ID** and **Client Secret** are exchanged for an access token, which the sample app needs to send to Alexa with each event (request).  
@@ -140,10 +140,10 @@ For example:
 
 Now fill in your product-specific values and save. **Note**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
 
-1. Replace the contents of the config file this JSON blob. 
+1. Replace the contents of the config file this JSON blob.
 
-    **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`. 
-    
+    **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`.
+
     ```
    {
         "authDelegate":{
@@ -176,8 +176,8 @@ Now fill in your product-specific values and save. **Note**: Do not remove the q
 
 A database is required to read and store records that the SDK requires. In this guide the values are pre-populated.
 
-Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language. 
-     
+Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language.
+
 **IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
 
 ### 3.3 Obtain a refresh token  
@@ -205,7 +205,7 @@ You're almost ready to run the sample app. Before you continue, make sure:
 **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`:  
 
 ```
-cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json 
+cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
 ```  
 
 **IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  
@@ -218,8 +218,13 @@ TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig
 
 This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue]().  
 
-| Issue | Workaround/Resolution | 
+| Issue | Workaround/Resolution |
 |--------|--------------|  
 | SDK fails to build because of missing dependencies. | Sometimes, the `brew install` command that is run during **step 1.2.3** will fail if a dependency is already installed. To get around this issue, run a `brew install` command for each dependency individually. |  
 | SampleApp fails to build because your version of curl doesn't support HTTP/2. | It's possible that curl didn't link correctly. To fix this issue, run `brew uninstall curl`, then repeat the steps in **1.2.2**. |  
 | AuthServer.py throws this error: `File "AuthServer/AuthServer.py", line 67 print 'The file "' + \ SyntaxError: Missing parentheses in call to 'print'`. | This is a known issue with Python 3.x. The workaround is to use Python 2.7.x. |  
+
+## Next Steps  
+
+* [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options)  
+* [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  

@@ -1,6 +1,6 @@
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on a Raspberry Pi running [Raspbian Stretch with Desktop](https://www.raspberrypi.org/downloads/raspbian/). When finished, you'll have a working sample app to test interactions with Alexa.  
 
-**Table of Contents** 
+**Table of Contents**
 * [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
 * [2. Build the SDK](#2-build-the-sdk)    
 * [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
@@ -13,10 +13,10 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 
 ### 1.1 Create the folder structure
 
-Let's create a few folders to organize our files. Open terminal and run this command from your home directory (~/): 
+Let's create a few folders to organize our files. Open terminal and run this command from your home directory (~/):
 
 ```
-cd /home/pi/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files 
+cd /home/pi/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files
 ```
 
 ### 1.2 Install dependencies
@@ -89,7 +89,7 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
 
 ### 3.2 Update AlexaClientSDKConfig.json
 
-Use your favorite text editor to open `/home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`. 
+Use your favorite text editor to open `/home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`.
 
 **TIP**: If you prefer to use a GUI-based text editor, run this command to install **gedit**: `sudo apt-get install gedit`.  
 
@@ -133,7 +133,7 @@ Now fill in your product-specific values and save. **Note**: Do not remove the q
 
 A database is required to read and store records that the SDK requires. In this guide the values are pre-populated.
 
-Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language. 
+Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language.
 
 ### 3.3 Obtain a refresh token  
 
@@ -163,7 +163,7 @@ sudo apt-get install sox -y && rec test.wav
 
 If everything works, you should see a message indicating that audio is recording. To exit, hit **Control + C**.
 
-If you don't receive a message indicating that audio is recording, we'll need to modify `~/.asoundrc` using your favorite text editor. For example: 
+If you don't receive a message indicating that audio is recording, we'll need to modify `~/.asoundrc` using your favorite text editor. For example:
 
 * Terminal editor:  `nano ~/.asoundrc`  
 * GUI-based editor:  `gedit ~/.asoundrc`
@@ -188,7 +188,7 @@ pcm.!default {
 
 ## 4. Run the sample app
 
-Run this command to launch the sample app. This includes the path to your configuration file and the Sensory wake word model: 
+Run this command to launch the sample app. This includes the path to your configuration file and the Sensory wake word model:
 
 ```
 cd /home/pi/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models
@@ -199,3 +199,8 @@ cd /home/pi/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /home/pi/sd
 ```
 TZ=UTC ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models debug9
 ```  
+
+## Next Steps  
+
+* [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options)  
+* [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  
