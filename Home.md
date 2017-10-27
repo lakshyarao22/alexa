@@ -12,8 +12,9 @@ The AVS Device SDK for C++ provides a C++ (11 or later) interface for the Alexa 
 ## Build
 You can set up the SDK on the following platforms:
 
-* [Linux/macOS](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)  
-* [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) - includes an implementation of the sample app  
+* **Updated** - [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) - includes an implementation of the sample app  
+* **NEW** - [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide) 
+* [Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide) 
 
 You can also prototype with a third party development kit
 * [xCORE VocalFusion 4-Mic Kit from XMOS](https://github.com/xmos/vocalfusion-avs-setup)
