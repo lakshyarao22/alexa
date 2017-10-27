@@ -1,5 +1,3 @@
-## AVS Device SDK
-
 ## Overview
 
 The AVS Device SDK for C++ provides a modern C++ (11 or later) interface for the Alexa Voice Service (AVS) that allows developers to add intelligent voice control to connected products. It is modular and abstracted, providing components to handle discrete functionality such as speech capture, audio processing, and communications, with each component exposing APIs that you can use and customize for your integration. It also includes a sample app, which demonstrates interactions with the Alexa Voice Service (AVS).   
