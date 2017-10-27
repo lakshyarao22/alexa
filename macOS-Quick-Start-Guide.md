@@ -6,6 +6,8 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 * [2. Build the SDK](#2-build-the-sdk)    
 * [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
 * [4. Run the sample app](#4-run-the-sample-app)  
+* [Common Issues](#common-issues)  
+* [Next Steps](#next-steps)
 
 **WARNING**: This guide doesn't include instructions to enable wake word.
 
@@ -214,7 +216,7 @@ cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder
 TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
 ```  
 
-## 5. Common Issues  
+## Common Issues  
 
 This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue]().  
 
