@@ -96,7 +96,7 @@ Use your favorite text editor to open `/home/pi/sdk-folder/sdk-build/Integration
 
 For example:   
 * Terminal editor: `nano /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
-* GUI-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
+* Gedit-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
 Now fill in your product-specific values and save. **Note**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
 
