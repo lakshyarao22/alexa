@@ -204,7 +204,7 @@ Now you're ready to run the sample app. This command sets the time zone to UTC a
 cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
 ```  
 
-You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least amount of debug information, and `debug9` providing the most information.  
+You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least and `debug9` providing the most information.  
 
 ```
 TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
