@@ -71,7 +71,7 @@ The AVS Device SDK requires libraries to:
      ./configure --disable-mac-universal && make
      ```
 
-5. A handful of python libraries, including pip and flask, are required to run the local auth server. Run this command to install pip (will prompt for your password):   
+5. A handful of python libraries, including pip and flask, are required to run the local auth server. Run this command to install pip if it's not already installed (will prompt for your password):   
 
     ```
     sudo easy_install pip
@@ -114,33 +114,31 @@ cd ~/sdk-folder/sdk-source && git clone git://github.com/alexa/avs-device-sdk.gi
     make SampleApp -j2
     ```
 
-   **Note**: Try the `-j3` through `-j64` option to run processes in parallel.
+   **Note**: Try the `-j3` or `j4` to run processes in parallel during make.
 
    If you want to build the full SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
-## 3. Set up and run the local auth server  
+## 3. Obtain credentials and set up your local auth server  
 
 In this section we are going to setup and run a local authorization server, which we'll use to obtain a refresh token. This refresh token, along with your **Client ID** and **Client Secret** are exchanged for an access token, which the sample app needs to send to Alexa with each event (request).  
 
 ### 3.1 Register your product with Amazon
 
-Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with.
+Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with. **Make sure the Allowed Origin and Return URL are `http` *not* `https`.
 
-**IMPORTANT**: The allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
+**IMPORTANT ENOUGH TO REPEAT**: The allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
 
 Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** and **Client Secret** from the **Security Profile** tab. You'll need these params to configure the authorization server.  
 
 ### 3.2 Update AlexaClientSDKConfig.json
 
-Use your favorite text editor to open `AlexaClientSDKConfig.json`.  
+1. Use your favorite text editor to open `AlexaClientSDKConfig.json`.  
 
-For example:   
-* Terminal editor: `nano ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
-* GUI-based editor: `open ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
+   For example:   
+   * Terminal editor: `nano ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
+   * GUI-based editor: `open ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
-Now fill in your product-specific values and save. **Note**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
-
-1. Replace the contents of the config file this JSON blob.
+2. Copy and paste this snipped into your `AlexaClientSDKConfig.json` file:
 
     **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`.
 
@@ -172,9 +170,9 @@ Now fill in your product-specific values and save. **Note**: Do not remove the q
     }
     ```
 
-2. Enter the `clientId`, `clientSecret`, and `productId` that you saved during device registration and save.
+2. Enter the `clientId`, `clientSecret`, and `productId` that you obtained during registration, then save.  
 
-A database is required to read and store records that the SDK requires. In this guide the values are pre-populated.
+   **NOTE** - `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
 
 Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language.
 
@@ -196,11 +194,7 @@ Then, open your browser and navigate to <http://localhost:3000>. Login with your
 
 ## 4. Run the sample app
 
-You're almost ready to run the sample app. Before you continue, make sure:   
-
-* The Alerts Capability Agent is calibrated to the Coordinated Universal Time Zone (UTC).
-* The path to the `AlexaClientSDKConfig.json` is correct.  
-* The path to the wake word model is correct.  
+Now you're ready to run the sample app. This command sets the time zone to UTC and references your `AlexaClientSDKConfig.json`:
 
 **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`:  
 
@@ -208,7 +202,7 @@ You're almost ready to run the sample app. Before you continue, make sure:
 cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
 ```  
 
-**IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  
+You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least amount of debug information, and `debug9` providing the most information.  
 
 ```
 TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
@@ -216,7 +210,7 @@ TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig
 
 ## 5. Common Issues  
 
-This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue]().  
+This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue](https://github.com/alexa/avs-device-sdk/issues/new).  
 
 | Issue | Workaround/Resolution |
 |--------|--------------|  
