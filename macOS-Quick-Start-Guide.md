@@ -4,7 +4,7 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 **Table of Contents**
 * [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
 * [2. Build the SDK](#2-build-the-sdk)    
-* [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
+* [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)  
 * [4. Run the sample app](#4-run-the-sample-app)  
 * [Common Issues](#common-issues)  
 * [Next Steps](#next-steps)
