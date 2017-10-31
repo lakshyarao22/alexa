@@ -4,7 +4,8 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 * [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
 * [2. Build the SDK](#2-build-the-sdk)    
 * [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
-* [4. Run the sample app](#4-run-the-sample-app)  
+* [4. Run the sample app](#4-run-the-sample-app) 
+* [Next Steps](#next-steps) 
 
 **Tip**: If your Raspberry Pi is not running Raspbian Stretch With Desktop use [these instructions to upgrade](https://www.raspberrypi.org/blog/raspbian-stretch/).  
 
@@ -95,7 +96,7 @@ Use your favorite text editor to open `/home/pi/sdk-folder/sdk-build/Integration
 
 For example:   
 * Terminal editor: `nano /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
-* GUI-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
+* Gedit-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
 Now fill in your product-specific values and save. **Note**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
 
