@@ -196,8 +196,8 @@ Then, open your browser and navigate to <http://localhost:3000>. Login with your
 
 These are the most common issues encountered when trying to obtain a refresh token:
 
-* Allowed Origins and Return URLs in your Security Profile are HTTPS not HTTP.  
-* Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
+* Allowed Origins and Return URLs in your Security Profile **must** be HTTP, not HTTPS, for this guide.  
+* Incorrect information in `AlexaClientSDKConfig.json`. 
 
 ## 4. Run the sample app
 
