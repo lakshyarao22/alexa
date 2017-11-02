@@ -1,16 +1,17 @@
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on a Raspberry Pi running [Raspbian Stretch with Desktop](https://www.raspberrypi.org/downloads/raspbian/). When finished, you'll have a working sample app to test interactions with Alexa.  
 
+**IMPORTANT**: If your Raspberry Pi is not running Raspbian Stretch With Desktop use [these instructions to upgrade](https://www.raspberrypi.org/blog/raspbian-stretch/). If you choose to build with Raspbian Jessie, you need to build certain dependencies from source (see commit [a5646fc](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide/a5646fc9e6dde8128c940b86a9bbece7f65c1ace) for instructions).  
+
 **Table of Contents**
 * [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
 * [2. Build the SDK](#2-build-the-sdk)    
-* [3. Set up and run the local auth server](#3-set-up-and-run-the-local-auth-server)  
-* [4. Run the sample app](#4-run-the-sample-app) 
-* [Next Steps](#next-steps) 
+* [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)  
+* [4. Run the sample app](#4-run-the-sample-app)
+* [Next Steps](#next-steps)
 
-**Tip**: If your Raspberry Pi is not running Raspbian Stretch With Desktop use [these instructions to upgrade](https://www.raspberrypi.org/blog/raspbian-stretch/).  
+## 1. Install and configure dependencies for the SDK  
 
-
-## 1. Install and configure dependencies for the SDK
+**IMPORTANT**: This guide assumes that all commands are run from your home directory (/home/pi). If you choose a different destination for your files, it's important that
 
 ### 1.1 Create the folder structure
 
@@ -67,16 +68,18 @@ cd /home/pi/sdk-folder/application-necessities/sound-files/ && wget -c https://i
 1. Run cmake to generate the build dependencies. This command declares that the wake word engine and gstreamer are enabled, and provides paths to the wake word engine and PortAudio:
      ```
      cd /home/pi/sdk-folder/sdk-build && cmake /home/pi/sdk-folder/sdk-source/avs-device-sdk -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=/home/pi/sdk-folder/third-party/alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=/home/pi/sdk-folder/third-party/alexa-rpi/include -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/home/pi/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/home/pi/sdk-folder/third-party/portaudio/include
-     ```
+     ```  
+
+   **NOTE**: This is sample cmake command configured for the sample app. There are other cmake options available for use outside of this project -- for the full list [click here](https://github.com/alexa/avs-device-sdk/wiki/Build-Options).  
 
 2. Here's the fun part, let's build! For this project we're only building the Sample App. Run this command:
     `make SampleApp -j2`
 
-   **Note**: Try the `-j3` or `-j4` option if you're feeling bold, but you run the risk of overheating the Pi when running too many processes in parallel.
+   **NOTE**: The `j2` flag allows you to run 2 proccesses in parallel, which should speed up the build. Try the `-j3` or `-j4` option if you're feeling bold, but you run the risk of overheating the Pi (maybe even melting it).
 
 If you want to build the rest of the SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
-## 3. Set up and run the local auth server
+## 3. Obtain credentials and set up your local auth server
 
 In this section we are going to setup and run a local authorization server, which we'll use to obtain a refresh token. This refresh token, along with your **Client ID** and **Client Secret** are exchanged for an access token, which the sample app needs to send to Alexa with each event (request).  
 
@@ -98,7 +101,7 @@ For example:
 * Terminal editor: `nano /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 * Gedit-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
-Now fill in your product-specific values and save. **Note**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
+Now fill in your product-specific values and save. **NOTE**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
 
 1. Replace the contents of the config file this JSON blob.  
 
@@ -144,30 +147,22 @@ After you've updated `AlexaClientSDKConfig.json`, run `AuthServer.py` to kick-of
 cd /home/pi/sdk-folder/sdk-build && python AuthServer/AuthServer.py
 ```
 
-**Note:** You may need to change the **locale** settings for your Pi, as some Raspbian images default to `amazon.co.uk` to `amazon.com`.
+**NOTE:** You may need to change the **locale** settings for your Pi, as some Raspbian images default to `amazon.co.uk` to `amazon.com`.
 
 Open your browser and navigate to <http://localhost:3000>. Login with your Amazon credentials and follow the instructions provided.  
 
 ![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
 
-**Note:** Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
+**NOTE:** Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
 
 **TIP**: If you are running Raspbian Lite, run `AuthServer.py` on a machine with access to a web browser and copy the refresh token into `AlexaClientSDKConfig.json` on your Pi.  
 
-### 3.4 Test the microphone
+### 3.4 Test the microphone  
 
-To ensure the microphone is capturing audio data, run this command:  
-
-```
-sudo apt-get install sox -y && rec test.wav
-```
-
-If everything works, you should see a message indicating that audio is recording. To exit, hit **Control + C**.
-
-If you don't receive a message indicating that audio is recording, we'll need to modify `~/.asoundrc` using your favorite text editor. For example:
+A fresh Raspbian Stretch image requires updates to `/.asoundrc` before we can test the microphone. With your favorite text editor, open `~/.asoundrc`. For example:
 
 * Terminal editor:  `nano ~/.asoundrc`  
-* GUI-based editor:  `gedit ~/.asoundrc`
+* GUI-based editor:  `gedit ~/.asoundrc`  
 
 Then add these lines to the file and save:  
 
@@ -185,7 +180,13 @@ pcm.!default {
 }
 ```
 
-**IMPORTANT**: You'll need to test the microphone after adjusting `~/.asoundrc`. Run this command: `rec test.wav`.   
+To ensure the microphone is capturing audio data, run this command:  
+
+```
+sudo apt-get install sox -y && rec test.wav
+```
+
+If everything works, you should see a message indicating that audio is recording. To exit, hit **Control + C**.
 
 ## 4. Run the sample app
 
