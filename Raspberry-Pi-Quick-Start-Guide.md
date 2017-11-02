@@ -153,9 +153,14 @@ Open your browser and navigate to <http://localhost:3000>. Login with your Amazo
 
 ![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
 
-**NOTE:** Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
-
 **TIP**: If you are running Raspbian Lite, run `AuthServer.py` on a machine with access to a web browser and copy the refresh token into `AlexaClientSDKConfig.json` on your Pi.  
+
+#### Common Issues  
+
+These are the most common issues encountered when trying to obtain a refresh token:
+
+* Allowed Origins and Return URLs in your Security Profile are HTTPS not HTTP.  
+* Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors. 
 
 ### 3.4 Test the microphone  
 

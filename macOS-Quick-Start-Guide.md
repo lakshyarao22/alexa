@@ -192,7 +192,12 @@ Then, open your browser and navigate to <http://localhost:3000>. Login with your
 
 ![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
 
-**Note:** Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
+#### Common Issues  
+
+These are the most common issues encountered when trying to obtain a refresh token:
+
+* Allowed Origins and Return URLs in your Security Profile are HTTPS not HTTP.  
+* Incorrect information in `AlexaClientSDKConfig.json` is the most common reason for errors.  
 
 ## 4. Run the sample app
 
