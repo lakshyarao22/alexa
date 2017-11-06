@@ -126,9 +126,9 @@ In this section we are going to setup and run a local authorization server, whic
 
 ### 3.1 Register your product with Amazon
 
-Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with. **Make sure the Allowed Origin and Return URL are `http` *not* `https`.
+Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with.
 
-**IMPORTANT ENOUGH TO REPEAT**: The allowed origin and return URL under web settings should be <http://localhost:3000> and <http://localhost:3000/authresponse>, respectively.
+**IMPORTANT**: The allowed origin under web settings should be http://localhost:3000 and https://localhost:3000. The return URL under web settings should be http://localhost:3000/authresponse and https://localhost:3000/authresponse.
 
 Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** and **Client Secret** from the **Security Profile** tab. You'll need these params to configure the authorization server.  
 
