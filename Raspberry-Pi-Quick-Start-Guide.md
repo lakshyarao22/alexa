@@ -87,8 +87,8 @@ In this section we are going to setup and run a local authorization server, whic
 
 Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this step if you have a registered product you'd like to test with.
 
-**IMPORTANT**: The allowed origin under web settings should be <http://localhost:3000> and <https://localhost:3000>.
-The return URL under web settings should be <http://localhost:3000/authresponse> and <https://localhost:3000/authresponse>.
+**IMPORTANT**: The allowed origin under web settings should be <http://localhost:3000> or <https://localhost:3000>.
+The return URL under web settings should be <http://localhost:3000/authresponse> or <https://localhost:3000/authresponse>.
 
 Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** and **Client Secret** from the **Security Profile** tab. You'll need these params to configure the authorization server.  
 
