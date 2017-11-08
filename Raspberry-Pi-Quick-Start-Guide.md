@@ -138,7 +138,7 @@ Now fill in your product-specific values and save. **NOTE**: Do not remove the q
 
 A database is required to read and store records that the SDK requires. In this guide the values are pre-populated.
 
-Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language.
+The locale is set to US English by default in the sample JSON, however, British English, (en-GB), German (de-DE) and Indian English (en-IN) are supported. Feel free to test each language.
 
 ### 3.3 Obtain a refresh token  
 
