@@ -82,7 +82,7 @@ The AVS Device SDK requires libraries to:
     Then run this command to install flask and requests:  
 
     ```
-    pip install --user flask requests
+    pip install --user flask requests commentjson
     ```  
 
 6. To support timers and alarms, we need to download sound files from the amazon.developer.portal with wget:  
