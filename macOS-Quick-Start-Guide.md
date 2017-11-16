@@ -79,7 +79,7 @@ The AVS Device SDK requires libraries to:
     sudo easy_install pip
     ```
 
-    Then run this command to install flask and requests:  
+    Then run this command to install flask, requests, and commentjson:  
 
     ```
     pip install --user flask requests commentjson
