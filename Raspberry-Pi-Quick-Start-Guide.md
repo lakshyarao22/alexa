@@ -48,6 +48,12 @@ PortAudio is required to record microphone data. Run this command to install and
 cd /home/pi/sdk-folder/third-party && wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz && tar zxf pa_stable_v190600_20161030.tgz && cd portaudio && ./configure --without-jack && make
 ```  
 
+commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run this command to install commentjson: 
+
+```
+pip install commentjson
+```
+
 To support timers and alarms, we need to download sound files from the amazon.developer.portal with `wget`:
 
 ```
