@@ -1,9 +1,9 @@
 ## [Home](https://github.com/alexa/avs-device-sdk/wiki)
 
 **Get Started**    
+* [Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide)  
 * [macOs](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)  
-* [Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)  
 
 **Dev Kits**
 * [Quick Start for xCORE VocalFusion 4-Mic Kit](https://github.com/xmos/vocalfusion-avs-setup) 
