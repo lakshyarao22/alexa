@@ -85,12 +85,6 @@ The AVS Device SDK requires libraries to:
     pip install --user flask requests commentjson
     ```  
 
-6. To support timers and alarms, we need to download sound files from the amazon.developer.portal with wget:  
-
-    ```
-    cd ~/sdk-folder/application-necessities/sound-files/ && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02_short._TTH_.wav && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01_short._TTH_.wav
-    ```
-
 ### 1.3 Clone the AVS Device SDK
 
 Let's clone the SDK into the sdk-source folder:  
@@ -152,13 +146,6 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
             "refreshToken":"",
             "clientId":"YOUR_CLIENT_ID",
             "productId":"YOUR_PRODUCT_ID"
-       },
-       "alertsCapabilityAgent":{
-            "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/alerts.db",
-            "alarmSoundFilePath":"/{HOME}/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01._TTH_.mp3",
-            "alarmShortSoundFilePath":"/{HOME}/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01_short._TTH_.wav",
-            "timerSoundFilePath":"/{HOME}/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02._TTH_.mp3",
-            "timerShortSoundFilePath":"/{HOME}/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02_short._TTH_.wav"
        },
        "settings":{
             "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/settings.db",
