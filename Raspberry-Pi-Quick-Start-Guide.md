@@ -54,12 +54,6 @@ commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run th
 pip install commentjson
 ```
 
-To support timers and alarms, we need to download sound files from the amazon.developer.portal with `wget`:
-
-```
-cd /home/pi/sdk-folder/application-necessities/sound-files/ && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_02_short._TTH_.wav && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01._TTH_.mp3 && wget -c https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-voice-service/docs/audio/states/med_system_alerts_melodic_01_short._TTH_.wav
-```
-
 ### 1.3 Clone the AVS Device SDK and the Sensory wake word engine
 
 1. Let's clone the SDK into the sdk-source folder:  
@@ -120,13 +114,6 @@ Now fill in your product-specific values and save. **NOTE**: Do not remove the q
             "refreshToken":"",
             "clientId":"YOUR_CLIENT_ID",
             "productId":"YOUR_PRODUCT_ID"
-       },
-       "alertsCapabilityAgent":{
-            "databaseFilePath":"/home/pi/sdk-folder/application-necessities/alerts.db",
-            "alarmSoundFilePath":"/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01._TTH_.mp3",
-            "alarmShortSoundFilePath":"/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_01_short._TTH_.wav",
-            "timerSoundFilePath":"/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02._TTH_.mp3",
-            "timerShortSoundFilePath":"/home/pi/sdk-folder/application-necessities/sound-files/med_system_alerts_melodic_02_short._TTH_.wav"
        },
        "settings":{
             "databaseFilePath":"/home/pi/sdk-folder/application-necessities/settings.db",
