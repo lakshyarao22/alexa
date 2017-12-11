@@ -128,9 +128,6 @@ If you choose to use the template, follow these instructions:
        },
        "certifiedSender":{
             "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
-       },
-       "sampleApp":{
-            "displayCardsSupported":true
        }
     }
     ```
