@@ -115,6 +115,9 @@ Now fill in your product-specific values and save. **NOTE**: Do not remove the q
             "clientId":"YOUR_CLIENT_ID",
             "productId":"YOUR_PRODUCT_ID"
        },
+       "alertsCapabilityAgent":{
+            "databaseFilePath":"/home/pi/sdk-folder/application-necessities/alerts.db"
+       },
        "settings":{
             "databaseFilePath":"/home/pi/sdk-folder/application-necessities/settings.db",
             "defaultAVSClientSettings":{
