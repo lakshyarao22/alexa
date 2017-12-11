@@ -6,6 +6,7 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 * [2. Build the SDK](#2-build-the-sdk)    
 * [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)  
 * [4. Run the sample app](#4-run-the-sample-app)  
+* [5. Setup shortcuts](#5-setup-shortcuts)
 * [Common Issues](#common-issues)  
 * [Next Steps](#next-steps)
 
@@ -200,6 +201,25 @@ You can enable debugging with the debug flag. `debug1` through `debug9` are acce
 ```
 TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
 ```  
+
+## 5. Setup shortcuts 
+
+Now that you've built the Sample App, let's setup some shortcuts so that you don't have to remember the full command to launch the app.  
+
+1. Use your favorite text editor to open `~/.bash_profile`. Then add these aliases and **save**:  
+   **IMPORTANT**: Make sure you update the paths to match your folder structure.  
+   ```
+   alias alexac="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
+   alias alexacdebug="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
+   ``` 
+2. After you've added these aliases, make sure to activate your `~/.bash_profile`:  
+   ```
+   source ~/.bash_profile
+   ```
+3. Now to launch the Sample App just run this command:  
+   ```
+   alexac  
+   ```
 
 ## Common Issues  
 
