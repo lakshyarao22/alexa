@@ -126,9 +126,6 @@ Now fill in your product-specific values and save. **NOTE**: Do not remove the q
        },
        "certifiedSender":{
             "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
-       },
-       "sampleApp":{
-            "displayCardsSupported":true
        }
     }
     ```
