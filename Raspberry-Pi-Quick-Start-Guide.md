@@ -109,7 +109,7 @@ If you choose to use the template, follow these instructions:
 1. Replace the contents of `AlexaClientSDKConfig.json` with this JSON blob:  
 
     ```
-   {
+    {
         "authDelegate":{
             "clientSecret":"YOUR_CLIENT_SECRET",
             "deviceSerialNumber":"123456",
