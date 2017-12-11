@@ -129,18 +129,22 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
 
 ### 3.2 Update AlexaClientSDKConfig.json
 
-1. Use your favorite text editor to open `AlexaClientSDKConfig.json`.  
+Use your favorite text editor to open `AlexaClientSDKConfig.json`.  
 
    For example:   
    * Terminal editor: `nano ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
    * GUI-based editor: `open ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
-2. Copy and paste this snipped into your `AlexaClientSDKConfig.json` file:
+Now fill in your product-specific values and save. Alternatively, you can use the template provided below, which includes paths to the database files required for the sample app.  
 
-    **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`.
+If you choose to use the template, follow these instructions:  
+
+1. Replace the contents of `AlexaClientSDKConfig.json` with this JSON blob:
+
+   **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`.
 
     ```
-   {
+    {
         "authDelegate":{
             "clientSecret":"YOUR_CLIENT_SECRET",
             "deviceSerialNumber":"123456",
@@ -163,11 +167,13 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
     }
     ```
 
-2. Enter the `clientId`, `clientSecret`, and `productId` that you obtained during registration, then save.  
+2. Enter the `clientId`, `clientSecret`, and `productId` that you saved during device registration and save.
 
-   **NOTE** - `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
+    **NOTE**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
 
-Locale is set to US English by default in the sample JSON, however, British English (en-GB) and German (de-DE) are supported. Feel free to test each language.
+    **NOTE 2**: `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
+
+The locale is set to US English by default in the sample JSON, however, British English, (en-GB), German (de-DE) and Indian English (en-IN) are supported. Feel free to test each language.
 
 **IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
 

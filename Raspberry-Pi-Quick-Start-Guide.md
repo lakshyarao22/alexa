@@ -48,7 +48,7 @@ PortAudio is required to record microphone data. Run this command to install and
 cd /home/pi/sdk-folder/third-party && wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz && tar zxf pa_stable_v190600_20161030.tgz && cd portaudio && ./configure --without-jack && make
 ```  
 
-commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run this command to install commentjson: 
+commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run this command to install commentjson:
 
 ```
 pip install commentjson
@@ -102,9 +102,11 @@ For example:
 * Terminal editor: `nano /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 * Gedit-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
 
-Now fill in your product-specific values and save. **NOTE**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
+Now fill in your product-specific values and save. Alternatively, you can use the template provided below, which includes paths to the database files required for the sample app.  
 
-1. Replace the contents of the config file this JSON blob.  
+If you choose to use the template, follow these instructions:  
+
+1. Replace the contents of `AlexaClientSDKConfig.json` with this JSON blob:  
 
     ```
    {
@@ -135,9 +137,13 @@ Now fill in your product-specific values and save. **NOTE**: Do not remove the q
 
 2. Enter the `clientId`, `clientSecret`, and `productId` that you saved during device registration and save.
 
-A database is required to read and store records that the SDK requires. In this guide the values are pre-populated.
+   **NOTE**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
+
+   **NOTE 2**: `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
 
 The locale is set to US English by default in the sample JSON, however, British English, (en-GB), German (de-DE) and Indian English (en-IN) are supported. Feel free to test each language.
+
+**IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
 
 ### 3.3 Obtain a refresh token  
 
@@ -158,7 +164,7 @@ Open your browser and navigate to <http://localhost:3000>. Login with your Amazo
 #### Common Issues  
 
 These are the most common issues encountered when trying to obtain a refresh token:
-  
+
 * Incorrect information in `AlexaClientSDKConfig.json`.
 
 ### 3.4 Test the microphone  
