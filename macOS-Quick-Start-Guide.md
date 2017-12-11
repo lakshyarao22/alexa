@@ -148,6 +148,9 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
             "clientId":"YOUR_CLIENT_ID",
             "productId":"YOUR_PRODUCT_ID"
        },
+       "alertsCapabilityAgent":{
+            "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/alerts.db"
+       },
        "settings":{
             "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/settings.db",
             "defaultAVSClientSettings":{
@@ -183,8 +186,8 @@ Then, open your browser and navigate to <http://localhost:3000>. Login with your
 #### Common Issues  
 
 These are the most common issues encountered when trying to obtain a refresh token:
- 
-* Incorrect information in `AlexaClientSDKConfig.json`. 
+
+* Incorrect information in `AlexaClientSDKConfig.json`.
 
 ## 4. Run the sample app
 
@@ -202,7 +205,7 @@ You can enable debugging with the debug flag. `debug1` through `debug9` are acce
 TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
 ```  
 
-## 5. Setup shortcuts 
+## 5. Setup shortcuts
 
 Now that you've built the Sample App, let's setup some shortcuts so that you don't have to remember the full command to launch the app.  
 
@@ -211,7 +214,7 @@ Now that you've built the Sample App, let's setup some shortcuts so that you don
    ```
    alias alexac="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
    alias alexacdebug="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
-   ``` 
+   ```
 2. After you've added these aliases, make sure to activate your `~/.bash_profile`:  
    ```
    source ~/.bash_profile
