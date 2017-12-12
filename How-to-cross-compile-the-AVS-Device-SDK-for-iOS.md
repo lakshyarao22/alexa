@@ -1,18 +1,18 @@
 
-These are step-by-step instructions to cross-compile and build the AVS Device SDK for iOS. If you encounter any errors or have questions, please check our issues list before creating a new issue. 
+These are step-by-step instructions to cross-compile and build the AVS Device SDK for iOS. If you encounter any errors or have questions, please check our issues list before creating a new issue.
 
 1. Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Skip to the next step if previously installed.  
-2. Install [Homebrew](https://brew.sh/). Skip to the next step if previously installed. 
+2. Install [Homebrew](https://brew.sh/). Skip to the next step if previously installed.
 
    ```
    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    ```
-3. Install additional dependencies: 
-  
+3. Install additional dependencies:
+
    ```
    brew install cmake
    brew install pkg-config
-   ``` 
+   ```
 4. Create a folder for your project. In this example project, we've named the folder `cross-compile`, however you can use whatever you'd like:  
 
    ```
@@ -20,13 +20,13 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
    mkdir cross-compile
    cd cross-compile
    ```
-5. Download the CMake toolchain for iOS: 
+5. Download the CMake toolchain for iOS:
 
    ```
    cd ~/cross-compile
    git clone https://github.com/leetal/ios-cmake.git
    ```
-6. Download and cross-compile Google Test: 
+6. Download and cross-compile Google Test:
 
    ```
    cd ~/cross-compile
@@ -35,8 +35,8 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
    cmake ../googletest -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS
    make
    ```
-7. Download and cross-compile OpenSSL and curl. For this step, we're going to use an open source script from GitHub. Heads-up, this may take a while: 
-   * Clone the repository: 
+7. Download and cross-compile OpenSSL and curl. For this step, we're going to use an open source script from GitHub. Heads-up, this may take a while:
+   * Clone the repository:
      ```
      cd ~/cross-compile
      git clone https://github.com/jasonacox/Build-OpenSSL-cURL.git
@@ -63,13 +63,13 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
      ```
      cd ~/cross-compile
      git clone https://github.com/alexa/avs-device-sdk.git  
-     cd avs-device-sdk/ 
+     cd avs-device-sdk/
      ```
    * Add this code between lines 98 and 99 of `/AVSCommon/Utils/src/LibcurlUtils/LibcurlUtils.cpp`:   
      ```
      + setopt(handle, CURLOPT_CAINFO, caPath.c_str(), "CURLOPT_CAINFO", caPath.c_str());
      ```
-   * After you add the line, it should look like this: 
+   * After you add the line, it should look like this:
      ```
      if (configuration::ConfigurationNode::getRoot()[LIBCURLUTILS_CONFIG_KEY].getString(CAPATH_CONFIG_KEY, &caPath)) {
        + setopt(handle, CURLOPT_CAINFO, caPath.c_str(), "CURLOPT_CAINFO", caPath.c_str());
@@ -94,7 +94,7 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
      cd ~/cross-compile
      mkdir avs_build_sim
      cd avs_build_sim
-     cmake ../avs-device-sdk -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DGSTREAMER_MEDIA_PLAYER=OFF -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config
+     cmake ../avs-device-sdk -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR64 -DGSTREAMER_MEDIA_PLAYER=OFF -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config  
      ```  
    * To build what's required for the iOS proof of concept run these commands:  
      ```
@@ -103,5 +103,5 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
      make KWD
      make PlaylistParser
      ```
-   * Make sure that each make command reaches `100%`. 
+   * Make sure that each make command reaches `100%`.
 10. That's it, you're done. The AVS Device SDK has been cross-compiled for iOS.  
