@@ -58,7 +58,7 @@ The AVS Device SDK requires libraries to:
 3. Now run:
 
      ```
-     brew install gstreamer gst-plugins-base gst-plugins-good gst-libav sqlite3 repo cmake clang-format doxygen wget git
+     brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav sqlite3 repo cmake clang-format doxygen wget git
      ```  
 
      **IMPORTANT**: Make sure that command ran successfully, and that no errors were thrown. If for any reason the install command fails, run brew install for each dependency individually.  
