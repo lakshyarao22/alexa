@@ -80,16 +80,10 @@ If `pip` isn't installed on your system, follow the detailed install instruction
 
 ### Step 2: Install `flask` and `requests`
 
-For Windows run this command:
+Run this command: 
 
 ```
-pip install flask requests
-```
-
-For Unix/Mac run this command:
-
-```
-pip install --user flask requests
+pip install --user flask requests commentjson
 ```
 
 ### Step 3: Obtain Your Product ID, Cliend ID, and Client Secret
