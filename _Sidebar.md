@@ -10,7 +10,7 @@
 * [Quick Start for NXP PICO-PI-IMX7D 2-Mic Kit](https://www.nxp.com/docs/en/user-guide/Quick-Start-Guide-for-Arrow-AVS-kit.pdf)  
 
 **Resources**  
-* [Minimum Requirements and Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Minimum-Requirements-and-Dependencies)  
+* [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies)  
 * [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options)  
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  
 * [API Reference](https://alexa.github.io/avs-device-sdk/)  
