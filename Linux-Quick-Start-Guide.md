@@ -5,7 +5,7 @@ The AVS Device SDK for C++ provides a modern C++ (11 or later) interface for the
 To quickly setup your Raspberry Pi development environment or to learn how to optimize libcurl for size, see the wiki or [click here](https://github.com/alexa/alexa-client-sdk/wiki).
 
 * [Common Terms](#common-terms)  
-* [Minimum Requirements and Dependencies](#minimum-requirements-and-dependencies)  
+* [Dependencies](#dependencies)  
 * [Prerequisites](#prerequisites)  
 * [Create an Out-of-Source Build](#create-an-out-of-source-build)  
 * [Run AuthServer](#run-authserver)  
@@ -25,7 +25,7 @@ To quickly setup your Raspberry Pi development environment or to learn how to op
 * **Downchannel** - A stream you create in your HTTP/2 connection, which is used to deliver directives from AVS to your product. The downchannel remains open in a half-closed state from the device and open from AVS for the life of the connection. The downchannel is primarily used to send cloud-initiated directives to your product.
 * **Cloud-initiated Directives** - Directives sent from AVS to your product. For example, when a user adjusts device volume from the Amazon Alexa App, a directive is sent to your product without a corresponding voice request.
 
-## Minimum Requirements and Dependencies  
+## Dependencies  
 
 Instructions are available to help you quickly [setup a development environment for RaspberryPi](../wiki/Raspberry-Pi-Quick-Start-Guide) and [build libcurl with nghttp2 for macOS](../wiki/How-to-build-libcurl-with-nghttp2-for-macos).
 
