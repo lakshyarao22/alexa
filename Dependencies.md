@@ -2,7 +2,7 @@ This is a list of requirements and dependencies for the AVS Device SDK. Quick st
 
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide)  
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)  
-* [Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Quick-Start-Guide)  
+* [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)  
 
 ### Core Dependencies  
 * C++ 11 or later

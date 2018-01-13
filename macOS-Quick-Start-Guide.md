@@ -143,29 +143,32 @@ If you choose to use the template, follow these instructions:
 
    **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`.
 
-    ```
-    {
-        "authDelegate":{
-            "clientSecret":"YOUR_CLIENT_SECRET",
-            "deviceSerialNumber":"123456",
-            "refreshToken":"",
-            "clientId":"YOUR_CLIENT_ID",
-            "productId":"YOUR_PRODUCT_ID"
+   ```
+   {
+       "authDelegate":{
+           "clientSecret":"YOUR_CLIENT_SECRET",
+           "deviceSerialNumber":"123456",
+           "refreshToken":"",
+           "clientId":"YOUR_CLIENT_ID",
+           "productId":"YOUR_PRODUCT_ID"
        },
        "alertsCapabilityAgent":{
-            "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/alerts.db"
+           "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/alerts.db"
        },
        "settings":{
-            "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/settings.db",
-            "defaultAVSClientSettings":{
-                "locale":"en-US"
-            }
+           "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/settings.db",
+           "defaultAVSClientSettings":{
+               "locale":"en-US"
+           }
        },
        "certifiedSender":{
-            "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/certifiedSender.db"
+           "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/certifiedSender.db"
+       },
+       "notifications":{
+           "databaseFilePath":"/{HOME}/sdk-folder/application-necessities/notifications.db"
        }
-    }
-    ```
+   }
+   ```
 
 2. Enter the `clientId`, `clientSecret`, and `productId` that you saved during device registration and save.
 

@@ -128,6 +128,9 @@ If you choose to use the template, follow these instructions:
        },
        "certifiedSender":{
             "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
+       },
+       "notifications":{
+           "databaseFilePath":"/home/pi/sdk-folder/application-necessities/notifications.db"
        }
     }
     ```
