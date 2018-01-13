@@ -2,7 +2,7 @@ The AVS Device SDK for C++ provides a modern C++ (11 or later) interface for the
 
 This guide assumes familiarity with Linux and requires you to build dependencies from source. If you are looking to get up and running quickly, please use one of our quickstart guides:  
 
-* [Ubuntu](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Quick-Start-Guide)
+* [Ubuntu](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)
 
