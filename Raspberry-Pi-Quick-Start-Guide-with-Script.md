@@ -1,6 +1,6 @@
 Want to see the AVS Device SDK in action? This guide is designed to have a working sample running on a Raspberry Pi 3 in less than an hour.
 
-This guide uses a handful of scripts to download, build, and run the AVS Device SDK with wake word detection enabled. If you'd like to build from scratch, we also provide [step-by-step instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Raspberry-Pi-Quick-Start-Guide) that will walk you through downloading dependencies, running the authorization service, and running the sample app in debug mode.
+This guide uses a handful of scripts to download, build, and run the AVS Device SDK with wake word detection enabled. If you'd like to build from scratch, we also provide [step-by-step instructions](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) that will walk you through downloading dependencies, running the authorization service, and running the sample app in debug mode.
 
 ## Required Hardware
 
