@@ -105,7 +105,7 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
 9. The AVS Device SDK uses a sample authorization service build in Python to obtain refresh and access tokens. In this step, we'll install PIP and other dependencies for the authorization service:  
    * Run this command to determine if PIP is installed:  
       ```
-      `pip --version`
+      pip --version
       ```
    * If PIP isn't installed, run:   
       ```
