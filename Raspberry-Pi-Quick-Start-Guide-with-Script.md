@@ -22,24 +22,24 @@ Before we get started, you'll need to register a device and create a security pr
 If you already have a registered product that you can use for testing, feel free to skip ahead.
 
 ## Setup and Run
-1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop, however, you can run the script anywhere.  
+1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
     ```
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/config.txt
     ```
 2. Update `config.txt` with the **Client ID**, **Client Secret**, and **Product ID** for your registered product and **save**.   
 3. Run the setup script with your configuration as an argument:
     ```
-    bash setup.sh config.txt
+    sudo bash setup.sh config.txt
     ```
 4. After the setup script has finished running, you'll need to generate an authorization token. Run this command and follow the on-screen instructions:
     ```
-    bash startauth.sh
+    sudo bash startauth.sh
     ```
 5. Last and most importantly, let's run the Sample App:
     ```
-    bash startsample.sh
+    sudo bash startsample.sh
     ```
 6. You can also run integration and unit tests:
     ```
-    bash test.sh
+    sudo bash test.sh
     ```
