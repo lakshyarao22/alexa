@@ -23,7 +23,7 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
    ```
 2. We need somewhere to put everything, so let's create some folders. This guide presumes that everything is built in `{HOME}`, which we will presume is your home directory. If you choose to use different folder names, please update the commands throughout this guide accoringly:
    ```
-   mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities
+   mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities
    ```  
 3. Now, let's set up our toolchain:  
    ```
