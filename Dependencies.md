@@ -6,7 +6,7 @@ This is a list of requirements and dependencies for the AVS Device SDK. Quick st
 
 ### Core Dependencies  
 * C++ 11 or later
-* [GNU Compiler Collection (GCC) 4.8.5](https://gcc.gnu.org/) or later **OR** [Clang 3.3](http://clang.llvm.org/get_started.html) or later
+* [GNU Compiler Collection (GCC) 4.8.5](https://gcc.gnu.org/) or later **OR** [Clang 3.9](http://clang.llvm.org/get_started.html) or later
 * [CMake 3.1](https://cmake.org/download/) or later
 * [libcurl 7.50.2](https://curl.haxx.se/download.html) or later
 * [nghttp2 1.0](https://github.com/nghttp2/nghttp2) or later
