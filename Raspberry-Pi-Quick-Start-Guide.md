@@ -203,7 +203,8 @@ If everything works, you should see a message indicating that audio is recording
 Run this command to launch the sample app. This includes the path to your configuration file and the Sensory wake word model:
 
 ```
-cd /home/pi/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models
+cd /home/pi/sdk-folder/sdk-build/SampleApp/src
+./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models
 ```  
 
 **IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  

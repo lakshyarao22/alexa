@@ -107,7 +107,7 @@ After you've obtained a refresh token, run integration and unit tests to ensure 
 
 * Use this command to run integration tests:
    ```
-   TZ=UTC make all integration
+   make all integration
    ```
 * Use this command to run unit tests:  
    ```
@@ -119,13 +119,13 @@ For additional details, see [Unit and Integration Tests](https://github.com/alex
 ## Run the Sample App
 Navigate to your *BUILD* folder, then run this command:
 ```
-TZ=UTC ./SampleApp ~/{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json
+./SampleApp ~/{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json
 ```
 
 You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least and `debug9` providing the most information.  
 
 ```
-TZ=UTC ./SampleApp /{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json debug9
+./SampleApp /{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json debug9
 ```  
 
 **TIP**: The Sample App is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  
@@ -137,8 +137,8 @@ Now that you've built the Sample App, you can set up some shortcuts to make laun
 1. Use your favorite text editor to open `~/.bash_profile`. Then add these aliases and **save**:  
    **IMPORTANT**: Make sure you update the paths to match your folder structure.  
    ```
-   alias alexac="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
-   alias alexacdebug="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
+   alias alexac="[path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
+   alias alexacdebug="[path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
    ```
 2. After you've added these aliases, make sure to activate your `~/.bash_profile`:  
    ```

@@ -158,7 +158,7 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
 12. Run integration and unit tests to ensure that the AVS Device SDK is functioning as designed.
     * Use this command to run integration tests:
        ```
-       TZ=UTC make all integration
+      make all integration
        ```
     * Use this command to run unit tests:  
        ```
@@ -169,6 +169,6 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
 13. If we've still got your attention, here's the best part! Run this command to launch the Sample App, which allows you to interact with Alexa:  
     ```
     cd ~/sdk-folder/sdk-build/SampleApp/src
-    TZ=UTC ./SampleApp ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
+    ./SampleApp ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
     ```
     **TIP**: The Sample App is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  

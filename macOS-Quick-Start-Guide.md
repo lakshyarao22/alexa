@@ -205,13 +205,14 @@ Now you're ready to run the sample app. This command sets the time zone to UTC a
 **IMPORTANT**: Replace all instances of `{HOME}` with the absolute path to your home directory. For example: `/Users/johnsmith/`:  
 
 ```
-cd ~/sdk-folder/sdk-build/SampleApp/src && TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
+cd ~/sdk-folder/sdk-build/SampleApp/src
+./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
 ```  
 
 You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least and `debug9` providing the most information.  
 
 ```
-TZ=UTC ./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
+./SampleApp /{HOME}/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json debug9
 ```  
 
 ## 5. Setup shortcuts
@@ -221,8 +222,8 @@ Now that you've built the Sample App, let's setup some shortcuts so that you don
 1. Use your favorite text editor to open `~/.bash_profile`. Then add these aliases and **save**:  
    **IMPORTANT**: Make sure you update the paths to match your folder structure.  
    ```
-   alias alexac="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
-   alias alexacdebug="TZ=UTC [path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
+   alias alexac="[path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json"
+   alias alexacdebug="[path_to_build_folder]/SampleApp/src/SampleApp [path_to_build_folder]/Integration/AlexaClientSDKConfig.json DEBUG9"
    ```
 2. After you've added these aliases, make sure to activate your `~/.bash_profile`:  
    ```
