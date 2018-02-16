@@ -148,7 +148,8 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
     }
     ```
 
-11. Now, run the authorization service and follow the instructions provided:
+11. Now, run the authorization service. Open your browser and navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials and follow the instructions provided.
+:
     ```
     cd ~/sdk-folder/sdk-build && python AuthServer/AuthServer.py
     ```  
