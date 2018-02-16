@@ -210,7 +210,7 @@ cd /home/pi/sdk-folder/sdk-build/SampleApp/src
 **IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  
 
 ```
-TZ=UTC ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models debug9
+./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models debug9
 ```  
 
 ## Next Steps  
