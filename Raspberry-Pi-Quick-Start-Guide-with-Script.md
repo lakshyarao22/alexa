@@ -31,7 +31,7 @@ If you already have a registered product that you can use for testing, feel free
     ```
     sudo bash setup.sh config.txt
     ```
-4. After the setup script has finished running, you'll need to generate an authorization token. Run this command and follow the on-screen instructions:
+4. After the setup script has finished running, you'll need to generate an authorization token. Run this command, and open your browser and navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials and follow the instructions provided:
     ```
     sudo bash startauth.sh
     ```
