@@ -42,7 +42,7 @@ If your project is built on a GNU/Linux-based platform (Ubuntu, Debian, etc.), t
 This `cmake` option is required when you build the SDK:
 
 ```
-cmake <absolute-path-to-source> -DNETWORK_INTEGRATION_TESTS=ON –DNETWORK_INTERFACE=eth0
+cmake <absolute-path-to-source> -DNETWORK_INTEGRATION_TESTS=ON -DNETWORK_INTERFACE=eth0
 ```
 
 **Note**: The name of the network interface can be located with this command `ifconfig -a`.
