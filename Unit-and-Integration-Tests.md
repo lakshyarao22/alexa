@@ -32,7 +32,7 @@ See the `Create the AlexaClientSDKConfig.json file` section (above), if you have
 To run the integration tests use this command: 
 
 ```
-TZ=UTC make all integration
+make all integration
 ```
 
 ### Network Integration Test  
