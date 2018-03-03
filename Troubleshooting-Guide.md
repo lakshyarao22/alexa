@@ -39,4 +39,5 @@ Let us know what we can do to help you by creating a [new issue](https://github.
 
 | Issue | Workaround/Resolution |
 |--------|--------------|
-| No USB soundcard option | The SampleApp uses the default input and output for audio. To use a USB soundcard, install the `dsnoop` and `dmix` plugins. Paste [this code](https://github.com/shivasiddharth/Assistants-Pi/blob/master/audio-drivers/USB-DAC/scripts/asound.conf) into `.asoundrc`, and into `asound.conf`. |
+| The system can't locate `libwinpthread-1.dll` when running the sample app | This means that Windows can't find the library either because it's not installed, or it's not in the path environment variable. To troubleshoot, verify that the library exists, and that it is nested within the proper file path, such as `c:\msys64\mingw64\bin`. |
+| The sample app hangs at startup, and ~35% of CPU is being used. | This likely means that Pacman isn't updated. Follow the steps **1.1.2** and **1.1.3** above. |
