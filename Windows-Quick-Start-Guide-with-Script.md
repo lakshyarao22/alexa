@@ -79,12 +79,7 @@ Open the MinGW64 shell, amd run `make` inside of the the `alexa_sdk\build` folde
 
 ## Common Issues
 
-This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue](https://github.com/alexa/avs-device-sdk/issues/new).
-
-| Issue | Workaround/Resolution |
-|--------|--------------|
-| The system can't locate `libwinpthread-1.dll` when running the sample app | This means that Windows can't find the library either because it's not installed, or it's not in the path environment variable. To troubleshoot, verify that the library exists, and that it is nested within the proper file path, such as `c:\msys64\mingw64\bin`. |
-| The sample app hangs at startup, and ~35% of CPU is being used. | This likely means that Pacman isn't updated. Follow the steps **1.1.2** and **1.1.3** above. |
+See the [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide).
 
 ## Next Steps
 

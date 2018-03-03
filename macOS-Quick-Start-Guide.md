@@ -236,13 +236,7 @@ Now that you've built the sample app, let's setup some shortcuts so that you don
 
 ## Common issues  
 
-This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue](https://github.com/alexa/avs-device-sdk/issues/new).  
-
-| Issue | Workaround/Resolution |
-|--------|--------------|  
-| SDK fails to build because of missing dependencies. | Sometimes, the `brew install` command that is run during **step 1.2.3** will fail if a dependency is already installed. To get around this issue, run a `brew install` command for each dependency individually. |  
-| SampleApp fails to build because your version of curl doesn't support HTTP/2. | It's possible that curl didn't link correctly. To fix this issue, run `brew uninstall curl`, then repeat the steps in **1.2.2**. |  
-| AuthServer.py throws this error: `File "AuthServer/AuthServer.py", line 67 print 'The file "' + \ SyntaxError: Missing parentheses in call to 'print'`. | This is a known issue with Python 3.x. The workaround is to use Python 2.7.x. |  
+See the [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide).
 
 ## Next steps  
 
