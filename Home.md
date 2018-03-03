@@ -5,19 +5,20 @@ The Alexa Voice Service (AVS) enables developers to integrate Alexa directly int
 
 [Learn more >>](https://developer.amazon.com/alexa-voice-service)  
 
-## Overview of the AVS Device SDK
+## Overview of the AVS device SDK
 
 The AVS Device SDK for C++ provides a C++ (11 or later) interface for the Alexa Voice Service (AVS) that allows developers to add intelligent voice control to connected products. It is modular and abstracted, providing components to handle discrete functionality such as speech capture, audio processing, and communications, with each component exposing APIs that you can use and customize for your integration. It also includes a sample app, which demonstrates interactions with the Alexa Voice Service (AVS).
 
-## Reference Guide for Linux   
+## Reference guide for Linux   
 * [Generic Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide)  
 
-## Step-by-Step Guides  
+## Step-by-step guides  
 Quickly build the SDK and run the sample app on these platforms:
 
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)   
 * [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
-* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)  
+* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
+* [Windows 64-bit]()  
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
 
 You can also prototype with a third party development kit
@@ -31,7 +32,7 @@ You can also prototype with a third party development kit
 
 The step-by-step guides include an authorization server for prototyping purposes. However, you'll want to use one of our approved authorization options for token exchange. [Click here](https://developer.amazon.com/alexa-voice-service/auth) to learn more.
 
-## Other Guides + Optimizations  
+## Other guides + optimizations  
 
 The following guides walk you through SDK optimizations:
 
@@ -40,7 +41,7 @@ The following guides walk you through SDK optimizations:
 * [Build libcurl with nghttp2 for macOS](https://github.com/alexa/alexa-client-sdk/wiki/How-to-build-libcurl-with-nghttp2-for-macos)  
 * [Runtime Configuration for CA Certificates](https://github.com/alexa/avs-device-sdk/wiki/Runtime-Configuration-for-CA-Certificates)   
 
-## Read the Docs  
+## Read the docs  
 
 * [AVS Device SDK API Documentation](https://alexa.github.io/avs-device-sdk/)  
 

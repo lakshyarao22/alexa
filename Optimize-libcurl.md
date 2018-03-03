@@ -69,7 +69,7 @@ We recommend that you use separate directories to keep track of your optimized b
 
 At this point, you should have all your libraries under `$OPTIMIZED_TARGET_DIR/lib`.
 
-## Pass Optimized libcurl to the Alexa Client SDK
+## Pass optimized libcurl to the Alexa Client SDK
 
 In this section, we will pass the optimized `libcurl` to the make process. We assume that the source code for Alexa Client SDK is located in `$ACSDK_SOURCE_DIR` and the build directory is `$ACSDK_BUILD_DIR`. 
 ```
@@ -80,7 +80,7 @@ cmake -DCURL_LIBRARY=$OPTIMIZED_TARGET_DIR/lib/libcurl.so -DCURL_INCLUDE_DIR=$O
 
 That is it, you have optimized libcurl for size. Click here to return to [README.md](https://github.com/alexa/alexa-client-sdk).
 
-## Optmiziation Results
+## Optmiziation results
 
 This table illustrates the size differences between standard and optimized libraries.
 
@@ -91,7 +91,7 @@ This table illustrates the size differences between standard and optimized libra
 | `libcrypto`	| 2.5M     | 1.7M      |
 | `libcurl`	| 508K	   | 264K      |
 
-## Release Notes   
+## Release notes   
 
 | Version | Release Date | Notes |
 |---------|--------------|-------|  

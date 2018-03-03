@@ -1,4 +1,4 @@
-## CMake Build Types and Options
+## CMake build types and options
 
 The following build types are supported:
 
@@ -12,7 +12,7 @@ To specify a build type, use this command in place of step 4 below:
 cmake <absolute-path-to-source> -DCMAKE_BUILD_TYPE=<build-type>
 ```
 
-## Build with a Wake Word Detector  
+## Build with a wake word detector  
 
 **Note**: Wake word detector and key word detector (KWD) are used interchangeably.
 
@@ -54,7 +54,7 @@ cmake <absolute-path-to-source> -DKITTAI_KEY_WORD_DETECTOR=ON -DKITTAI_KEY_WORD_
 
 ```
 -DGSTREAMER_MEDIA_PLAYER=ON
-``` 
+```
 
 If GStreamer was [installed from source](https://gstreamer.freedesktop.org/documentation/frequently-asked-questions/getting.html), the prefix path provided when building must be specified to CMake with:
 
@@ -68,18 +68,18 @@ This is a sample `cmake` command:
 cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DCMAKE_PREFIX_PATH=<absolute-path-to-GStreamer-build>
 ```
 
-## Build with PortAudio (Required to Run the Sample App)  
+## Build with PortAudio (required to run the sample app)  
 
-PortAudio is required to build and run the SampleApp. This is covered in the quick start guides for Linux, macOS, and Raspberry Pi. 
+PortAudio is required to build and run the sample app. This is covered in the quick start guides for Linux, macOS, and Raspberry Pi.
 
 These options must be declared in your `cmake` command to build with PortAudio. Please note, GStreamer is also included, as it is required to run the SampleApp:  
 
-* `-DGSTREAMER_MEDIA_PLAYER=ON` 
-* `-DPORTAUDIO=ON` 
+* `-DGSTREAMER_MEDIA_PLAYER=ON`
+* `-DPORTAUDIO=ON`
 * `-DPORTAUDIO_LIB_PATH=<absolute-path-to-portaudio-lib>`
 * `-DPORTAUDIO_INCLUDE_DIR=<absolute-path-to-portaudio-include-dir`
 
-This is a sample `cmake` command: 
+This is a sample `cmake` command:
 ```
 cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=<absolute-path>/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=<absolute-path>/portaudio/include
 ```

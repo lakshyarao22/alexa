@@ -116,7 +116,7 @@ After you've obtained a refresh token, run integration and unit tests to ensure 
 
 For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).
 
-## Run the Sample App
+## Run the sample app
 Navigate to your *BUILD* folder, then run this command:
 ```
 ./SampleApp ~/{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json
@@ -128,11 +128,11 @@ You can enable debugging with the debug flag. `debug1` through `debug9` are acce
 ./SampleApp /{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json debug9
 ```  
 
-**TIP**: The Sample App is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  
+**TIP**: The sample app is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  
 
 ## Setup shortcuts
 
-Now that you've built the Sample App, you can set up some shortcuts to make launching the Sample App easier:   
+Now that you've built the sample app, you can set up some shortcuts to make launching the sample app easier:   
 
 1. Use your favorite text editor to open `~/.bash_profile`. Then add these aliases and **save**:  
    **IMPORTANT**: Make sure you update the paths to match your folder structure.  
@@ -144,7 +144,7 @@ Now that you've built the Sample App, you can set up some shortcuts to make laun
    ```
    source ~/.bash_profile
    ```
-3. Now to launch the Sample App, just run this command:  
+3. Now to launch the sample app, just run this command:  
    ```
    alexac  
    ```

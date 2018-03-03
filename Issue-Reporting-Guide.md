@@ -2,7 +2,7 @@ Occasionally, you may encounter issues related to unit and integration tests pro
 
 **NOTE**: These instructions assume that you are working at the top level of the build directory, where you run `make test` and `make integration`.
 
-## Integration Tests
+## Integration tests
 
 The integration tests rely on your platform's internet connection and the server's availability. Therefore, the failures you might see during integration tests might be intermittent. The general approach for integration tests should be to isolate the test bench (rf Step 1 below) and repeat the test bench using the `--gtest_repeat=n` flag with at least 10 tries. If the failure is persistent, you can also filter the test (rf Step 3 below) and repeat with at least 10 tries. The main difference between the unit and integration tests is that integration tests are not included in the CTest command. Therefore, you should pass the correct parameters to the executable to run a single test bench. There are seven integration tests, the following commands are used to run these tests:
 
@@ -16,9 +16,9 @@ The integration tests rely on your platform's internet connection and the server
 
 Once you have used `--gtest_filter`, you can include that output to the issue report.
 
-## Unit Tests  
+## Unit tests  
 
-### How to Find Which Test is Responsible
+### How to find which test is responsible
 
 Using the build instructions, you may encounter failures during the `make test` step. Here we summarize what to do and how to re-run just the test that had failed:  
 
@@ -43,13 +43,13 @@ Using the build instructions, you may encounter failures during the `make test` 
     [  FAILED  ] MediaPlayerTest.testStartPlayForUrl
     ```
     In this example, we see that the same two tests have failed again.
-    
+
 3. **Run only the failed tests and report:** Now that we are sure which tests failed, we can run this test:
     ```
     ctest -R "^MediaPlayerTest.testStartPlayWaitForEnd$|^MediaPlayerTest.testStartPlayForUrl$" -V
     ```
-    Here, notice that the tests are separated by `|`. Now the output is much smaller, and contains all the info needed for the run: 
-    
+    Here, notice that the tests are separated by `|`. Now the output is much smaller, and contains all the info needed for the run:
+
     ```
     Note: Google Test filter = MediaPlayerTest.testStartPlayWaitForEnd:MediaPlayerTest.testStartPlayForUrl
     [==========] Running 2 tests from 1 test case.
@@ -96,7 +96,7 @@ Using the build instructions, you may encounter failures during the `make test` 
 
      2 FAILED TESTS
     ```
-    
+
     Before you report the failure, it's important that you observe how frequently these tests fail. You can have the tests repeat themselves by passing the ` --repeat-until-fail n` flag where `n` is the number of tries. If you observe the failures intermittently, then please note that in your issue report after attaching the final printout. For example:  
-        
+
     **Note:** If you have `ACSDK_EMIT_SENSITIVE_LOGS` flags enabled and your printout contains sensitive information like user name, client ID, or refresh token, please remove those from the logs before submitting an issue.

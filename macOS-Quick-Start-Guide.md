@@ -121,7 +121,7 @@ In this section we are going to setup and run a local authorization server, whic
 
 ### 3.1 Register your product with Amazon
 
-Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with.
+Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this step if you have a registered product you'd like to test with.
 
 **IMPORTANT**: The allowed origin under web settings should be http://localhost:3000 and https://localhost:3000. The return URL under web settings should be http://localhost:3000/authresponse and https://localhost:3000/authresponse.
 
@@ -176,7 +176,7 @@ If you choose to use the template, follow these instructions:
 
     **NOTE 2**: `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
 
-The locale is set to US English by default in the sample JSON, however, British English, (en-GB), German (de-DE) and Indian English (en-IN) are supported. Feel free to test each language.
+The locale is set to US English by default in the sample JSON, however other [locales are supported](https://developer.amazon.com/docs/alexa-voice-service/settings.html#settingsupdated). Feel free to test each language.
 
 **IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
 
@@ -192,7 +192,7 @@ Then, open your browser and navigate to <http://localhost:3000>. Login with your
 
 ![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
 
-#### Common Issues  
+#### Common issues  
 
 These are the most common issues encountered when trying to obtain a refresh token:
 
@@ -217,7 +217,7 @@ You can enable debugging with the debug flag. `debug1` through `debug9` are acce
 
 ## 5. Setup shortcuts
 
-Now that you've built the Sample App, let's setup some shortcuts so that you don't have to remember the full command to launch the app.  
+Now that you've built the sample app, let's setup some shortcuts so that you don't have to remember the full command to launch the app.  
 
 1. Use your favorite text editor to open `~/.bash_profile`. Then add these aliases and **save**:  
    **IMPORTANT**: Make sure you update the paths to match your folder structure.  
@@ -229,12 +229,12 @@ Now that you've built the Sample App, let's setup some shortcuts so that you don
    ```
    source ~/.bash_profile
    ```
-3. Now to launch the Sample App just run this command:  
+3. Now to launch the sample app just run this command:  
    ```
    alexac  
    ```
 
-## Common Issues  
+## Common issues  
 
 This is a list of common issues (or got'chas) and workarounds/resolutions. Please, let us know what we can improve by creating a [new issue](https://github.com/alexa/avs-device-sdk/issues/new).  
 
@@ -244,7 +244,7 @@ This is a list of common issues (or got'chas) and workarounds/resolutions. Pleas
 | SampleApp fails to build because your version of curl doesn't support HTTP/2. | It's possible that curl didn't link correctly. To fix this issue, run `brew uninstall curl`, then repeat the steps in **1.2.2**. |  
 | AuthServer.py throws this error: `File "AuthServer/AuthServer.py", line 67 print 'The file "' + \ SyntaxError: Missing parentheses in call to 'print'`. | This is a known issue with Python 3.x. The workaround is to use Python 2.7.x. |  
 
-## Next Steps  
+## Next steps  
 
 * [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options)  
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  

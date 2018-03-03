@@ -8,14 +8,14 @@ This guide assumes that:
 * you have a microphone
 * your Ubuntu box is capable of audio output through headphones or a speaker  
 
-## Register a Device
+## Register a device
 Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this set if you have a registered product you'd like to test with.
 
 **IMPORTANT**: The allowed origin under web settings should be http://localhost:3000 and https://localhost:3000. The return URL under web settings should be http://localhost:3000/authresponse and https://localhost:3000/authresponse.
 
 Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** and **Client Secret** from the **Security Profile** tab.
 
-## Quickstart Instructions
+## Quickstart instructions
 
 1. The first step is to make sure your machine has the latest package lists and then install the latest version of each package in that list:
    ```
@@ -166,9 +166,9 @@ Make sure you save the **Product ID** from the **Product information** tab, and 
        ```
     For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).  
 
-13. If we've still got your attention, here's the best part! Run this command to launch the Sample App, which allows you to interact with Alexa:  
+13. If we've still got your attention, here's the best part! Run this command to launch the sample app, which allows you to interact with Alexa:  
     ```
     cd ~/sdk-folder/sdk-build/SampleApp/src
     ./SampleApp ~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json
     ```
-    **TIP**: The Sample App is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  
+    **TIP**: The sample app is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  

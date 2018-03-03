@@ -4,7 +4,7 @@ We recommend that you use separate directories to keep track of your optimized b
 
 **Note**: These instructions are verified for Ubuntu 16.04.  
 
-## Build Instructions
+## Build instructions
 
 1. Run the following commands to install CMake. You can skip this step if CMake is already installed.  
    * `wget https://cmake.org/files/v3.8/cmake-3.8.0-rc1.tar.gz`  

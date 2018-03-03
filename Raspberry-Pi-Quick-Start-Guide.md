@@ -72,7 +72,7 @@ pip install commentjson
 
    **NOTE**: This is sample cmake command configured for the sample app. There are other cmake options available for use outside of this project -- for the full list [click here](https://github.com/alexa/avs-device-sdk/wiki/Build-Options).  
 
-2. Here's the fun part, let's build! For this project we're only building the Sample App. Run this command:
+2. Here's the fun part, let's build! For this project we're only building the sample app. Run this command:
     `make SampleApp -j2`
 
    **NOTE**: The `j2` flag allows you to run 2 proccesses in parallel, which should speed up the build. Try the `-j3` or `-j4` option if you're feeling bold, but you run the risk of overheating the Pi (maybe even melting it).
@@ -141,7 +141,7 @@ If you choose to use the template, follow these instructions:
 
    **NOTE 2**: `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
 
-The locale is set to US English by default in the sample JSON, however, British English, (en-GB), German (de-DE) and Indian English (en-IN) are supported. Feel free to test each language.
+The locale is set to US English by default in the sample JSON, however other [locales are supported](https://developer.amazon.com/docs/alexa-voice-service/settings.html#settingsupdated). Feel free to test each language.
 
 **IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
 

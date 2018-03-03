@@ -4,7 +4,7 @@ Want to see the AVS Device SDK in action? This guide is designed to have a worki
 
 This guide uses a handful of scripts to download, build, and run the AVS Device SDK with wake word detection enabled. If you'd like to build from scratch, we also provide [step-by-step instructions](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide) that will walk you through downloading dependencies, running the authorization service, and running the sample app in debug mode.
 
-## Required Hardware
+## Required hardware
 
 1. **Raspberry Pi 3** (Recommended) or **Pi 2 Model B** (Supported)  - Buy at Amazon - [Pi 3](https://amzn.com/B01CD5VC92) or [Pi 2](http://amzn.com/B00T2U7R7I).
 2. **Micro-USB power cable** for Raspberry Pi.
@@ -16,14 +16,14 @@ This guide uses a handful of scripts to download, build, and run the AVS Device 
 8. (Optional) WiFi Wireless Adapter for Pi 2 ([Buy on Amazon](http://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498/)).
    **Note:** Pi 3 has built-in WiFi.
 
-## Register a Product  
+## Register a product  
 Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. [Click here](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) for step-by-step instructions.
 
 **IMPORTANT**: The allowed origins under web settings should be `http://localhost:3000` and  `https://localhost:3000`. The return URLs under web settings should be `http://localhost:3000/authresponse` and `https://localhost:3000/authresponse`.  
 
 If you already have a registered product that you can use for testing, feel free to skip ahead.
 
-## Setup and Run
+## Setup and run
 1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
     ```
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/config.txt
@@ -37,7 +37,7 @@ If you already have a registered product that you can use for testing, feel free
     ```
     sudo bash startauth.sh
     ```
-5. Last and most importantly, let's run the Sample App:
+5. Last and most importantly, let's run the sample app:
     ```
     sudo bash startsample.sh
     ```
