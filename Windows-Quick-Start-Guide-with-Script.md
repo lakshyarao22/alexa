@@ -35,16 +35,16 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
     ## 2. Obtain credentials and set up your local auth server
 Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. Click [here](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) for step-by-step instructions.
 
-**IMPORTANT**: The allowed origin under web settings should be http://localhost:3000 and https://localhost:3000. The return URL under web settings should be http://localhost:3000/authresponse and https://localhost:3000/authresponse.
+**IMPORTANT**: The allowed origin under web settings should be `http://localhost:3000` and `https://localhost:3000`. The return URL under web settings should be `http://localhost:3000/authresponse` and `https://localhost:3000/authresponse`.
 
 If you already have a registered product that you can use for testing, feel free to skip ahead.
 
 ## 3. Setup and Run
 1. Open the MinGW64 shell, and run this command to download the installation script and configuration file:
     ```
-    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh &&  wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/mingw.sh &&wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/mingw.sh &&wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt
     ```
-    Note: we recommend running these commands from the home directory (`~/`) or your desktop, however, you can run       the script anywhere.
+    Note: we recommend running these commands from your home directory (`C:/msys64/home/<user_name>`) or your desktop, however, you can run the script anywhere.
 
 2. Using your favorite text editor, update the `config.txt` file with the **Client ID**, **Client Secret**, and **Product ID** for your registered product and **save**.
 
@@ -58,24 +58,22 @@ If you already have a registered product that you can use for testing, feel free
     bash startauth.sh
     ```
 
-5. Last and most importantly, let's run the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by double-clicking the file directly.
+5. Last and most importantly, let's run the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
 
 6. You can also run integration and unit tests:
-    ```
-    bash test.sh
-    ```
+    `bash test.sh`
 
-    ## 4. Optional configurations
-1. To run the sample app manually:
-    Open the MinGW64 shell, and run these commands:
-    `CD into alexa_sdk/build/bin`
-   `./SampleApp.exe ../Integration/AlexaClientSDKConfig.jsonDEBUG9`
+## 4. Optional configurations
+**To run the sample app manually**:
+Open the MinGW64 shell. Run the following commands:
+`cd <msys64_installed_path>/alexa_sdk/build/bin`
+`./SampleApp.exe ../Integration/AlexaClientSDKConfig.json DEBUG9`
 
-2. To run the sample app using the Windows command line:
-    Add `<msys64_installed_path>\mingw64\bin` into the path. Note: For this option, use `mingw32-make.exe` instead      of `make`.
+**To run the sample app using the Windows command line**:
+Add `<msys64_installed_path>/mingw64/bin` into the path. Note: For this option, use `mingw32-make.exe` instead of `make`.
 
-3. To build the SDK after making custom changes:
-Open the MinGW64 shell, amd run `make` inside of the the `alexa_sdk\build` folder.
+**To build the SDK after making custom changes**:
+Open the MinGW64 shell, and run `make` inside of the the `alexa_sdk/build` folder.
 
 ## Common Issues
 

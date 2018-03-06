@@ -39,5 +39,5 @@ Let us know what we can do to help you by creating a [new issue](https://github.
 
 | Issue | Workaround/Resolution |
 |--------|--------------|
-| The system can't locate `libwinpthread-1.dll` when running the sample app | This means that Windows can't find the library either because it's not installed, or it's not in the path environment variable. To troubleshoot, verify that the library exists, and that it is nested within the proper file path, such as `c:\msys64\mingw64\bin`. |
-| The sample app hangs at startup, and ~35% of CPU is being used. | This likely means that Pacman isn't updated. Follow the steps **1.1.2** and **1.1.3** above. |
+| The system can't locate `libwinpthread-1.dll` when running the sample app | This means that Windows can't find the library either because it's not installed, or it's not in the path environment variable. To troubleshoot first verify that the library exists, and that it is nested within the proper file path, such as `c:/msys64/mingw64/bin`. |
+| The sample app hangs at startup, and ~35% of CPU is being used. | This likely means that Pacman isn't updated. Update Pacman by following the steps in the [Windows Quick Start Guide] (https://github.com/alexa/avs-device-sdk/wiki/https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script#1-install-and-configure-dependencies-for-the-sdk). |

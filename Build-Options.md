@@ -83,3 +83,10 @@ This is a sample `cmake` command:
 ```
 cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=<absolute-path>/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=<absolute-path>/portaudio/include
 ```
+## Logging sensitive data
+
+Logging of potentially sensitive data is disabled by default, but can be enabled in `DEBUG` builds by including this `cmake` command:
+
+`-DACSDK_EMIT_SENSITIVE_LOGS=ON`
+
+If you want to post logs generated with this setting to a public forum, please be sure to review them and redact any data you consider sensitive before doing so.
