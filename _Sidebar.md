@@ -3,7 +3,8 @@
 **Step-by-Step Guides**    
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)  
 * [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
-* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)  
+* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
+* [Windows](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)  
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
 
 **Reference Guide**  

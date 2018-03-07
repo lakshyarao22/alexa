@@ -32,7 +32,7 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
     pacman -Su
     ```
 
-    ## 2. Obtain credentials and set up your local auth server
+## 2. Obtain credentials and set up your local auth server
 Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. Click [here](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) for step-by-step instructions.
 
 **IMPORTANT**: The allowed origin under web settings should be `http://localhost:3000` and `https://localhost:3000`. The return URL under web settings should be `http://localhost:3000/authresponse` and `https://localhost:3000/authresponse`.
@@ -53,14 +53,16 @@ If you already have a registered product that you can use for testing, feel free
     bash setup.sh config.txt
     ```
 
-4. After the setup script has finished running, you'll need to generate an authorization token. Run this command, open your browser, and navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials and follow the instructions provided:
+4. After the setup script has finished running, you'll need to generate an authorization token. Run this command:
     ```
     bash startauth.sh
     ```
+    
+5. Navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials, and follow the instructions provided.
 
-5. Last and most importantly, let's run the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
+6. Last and most importantly, let's run the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
 
-6. You can also run integration and unit tests:
+7. You can also run integration and unit tests:
     `bash test.sh`
 
 ## 4. Optional configurations
