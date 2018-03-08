@@ -89,4 +89,4 @@ Logging of potentially sensitive data is disabled by default, but can be enabled
 
 `-DACSDK_EMIT_SENSITIVE_LOGS=ON`
 
-If you want to post logs generated with this setting to a public forum, please be sure to review them and redact any data you consider sensitive before doing so.
+Note: If you want to post logs generated with this setting to a public forum, please be sure to review them and redact any data you consider sensitive before doing so.
