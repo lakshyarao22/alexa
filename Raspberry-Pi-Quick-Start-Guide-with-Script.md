@@ -26,7 +26,7 @@ If you already have a registered product that you can use for testing, feel free
 ## Setup and run
 1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
     ```
-    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/RaspberryPi/config.txt
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
     ```
 2. Update `config.txt` with the **Client ID**, **Client Secret**, and **Product ID** for your registered product and **save**.   
 3. Run the setup script with your configuration as an argument:
