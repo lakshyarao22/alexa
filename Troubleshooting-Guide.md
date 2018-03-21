@@ -34,6 +34,7 @@ Let us know what we can do to help you by creating a [new issue](https://github.
 | Issue | Workaround/Resolution |
 |--------|--------------|
 | No USB soundcard option | The SampleApp uses the default input and output for audio. To use a USB soundcard, install the `dsnoop` and `dmix` plugins. Paste [this code](https://github.com/shivasiddharth/Assistants-Pi/blob/master/audio-drivers/USB-DAC/scripts/asound.conf) into `.asoundrc`, and into `asound.conf`. |
+| Trouble building with / linking against Kitt.ai | This [link](https://github.com/Kitt-AI/snowboy/issues/269) has some helpful suggestions. You can pass in CXX flags to the SampleApp CMake command like so: `-DCMAKE_CXX_FLAGS:STRING="-D_GLIBCXX_USE_CXX11_ABI=0 -pg"`
 
 ## Windows
 
