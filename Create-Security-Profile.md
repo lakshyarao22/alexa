@@ -17,7 +17,7 @@ On this page you'll provide information about your product.
 3. Choose product type **Alexa-Enabled Device**.  
 4. When asked if your product will use a companion app, select **No**.
 5. For Product Category, select **Other**, and enter "Rapsberry Pi Project on GitHub". **Note**: For a commercial product, you should select the best option available.
-   ![](https://github.com/alexa/alexa-avs-sample-app/wiki/assets/avs-device-type-info.png)
+   ![](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/github/avs-product-screen-newUI-reducedSize.png)
 6. Enter a brief description. For example: My first Pi project.  
 7. When asked how users will interact with your product, select **Touch-initiated** and **Hands-free**. **Note**: For a commercial product, you should select the options that best describe your product's functionality.  
 8. You can skip uploading an image for now. This content is used on the manage your content and devices screen on amazon.com.  
