@@ -2,20 +2,11 @@
 
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on 64-bit Windows. When finished, you'll have a working sample app to test interactions with Alexa.
 
-**Table of Contents**
-* [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)
-* [2. Build the SDK](#2-build-the-sdk)
-* [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)
-* [4. Run the sample app](#4-run-the-sample-app)
-* [5. Setup shortcuts](#5-setup-shortcuts)
-* [Common Issues](#common-issues)
-* [Next Steps](#next-steps)
-
 **WARNING**: This guide doesn't include instructions to enable wake word.
 
-## 1. Install and configure dependencies for the SDK
+## Install Dependencies
 
-### 1.1 Download and install MSYS2
+### Download and install MSYS2
 
 1. Download and run the MSYS2 (64-bit) installer. MSYS2 is a software distribution and building platform for Windows. This will install three different shells: MSYS2, MinGW32, and MinGW64. You will use the MinGW64 shell in the steps below.
 [Install MSYS2 for Windows 64-bit (x86_64)](http://www.msys2.org/)
@@ -32,40 +23,62 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
     pacman -Su
     ```
 
-## 2. Obtain credentials and set up your local auth server
-Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. Click [here](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) for step-by-step instructions.
+## Register a product
+Follow these instructions to [register your product and create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile).
 
-**IMPORTANT**: The allowed origin under web settings should be `http://localhost:3000` and `https://localhost:3000`. The return URL under web settings should be `http://localhost:3000/authresponse` and `https://localhost:3000/authresponse`.
+Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** from the **Other devices and platforms** tab from within the **Security Profile** section.
 
-If you already have a registered product that you can use for testing, feel free to skip ahead.
+Note: If you already have a registered product that you can use for testing, you may use it but it must be enabled for use with Code Based Linking (CBL). You can find steps for enabling CBL for your device [Here](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1) (Step 1).
 
-## 3. Setup and Run
+**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.
+
+## Setup
 1. Open the MinGW64 shell, and run this command to download the installation script and configuration file:
     ```
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/mingw.sh &&wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt
     ```
     Note: we recommend running these commands from your home directory (`C:/msys64/home/<user_name>`) or your desktop, however, you can run the script anywhere.
 
-2. Using your favorite text editor, update the `config.txt` file with the **Client ID**, **Client Secret**, and **Product ID** for your registered product and **save**.
+2. Using your favorite text editor, update the `config.txt` file with the **Product ID** and **Client ID** (from the 'Other devices and platforms' tab of your device's security profile) for your registered product and **save**.
 
 3. Using the MinGW64 shell, run the setup script with your configuration as an argument:
-    ```
-    bash setup.sh config.txt
-    ```
+```
+bash setup.sh config.txt
+```
 
-4. After the setup script has finished running, you'll need to generate an authorization token. Run this command:
-    ```
-    bash startauth.sh
-    ```
-    
-5. Navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials, and follow the instructions provided.
+## Authorize and run
 
-6. Last and most importantly, let's run the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
+When you run the sample app for the first time, you'll need to authorize your client for access to AVS.
 
-7. You can also run integration and unit tests:
-    `bash test.sh`
+1. Start the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
 
-## 4. Optional configurations
+2. Wait for the sample app to display a message like this:
+```
+##################################
+#       NOT YET AUTHORIZED       #
+##################################
+################################################################################################
+#       To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}       #
+################################################################################################
+```
+3. Use a browser to navigate to the URL specified in the message from the sample app.
+4. If requested to do so, authenticate using your Amazon user credentials.
+5. Enter the code specified in the message from sample app.
+6. Select “Allow”.
+7. Wait (it may take a few seconds) for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
+```
+###########################
+#       Authorized!       #
+###########################
+########################################
+#       Alexa is currently idle!       #
+########################################
+```
+8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
+
+Note: if you exit out of sample app via the `k` command, the `CBLAuthDelegate` database will be cleared, and you will need to reauthorize your client.
+
+## Optional configurations
 **To run the sample app manually**:
 Open the MinGW64 shell. Run the following commands:
 `cd <msys64_installed_path>/alexa_sdk/build/bin`
