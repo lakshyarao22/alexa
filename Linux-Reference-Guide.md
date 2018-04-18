@@ -1,32 +1,22 @@
 The AVS Device SDK for C++ provides a modern C++ (11 or later) interface for the Alexa Voice Service (AVS) that allows developers to add intelligent voice control to connected products. It is modular and abstracted, providing components to handle discrete functionality such as speech capture, audio processing, and communications, with each component exposing APIs that you can use and customize for your integration.  
 
-This guide assumes familiarity with Linux and requires you to build dependencies from source. If you are looking to get up and running quickly, please use one of our quickstart guides:  
+This guide assumes familiarity with Linux and requires you to build dependencies from source. If you are looking to get up and running quickly, please use one of our quick start guides:  
 
 * [Ubuntu](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)
 
 ## Register
-Follow these instructions to [register your product and create a security profile](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile). You can skip this set if you have a registered product you'd like to test with.
+Follow these instructions to [register your product and create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile).
 
-**IMPORTANT**: The allowed origin under web settings should be http://localhost:3000 and https://localhost:3000. The return URL under web settings should be http://localhost:3000/authresponse and https://localhost:3000/authresponse.
+Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** from the **Other devices and platforms** tab from within the **Security Profile** section.
 
-Make note of your **Product ID**, **Client ID**, and **Client Secret** -- you'll need these later.
+Note: If you already have a registered product that you can use for testing, you may use it but it must be enabled for use with Code Based Linking (CBL). You can find steps for enabling CBL for your device [Here](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1) (Step 1).
+
+**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.
 
 ## Dependencies
 See [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies) for version details and installation instructions.
-
-## AuthServer setup
-This project uses `AuthServer`, a minimal authorization service built in Python using Flask. It's a quick way to obtain your first refresh token that is required by the sample app, unit and integration tests. In this section you'll install `pip`  and other `AuthServer` dependencies.
-
-**IMPORTANT**: `AuthServer` is for testing purposes only. A commercial product is expected to obtain Login with Amazon (LWA) credentials using the instructions provided on the Amazon Developer Portal for *Remote Authorization* and *Local Authorization*. For additional information, see [AVS Authorization](https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/avs-api-overview#authorization).
-
-If `pip` isn't installed on your system, follow the detailed install instructions [here](https://packaging.python.org/installing/#install-pip-setuptools-and-wheel).
-
-Then install Flask, requests, and commentjson:
-```
-pip install --user flask requests commentjson
-```
 
 ## Create an out-of-source build
 The AVS Device SDK must be built out-of-source. Creating sub-folders within your project for *BUILD*, *SOURCE*, *THIRD-PARTY*, and *APPLICATION NECESSITIES* is recommended.
@@ -56,54 +46,97 @@ make
 
 **IMPORTANT**: See [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options) for a additional configuration options.
 
-## Run AuthServer  
+## Setup your configuration
 
-The authorization service uses data in `AlexaClientSDKConfig.json` to obtain a refresh token, which along with your client ID, client secret, and product ID, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
+The sample app uses data in `AlexaClientSDKConfig.json` to obtain a refresh token which, along with your **Client ID** and **Product ID**, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
 
-Using your favorite editor, open `~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json` and replace the contents with the JSON provided below. You'll need to do two things:
-* Update the config file with your **Product ID**, **Client ID**, and **Client Secret** from the Developer Console.
-* Replace all instances of `{PATH TO APPLICATION NECESSITIES}`.
+Using your favorite editor, open `{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json` and replace the contents with the JSON provided below. You'll need to do two things:
+* Update the **deviceInfo** object in the config file with your **Product ID** and **Client ID** from the Developer Console.
+* Replace all instances of `"databaseFilePath":"/{HOME}/sdk-folder/application-necessities/{{dataBase}}.db"` with the absolute path to that file.
 
-*Each instance of the SDK requires a unique **Device Serial Number**. This is provided by you and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.*
+Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you, and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
 
 ```
 {
-    "authDelegate":{
-        "clientSecret":"YOUR_CLIENT_SECRET",
-        "deviceSerialNumber":"123456",
-        "refreshToken":"",
-        "clientId":"YOUR_CLIENT_ID",
-        "productId":"YOUR_PRODUCT_ID"
-    },
-    "alertsCapabilityAgent":{
-        "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/alerts.db"
-    },
-    "settings":{
-        "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/settings.db",
-        "defaultAVSClientSettings":{
-            "locale":"en-US"
-        }
-    },
-    "certifiedSender":{
-       "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/certifiedSender.db"
-    },
-    "notifications":{
-        "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/notifications.db"
-    }
+  "deviceInfo":{
+    "deviceSerialNumber":"123456",
+    "clientId":"YOUR_CLIENT_ID",
+    "productId":"YOUR_PRODUCT_ID"
+  },
+  "cblAuthDelegate":{
+      "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/cblAuthDelegate.db"
+  },
+  "miscDatabase":{
+      "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/miscDatabase.db"
+  },
+  "alertsCapabilityAgent":{
+      "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/alerts.db"
+  },
+  "settings":{
+      "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/settings.db",
+      "defaultAVSClientSettings":{
+          "locale":"en-US"
+      }
+  },
+  "certifiedSender":{
+     "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/certifiedSender.db"
+  },
+  "notifications":{
+      "databaseFilePath":"/{PATH TO APPLICATION NECESSITIES}/notifications.db"
+  }
 }
 ```
 
-Navigate to your *BUILD* folder, then run:
+**IMPORTANT:** Save a backup copy of your edited `AlexaClientSDKConfig.json`. Subsequent builds will reset the contents of this file.
+
+## Run and authorize
+
+Navigate to your *BUILD* folder, then:
+1. Start the sample app:
 ```
-python AuthServer/AuthServer.py
+./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json
+```
+2. Wait for the sample app to display a message like this:
+```
+##################################
+#       NOT YET AUTHORIZED       #
+##################################
+################################################################################################
+#       To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}       #
+################################################################################################
+```
+3. Use a browser to navigate to the URL specified in the message from the sample app.
+4. If requested to do so, authenticate using your Amazon user credentials.
+5. Enter the code specified in the message from sample app.
+6. Select “Allow”.
+7. Wait (it may take as few seconds) for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
+```
+###########################
+#       Authorized!       #
+###########################
+########################################
+#       Alexa is currently idle!       #
+########################################
+```
+8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
+
+A couple more details:
+* If you exit out of sample app via the `k` command, the `CBLAuthDelegate` database will be cleared and you will need to reauthorize your client.
+* If you want to move this authorization to another sample app installation, you need to copy the **deviceInfo** object within `AlexaClientSDKConfig.json` to the new installation.  You will also need to copy the file `"/{PATH TO APPLICATION NECESSITIES}/cblAuthDelegate.db"` to the new installation, and update **AlexaClientSDKConfig.json** in the new installation so that the **cblAuthDelegate's databaseFilePath** property points to it.
+
+## Enabling debug logs
+
+Debug logs are available in DEBUG builds.  You can enable them by adding the following to the end of your cmake command line:
+```
+cmake < other cmake parameters > -DCMAKE_BUILD_TYPE=DEBUG
+```
+An additional sample app command line parameter allows you to select the level of debug logging to be output.  The allowed values are DEBUG0, DEBUG1, ... DEBUG9, where DEBUG9 provides the most information.  For example:
+```
+./SampleApp/src/SampleApp ./Integration/Integration/AlexaClientSDKConfig.json DEBUG9
 ```  
 
-Navigate to the URL provided and follow the on-screen instructions.
-
-**NOTE**: It's a good idea to save a backup copy of the `AlexaClientSDKConfig.json` file somewhere safe, since subsequent builds will clear its contents.
-
 ## Run tests
-After you've obtained a refresh token, run integration and unit tests to ensure that the AVS Device SDK is functioning as designed.
+After you've authorized your sample app, run integration and unit tests to ensure that the AVS Device SDK is functioning as designed.
 
 * Use this command to run integration tests:
    ```
@@ -115,20 +148,6 @@ After you've obtained a refresh token, run integration and unit tests to ensure 
    ```
 
 For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).
-
-## Run the sample app
-Navigate to your *BUILD* folder, then run this command:
-```
-./SampleApp ~/{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json
-```
-
-You can enable debugging with the debug flag. `debug1` through `debug9` are accepted values, with `debug1` providing the least and `debug9` providing the most information.  
-
-```
-./SampleApp /{PATH TO BUILD FOLDER}/Integration/AlexaClientSDKConfig.json debug9
-```  
-
-**TIP**: The sample app is an implementation of the [`DefaultClient`](https://github.com/alexa/avs-device-sdk/blob/1b712a1e978dc3fc6b5f4d31d95e6b3741e47f2a/ApplicationUtilities/DefaultClient/src/DefaultClient.cpp) class.  
 
 ## Setup shortcuts
 
