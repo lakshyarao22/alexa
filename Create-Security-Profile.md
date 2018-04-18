@@ -6,7 +6,7 @@ After you've registered for an Amazon developer account, you'll need to create a
 2. Navigate to the [AVS Console](https://developer.amazon.com/avs/home.html#/avs/home)
 3. Click **Create Product**.
 	![](assets/avs-choose-device.png)
-4. Fill-in these values and save:
+4. Follow these steps:
 
 **Product Information**
 
