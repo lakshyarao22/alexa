@@ -17,31 +17,52 @@ This guide uses a handful of scripts to download, build, and run the AVS Device 
    **Note:** Pi 3 has built-in WiFi.
 
 ## Register a product  
-Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. [Click here](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) for step-by-step instructions.
-
-**IMPORTANT**: The allowed origins under web settings should be `http://localhost:3000` and  `https://localhost:3000`. The return URLs under web settings should be `http://localhost:3000/authresponse` and `https://localhost:3000/authresponse`.  
+Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. [Click here](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile) for step-by-step instructions.
 
 If you already have a registered product that you can use for testing, feel free to skip ahead.
 
-## Setup and run
+## Setup
 1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
     ```
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
     ```
-2. Update `config.txt` with the **Client ID**, **Client Secret**, and **Product ID** for your registered product and **save**.   
+2. Update `config.txt` with the **Client ID** and **Product ID** for your registered product and **save**.   
 3. Run the setup script with your configuration as an argument:
     ```
     sudo bash setup.sh config.txt
     ```
-4. After the setup script has finished running, you'll need to generate an authorization token. Run this command, and open your browser and navigate to [http://localhost:3000](http://localhost:3000). Log in with your Amazon credentials and follow the instructions provided:
-    ```
-    sudo bash startauth.sh
-    ```
-5. Last and most importantly, let's run the sample app:
-    ```
-    sudo bash startsample.sh
-    ```
-6. You can also run integration and unit tests:
+
+## Authorize and run
+When you run the sample app for the first time, you'll need to authorize your client for access to AVS.
+
+1. Initialize the sample app:
+```
+sudo bash startsample.sh
+```
+2. Wait for the sample app to display a message like this:
+```
+######################################################
+#       > > > > > NOT YET AUTHORIZED < < < < <       #
+######################################################
+
+############################################################################################
+#     To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}     #
+############################################################################################
+```
+3. Use a browser to navigate to the URL specified in the message from the sample app.
+4. Authenticate using your Amazon user credentials.
+5. Enter the code specified in the message from sample app.
+6. Select “Allow”.
+7. Wait (it may take as long as 30 seconds) for `CBLAuthDelegate` to successfully get an access and refresh token from Login With Amazon (LWA). This may take At this point the sample app will print a message like this:
+```
+########################################
+#       Alexa is currently idle!       #
+########################################
+```
+8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
+
+## Integration and unit tests
+You can run integration and unit tests using this command:
     ```
     sudo bash test.sh
     ```
