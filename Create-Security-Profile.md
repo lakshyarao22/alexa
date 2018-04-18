@@ -43,7 +43,7 @@ On this page we'll create a new Login with Amazon (LWA) security profile. This a
 
 ![](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/docs/avs-code-based-linking-other-generate-clientid._TTH_.png)
 
-Save the **Client ID**, you'll need this later.
+**IMPORTANT:** Save *this* **Client ID**, you'll need this later. Using the wrong **Client ID**, such as from the Product Information Page, these are different elements but have the same name. Using the wrong one will result in authorization failures.
 
 4. Review and agree to the [AVS Agreement](https://developer.amazon.com/support/legal/alexa/alexa-voice-service/terms-and-agreements#Alexa%20Voice%20Service%20Agreement) and [AVS Program Requirement](https://developer.amazon.com/support/legal/alexa/alexa-voice-service/terms-and-agreements#Alexa%20Voice%20Service%20Program%20Requirements), and then select **Finish**.
 
