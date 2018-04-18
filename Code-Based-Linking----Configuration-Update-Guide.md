@@ -12,7 +12,8 @@ There have been changes made to the configuration file, which you need to be awa
 2. `cblAuthDelegate` - This is a new configuration object that specifies parameters for CBLAuthDelegate. This object has one required value:
    * databaseFilePath - The absolute path / file-name specifying where CBLAuthDelegate should persist data.
 
-For more detailed instructions, please consult the quick start guide for your platform: 
+For detailed instructions on authorizing your product with code based linking, please consult the "run and authorize" section of the quick start guide for your platform:
+
 * [Linux Reference Guide](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide)
 * [Ubuntu Linux Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 * [macOS Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
