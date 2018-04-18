@@ -7,6 +7,8 @@ There have been changes made to the configuration file, which you need to be awa
    * deviceSerialNumber (unique string, supplied by developer)
    * productId (from "Alexa Dashboard" > "My Products")  
 
+**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** section within the **Security Profile** tab and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs.  They are different values with the same name, and using the wrong one will result in authorization failures.
+
 2. `cblAuthDelegate` - This is a new configuration object that specifies parameters for CBLAuthDelegate. This object has one required value:
    * databaseFilePath - The absolute path / file-name specifying where CBLAuthDelegate should persist data.
 
