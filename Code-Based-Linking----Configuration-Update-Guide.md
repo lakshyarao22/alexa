@@ -14,11 +14,11 @@ There have been changes made to the configuration file, which you need to be awa
 
 For detailed instructions on authorizing your product with code based linking, please consult the "run and authorize" section of the quick start guide for your platform:
 
-* [Linux Reference Guide](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide)
-* [Ubuntu Linux Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
-* [macOS Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
-* [Raspberry Pi Quick Start Guide with Script](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)
-* [Windows Quick Start Guide with Script](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
+* [Linux Reference Guide](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide#run-and-authorize)
+* [Ubuntu Linux Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide#run-and-authorize)
+* [macOS Quick Start Guide](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide#run-and-authorize)
+* [Raspberry Pi Quick Start Guide with Script](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script#authorize-and-run)
+* [Windows Quick Start Guide with Script](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script#authorize-and-run)
 
 
 
