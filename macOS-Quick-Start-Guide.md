@@ -1,15 +1,6 @@
 
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on macOS. When finished, you'll have a working sample app to test interactions with Alexa.   
 
-**Table of Contents**
-* [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
-* [2. Build the SDK](#2-build-the-sdk)    
-* [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)  
-* [4. Run the sample app](#4-run-the-sample-app)  
-* [5. Setup shortcuts](#5-setup-shortcuts)
-* [Common Issues](#common-issues)  
-* [Next Steps](#next-steps)
-
 **WARNING**: This guide doesn't include instructions to enable wake word.
 
 ## Prerequisites  
