@@ -2,26 +2,23 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 
 **IMPORTANT**: If your Raspberry Pi is not running Raspbian Stretch With Desktop use [these instructions to upgrade](https://www.raspberrypi.org/blog/raspbian-stretch/). If you choose to build with Raspbian Jessie, you need to build certain dependencies from source (see commit [a5646fc](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide/a5646fc9e6dde8128c940b86a9bbece7f65c1ace) for instructions).  
 
-**Table of Contents**
-* [1. Install and configure dependencies for the SDK](#1-install-and-configure-dependencies-for-the-sdk)  
-* [2. Build the SDK](#2-build-the-sdk)    
-* [3. Obtain credentials and set up your local auth server](#3-obtain-credentials-and-set-up-your-local-auth-server)  
-* [4. Run the sample app](#4-run-the-sample-app)
-* [Next Steps](#next-steps)
+## Register a product
 
-## 1. Install and configure dependencies for the SDK  
+Follow these [instructions](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this step if you have a registered product you'd like to test with.
 
-**IMPORTANT**: This guide assumes that all commands are run from your home directory (/home/pi). If you choose a different destination for your files, it's important that
+**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.  
 
-### 1.1 Create the folder structure
+##Setup
 
-Let's create a few folders to organize our files. Open terminal and run this command from your home directory (~/):
+Let's create a few folders to organize our files. This guide presumes that everything is built in `/home/pi`, which we will presume is your home directory. If you choose to use different folder names, please update the commands throughout this guide accordingly.
+
+Open terminal and run this command from your home directory (~/):
 
 ```
 cd /home/pi/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files
 ```
 
-### 1.2 Install dependencies
+### Install dependencies
 
 The AVS Device SDK requires libraries to:  
 
@@ -30,7 +27,7 @@ The AVS Device SDK requires libraries to:
 3. Record audio from the microphone  
 4. Store records in a database (persistent storage)  
 
-The first step is to update apt-get. This ensures that you have access to required dependencies.
+The first step is to update `apt-get`. This ensures that you have access to required dependencies.
 
 ```
 sudo apt-get update
@@ -54,7 +51,7 @@ commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run th
 pip install commentjson
 ```
 
-### 1.3 Clone the AVS Device SDK and the Sensory wake word engine
+### Clone the AVS Device SDK and the Sensory wake word engine
 
 1. Let's clone the SDK into the sdk-source folder:  
     `cd /home/pi/sdk-folder/sdk-source && git clone git://github.com/alexa/avs-device-sdk.git`
@@ -63,7 +60,7 @@ pip install commentjson
 3. Now let's run the licensing script and accept the licensing agreement. This is required to use Sensory's wake word engine:   
      `cd /home/pi/sdk-folder/third-party/alexa-rpi/bin/ && ./license.sh`
 
-## 2. Build the SDK
+## Build the SDK
 
 1. Run cmake to generate the build dependencies. This command declares that the wake word engine and gstreamer are enabled, and provides paths to the wake word engine and PortAudio:
      ```
@@ -79,95 +76,50 @@ pip install commentjson
 
 If you want to build the rest of the SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
-## 3. Obtain credentials and set up your local auth server
+## Setup your configuration
 
-In this section we are going to setup and run a local authorization server, which we'll use to obtain a refresh token. This refresh token, along with your **Client ID** and **Client Secret** are exchanged for an access token, which the sample app needs to send to Alexa with each event (request).  
+The sample app uses data in `AlexaClientSDKConfig.json` to obtain a refresh token which, along with your **Client ID** and **Product ID**, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
 
-### 3.1 Register your product with Amazon
+Using your favorite editor, open `~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json` and replace the contents with the JSON provided below. You'll need to do two things:
+* Update the **deviceInfo** object in the config file with your **Product ID** and **Client ID** from the Developer Console.
+* Replace all instances of `"databaseFilePath":"/home/pi/sdk-folder/application-necessities/{{dataBase}}.db"` with the absolute path to that file.
 
-Follow these [instructions](https://github.com/alexa/alexa-avs-sample-app/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this step if you have a registered product you'd like to test with.
-
-**IMPORTANT**: The allowed origin under web settings should be <http://localhost:3000> or <https://localhost:3000>.
-The return URL under web settings should be <http://localhost:3000/authresponse> or <https://localhost:3000/authresponse>.
-
-Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** and **Client Secret** from the **Security Profile** tab. You'll need these params to configure the authorization server.  
-
-### 3.2 Update AlexaClientSDKConfig.json
-
-Use your favorite text editor to open `/home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`.
-
-**TIP**: If you prefer to use a GUI-based text editor, run this command to install **gedit**: `sudo apt-get install gedit`.  
-
-For example:   
-* Terminal editor: `nano /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
-* Gedit-based editor: `gedit /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json`  
-
-Now fill in your product-specific values and save. Alternatively, you can use the template provided below, which includes paths to the database files required for the sample app.  
-
-If you choose to use the template, follow these instructions:  
-
-1. Replace the contents of `AlexaClientSDKConfig.json` with this JSON blob:  
-
-    ```
-    {
-        "authDelegate":{
-            "clientSecret":"YOUR_CLIENT_SECRET",
-            "deviceSerialNumber":"123456",
-            "refreshToken":"",
-            "clientId":"YOUR_CLIENT_ID",
-            "productId":"YOUR_PRODUCT_ID"
-       },
-       "alertsCapabilityAgent":{
-            "databaseFilePath":"/home/pi/sdk-folder/application-necessities/alerts.db"
-       },
-       "settings":{
-            "databaseFilePath":"/home/pi/sdk-folder/application-necessities/settings.db",
-            "defaultAVSClientSettings":{
-                "locale":"en-US"
-            }
-       },
-       "certifiedSender":{
-            "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
-       },
-       "notifications":{
-           "databaseFilePath":"/home/pi/sdk-folder/application-necessities/notifications.db"
-       }
-    }
-    ```
-
-2. Enter the `clientId`, `clientSecret`, and `productId` that you saved during device registration and save.
-
-   **NOTE**: Do not remove the quotes and make sure there are no extra characters or spaces! The required values are strings.  
-
-   **NOTE 2**: `deviceSerialNumber` is pre-populated for this project, however, a commercial product should use a serial number or other unique identified for the device.  
-
-The locale is set to US English by default in the sample JSON, however other [locales are supported](https://developer.amazon.com/docs/alexa-voice-service/settings.html#settingsupdated). Feel free to test each language.
-
-**IMPORTANT**: It is a good idea to save a backup of this file. Subsequent builds may overwrite the values in `AlexaClientSDKConfig.json`.  
-
-### 3.3 Obtain a refresh token  
-
-After you've updated `AlexaClientSDKConfig.json`, run `AuthServer.py` to kick-off the token exchange:  
+Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
 
 ```
-cd /home/pi/sdk-folder/sdk-build && python AuthServer/AuthServer.py
+{
+  "deviceInfo":{
+    "deviceSerialNumber":"123456",
+    "clientId":"YOUR_CLIENT_ID",
+    "productId":"YOUR_PRODUCT_ID"
+  },
+  "cblAuthDelegate":{
+      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/cblAuthDelegate.db"
+  },
+  "miscDatabase":{
+      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/miscDatabase.db"
+  },
+  "alertsCapabilityAgent":{
+      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/alerts.db"
+  },
+  "settings":{
+      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/settings.db",
+      "defaultAVSClientSettings":{
+          "locale":"en-US"
+      }
+  },
+  "certifiedSender":{
+     "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
+  },
+  "notifications":{
+      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/notifications.db"
+  }
+}
 ```
 
-**NOTE:** You may need to change the **locale** settings for your Pi, as some Raspbian images default to `amazon.co.uk` to `amazon.com`.
+IMPORTANT: Save a backup copy of your edited `AlexaClientSDKConfig.json`. Subsequent builds will reset the contents of this file.
 
-Open your browser and navigate to <http://localhost:3000>. Login with your Amazon credentials and follow the instructions provided.  
-
-![Login Screen](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/3.png")
-
-**TIP**: If you are running Raspbian Lite, run `AuthServer.py` on a machine with access to a web browser and copy the refresh token into `AlexaClientSDKConfig.json` on your Pi.  
-
-#### Common Issues  
-
-These are the most common issues encountered when trying to obtain a refresh token:
-
-* Incorrect information in `AlexaClientSDKConfig.json`.
-
-### 3.4 Test the microphone  
+## Test the microphone  
 
 A fresh Raspbian Stretch image requires updates to `/.asoundrc` before we can test the microphone. With your favorite text editor, open `~/.asoundrc`. For example:
 
@@ -198,20 +150,60 @@ sudo apt-get install sox -y && rec test.wav
 
 If everything works, you should see a message indicating that audio is recording. To exit, hit **Control + C**.
 
-## 4. Run the sample app
+## Run and authorize  
+Navigate to your *BUILD* folder, then:
+1. Start the sample app:
+```
+./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json
+```
+2. Wait for the sample app to display a message like this:
+```
+##################################
+#       NOT YET AUTHORIZED       #
+##################################
+################################################################################################
+#       To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}       #
+################################################################################################
+```
+3. Use a browser to navigate to the URL specified in the message from the sample app.
+4. If requested to do so, authenticate using your Amazon user credentials.
+5. Enter the code specified in the message from sample app.
+6. Select “Allow”.
+7. Wait (it may take as few seconds) for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
+```
+###########################
+#       Authorized!       #
+###########################
+########################################
+#       Alexa is currently idle!       #
+########################################
+```
+8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
+
+A couple more details:
+* If you exit out of sample app via the `k` command, the `CBLAuthDelegate` database will be cleared and you will need to reauthorize your client.
+* If you want to move this authorization to another sample app installation, you need to copy the **deviceInfo** object within `AlexaClientSDKConfig.json` to the new installation. You will also need to copy the file `"/home/pi/sdk-folder/Integration/cblAuthDelegate.db"` to the new installation, and update **AlexaClientSDKConfig.json** in the new installation so that the **cblAuthDelegate's databaseFilePath** property points to it.
+
+## Setup shortcuts
 
 Run this command to launch the sample app. This includes the path to your configuration file and the Sensory wake word model:
 
 ```
 cd /home/pi/sdk-folder/sdk-build/SampleApp/src
-./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models
+./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json ../third-party/alexa-rpi/models
 ```  
 
+## Enabling debug logs
 **IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  
 
 ```
 ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models debug9
 ```  
+
+## Common Issues  
+
+These are the most common issues encountered when trying to obtain a refresh token:
+* Incorrect information in `AlexaClientSDKConfig.json`.
 
 ## Next Steps  
 
