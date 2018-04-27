@@ -8,7 +8,7 @@ Follow these [instructions](https://github.com/alexa/avs-device-sdk/wiki/Create-
 
 **IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.  
 
-##Setup
+## Setup
 
 Let's create a few folders to organize our files. This guide presumes that everything is built in `/home/pi`, which we will presume is your home directory. If you choose to use different folder names, please update the commands throughout this guide accordingly.
 
