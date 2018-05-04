@@ -103,6 +103,7 @@ Note: If you already have a registered product that you can use for testing, you
    ```
    cd /{HOME}/sdk-folder/sdk-build && cmake /{HOME}/sdk-folder/sdk-source/avs-device-sdk -DSENSORY_KEY_WORD_DETECTOR=OFF -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/{HOME}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/{HOME}/sdk-folder/third-party/portaudio/include && make
    ```   
+### Bluetooth
 
 ## Setup your configuration
 The sample app uses data within `AlexaClientSDKConfig.json` to obtain a refresh token, which along with your **Client ID** and **Product ID**, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
@@ -189,4 +190,29 @@ A couple more details:
        ```
        make all test
        ```
-    For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).  
+    For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).
+
+## Bluetooth
+
+Building with Bluetooth is optional, and is currently limited to Linux and Raspberry Pi. This release supports `A2DP-SINK` and `AVRCP` profiles. In order to use Bluetooth for these platforms, you must install all Bluetooth [dependencies]() and **disable any processes which obtain an incoming Bluetooth audio stream**, such as:
+
+### PulseAudio
+If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
+
+1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
+      ```
+      ### Automatically load driver modules for Bluetooth hardware
+      #.ifexists module-bluetooth-policy.so
+      #load-module module-bluetooth-policy
+      #.endif
+
+      #.ifexists module-bluetooth-discover.so
+      #load-module module-bluetooth-discover
+      #.endif
+      ```
+
+2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
+      ```
+      pulseaudio --kill
+      pulseaudio --start
+      ```
