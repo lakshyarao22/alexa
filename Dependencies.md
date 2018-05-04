@@ -41,3 +41,8 @@ The following codecs and packages are required:
 * [Crypto Library](https://gnupg.org/software/libgcrypt/index.html) for HLS demuxers.
 * [libsoup]( https://wiki.gnome.org/Projects/libsoup) an HTTP client/server library used by GStreamer.
 * [libfaad-dev](https://github.com/dsvensson/faad2) - AAC and HE-AAC decoding.
+
+### Bluetooth Dependencies
+Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi platforms. This release supports `A2DP-SINK` and `AVRCP` profiles. If you choose to build with Bluetooth, these dependencies must be installed:
+* [SBC Library](https://git.kernel.org/pub/scm/bluetooth/sbc.git/tree/)
+* [BlueZ 5.37](http://www.bluez.org/download/) or later.
