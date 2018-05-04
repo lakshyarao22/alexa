@@ -66,3 +66,36 @@ You can run integration and unit tests using this command:
     ```
     sudo bash test.sh
     ```
+
+## Bluetooth
+
+Building with Bluetooth is optional, and is currently limited to Linux and Raspberry Pi. This release supports `A2DP-SINK` and `AVRCP` profiles. In order to use Bluetooth for these platforms, you must install all Bluetooth [dependencies]() and **disable any processes which obtain an incoming Bluetooth audio stream**, such as:
+
+### BlueALSA
+
+1. If you are using `BlueALSA`, you must disable Bluetooth by running this command:
+    ```
+    ps aux | grep bluealsa
+    sudo kill <bluealsa pid>
+    ```
+
+### PulseAudio
+If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
+
+1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
+    ```
+    ### Automatically load driver modules for Bluetooth hardware
+    #.ifexists module-bluetooth-policy.so
+    #load-module module-bluetooth-policy
+    #.endif
+
+    #.ifexists module-bluetooth-discover.so
+    #load-module module-bluetooth-discover
+    #.endif
+    ```
+
+2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
+    ```
+    pulseaudio --kill
+    pulseaudio --start
+    ```
