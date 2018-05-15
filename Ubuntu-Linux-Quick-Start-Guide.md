@@ -103,7 +103,6 @@ Note: If you already have a registered product that you can use for testing, you
    ```
    cd /{HOME}/sdk-folder/sdk-build && cmake /{HOME}/sdk-folder/sdk-source/avs-device-sdk -DSENSORY_KEY_WORD_DETECTOR=OFF -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/{HOME}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/{HOME}/sdk-folder/third-party/portaudio/include && make
    ```   
-### Bluetooth
 
 ## Setup your configuration
 The sample app uses data within `AlexaClientSDKConfig.json` to obtain a refresh token, which along with your **Client ID** and **Product ID**, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
