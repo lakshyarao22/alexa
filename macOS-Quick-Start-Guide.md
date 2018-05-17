@@ -192,7 +192,7 @@ cmake < other cmake parameters > -DCMAKE_BUILD_TYPE=DEBUG
 ```
 An additional sample app command line parameter allows you to select the level of debug logging to be output. The allowed values are DEBUG0, DEBUG1, ... DEBUG9, where DEBUG9 provides the most information. For example:
 ```
-./SampleApp/src/SampleApp ./Integration/Integration/AlexaClientSDKConfig.json DEBUG9
+./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json DEBUG9
 ```  
 
 ## Setup shortcuts
