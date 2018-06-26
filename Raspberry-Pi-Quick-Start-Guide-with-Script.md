@@ -21,13 +21,19 @@ Before we get started, you'll need to register a device and create a security pr
 
 If you already have a registered product that you can use for testing, feel free to skip ahead.
 
-## Setup
-1. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
+## Setup  
+
+1. The first step is to upgrade `apt-get`. This ensures that you have access to required dependencies.
+   ```
+   sudo apt-get upgrade
+   ```  
+
+2. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
     ```
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
     ```
-2. Update `config.txt` with the **Client ID** and **Product ID** for your registered product and **save**.   
-3. Run the setup script with your configuration as an argument:
+3. Update `config.txt` with the **Client ID** and **Product ID** for your registered product and **save**.   
+4. Run the setup script with your configuration as an argument:
     ```
     sudo bash setup.sh config.txt
     ```
@@ -36,36 +42,36 @@ If you already have a registered product that you can use for testing, feel free
 When you run the sample app for the first time, you'll need to authorize your client for access to AVS.
 
 1. Initialize the sample app:
-```
-sudo bash startsample.sh
-```
+   ```
+   sudo bash startsample.sh
+   ```  
 2. Wait for the sample app to display a message like this:
-```
-######################################################
-#       > > > > > NOT YET AUTHORIZED < < < < <       #
-######################################################
+   ```
+   ######################################################
+   #       > > > > > NOT YET AUTHORIZED < < < < <       #
+   ######################################################
 
-############################################################################################
-#     To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}     #
-############################################################################################
-```
+   ############################################################################################
+   #     To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}     #
+   ############################################################################################
+   ```
 3. Use a browser to navigate to the URL specified in the message from the sample app.
 4. Authenticate using your Amazon user credentials.
 5. Enter the code specified in the message from sample app.
 6. Select “Allow”.
 7. Wait (it may take as long as 30 seconds) for `CBLAuthDelegate` to successfully get an access and refresh token from Login With Amazon (LWA). This may take At this point the sample app will print a message like this:
-```
-########################################
-#       Alexa is currently idle!       #
-########################################
-```
+   ```
+   ########################################
+   #       Alexa is currently idle!       #
+   ########################################
+   ```
 8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
 
 ## Integration and unit tests
 You can run integration and unit tests using this command:
-    ```
-    sudo bash test.sh
-    ```
+```
+sudo bash test.sh
+```
 
 ## Bluetooth
 
@@ -74,28 +80,28 @@ Building with Bluetooth is optional, and is currently limited to Linux and Raspb
 ### BlueALSA
 
 1. If you are using `BlueALSA`, you must disable Bluetooth by running this command:
-    ```
-    ps aux | grep bluealsa
-    sudo kill <bluealsa pid>
-    ```
+   ```
+   ps aux | grep bluealsa
+   sudo kill <bluealsa pid>
+   ```
 
 ### PulseAudio
 If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
 
 1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
-    ```
-    ### Automatically load driver modules for Bluetooth hardware
-    #.ifexists module-bluetooth-policy.so
-    #load-module module-bluetooth-policy
-    #.endif
+   ```
+   ### Automatically load driver modules for Bluetooth hardware
+   #.ifexists module-bluetooth-policy.so
+   #load-module module-bluetooth-policy
+   #.endif
 
-    #.ifexists module-bluetooth-discover.so
-    #load-module module-bluetooth-discover
-    #.endif
-    ```
+   #.ifexists module-bluetooth-discover.so
+   #load-module module-bluetooth-discover
+   #.endif
+   ```
 
 2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
-    ```
-    pulseaudio --kill
-    pulseaudio --start
-    ```
+   ```
+   pulseaudio --kill
+   pulseaudio --start
+   ```
