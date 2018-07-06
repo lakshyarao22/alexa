@@ -75,8 +75,8 @@ To implement the [Companion App](https://developer.amazon.com/docs/alexa-voice-s
 
 For your product to receive access tokens from LWA and provide them to the **AVS Device SDK**, you will need to provide an implementation of `AuthDelegateInterface` that can perform these steps:
 
-<details><summary>*Companion app data flow*</summary>
-![Companion app data flow](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/companion_app_data_flow.png)
+<details><summary>Companion app data flow</summary>
+<img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/companion_app_data_flow.png" alt="companion app data flow">
 </details>
 <br>
 
@@ -123,10 +123,11 @@ To implement the [companion site](https://developer.amazon.com/docs/alexa-voice-
 
 For your product to receive **access tokens** from the **companion site** and provide them to the **AVS Device SDK**, you'll need to provide an implementation of _**AuthDelegateInterface**_ that can perform these steps:
 
-<details><summary>*Companion site data flow*</summary>
-![Companion site data flow](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/companion_site_data_flow.png)
+<details><summary>Companion site data flow</summary>
+<img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/companion_site_data_flow.png" alt="Companion site data flow">
 </details>
 <br>
+
 1. Check if **Session ID** value was saved during the last execution. ***If so, you can skip to step 5.***
 2. Load fixed configuration parameters: **Product ID** and **Device Serial Number**.
 3. Register the product with the product manufacturer's* **companion site** by sending the **Product ID** and **Device Serial Number** to it. The **companion site** replies to valid requests with a **Registration Code** and a **Session ID**.
@@ -154,10 +155,11 @@ The AVS Device SDK provides an example implementation of the [Code Based Linking
 
 Applications may use `CBLAUthDelegate` as-is, but if product developers wish to create their own implementation of the [Code Based Linking](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html) authorization method within the AVS Device SDK, the implementation of the `AuthDelegateInterface` must be able to perform these steps:
 
-<details><summary>*CBL data flow*</summary>
-![CBL Data Flow](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/cbl_data_flow.png)
+<details><summary>Companion app data flow</summary>
+<img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/cbl_data_flow.png" alt="CBL data flow">
 </details>
 <br>
+
 1. Load fixed configuration parameters: **Client ID**, **Product ID** and **Device Serial Number**.
 2. Check if **refresh token** was saved during the last execution. ***If so, you can skip to step 6***.
 3. Send a **Device Authorization Request** to **LWA**. See [Device Authorization Request](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step2) for details.
