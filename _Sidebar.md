@@ -15,7 +15,7 @@
 * [Quick Start for NXP PICO-PI-IMX7D 2-Mic Kit](https://www.nxp.com/docs/en/user-guide/Quick-Start-Guide-for-Arrow-AVS-kit.pdf)  
 
 **Other Guides + Optimizations**
-* [Auth](https://developer.amazon.com/alexa-voice-service/auth)
+* [Authorizing AVS Device SDK Software with AVS](https://github.com/alexa/avs-device-sdk/wiki/Authorizing-AVS-Device-SDK-Software-with-AVS)
 * [Optimize libcurl for Size](https://github.com/alexa/alexa-client-sdk/wiki/Optimize-libcurl)  
 * [Build libcurl with mbed TLS and nghttp2](https://github.com/alexa/alexa-client-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2)  
 * [Build libcurl with nghttp2 for macOS](https://github.com/alexa/alexa-client-sdk/wiki/How-to-build-libcurl-with-nghttp2-for-macos)
