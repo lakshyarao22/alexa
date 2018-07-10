@@ -1,5 +1,3 @@
-# Authorizing AVS Device SDK Software with AVS
-
 This guide describes the steps required to implement the various methods used to authorize the Alexa Voice Service (AVS) Device SDK with AVS.
 
 ## AuthDelegateInterface
