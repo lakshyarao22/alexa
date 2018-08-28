@@ -83,6 +83,22 @@ This is a sample `cmake` command:
 ```
 cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=<absolute-path>/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=<absolute-path>/portaudio/include
 ```
+## Build for Android
+
+The following variables can be declared in your `cmake` command to build for Android.
+
+Note: All of the `ANDROID_*` variables are only relevant if the `ANDROID` variable is `ON`.
+
+* `ANDROID`: Enables the android build (`OFF` by default).
+
+* `ANDROID_LOGGER`: Publishes logs using the Android logging facility (`ON` by default)
+
+* `ANDROID_MICROPHONE`: Uses the Android microphone implementation, based on the Native Development Kit (NDK) (`ON` by default).
+
+* `ANDROID_MEDIA_PLAYER`: Uses the Android media player implementation, based on the NDK and FFmpeg (`ON` by default).
+
+* `ANDROID_DEVICE_INSTALL_PREFIX`: The SDK installation path on the Android device or emulator.
+
 ## Logging sensitive data
 
 Logging of potentially sensitive data is disabled by default, but can be enabled in `DEBUG` builds by including this `cmake` command:
