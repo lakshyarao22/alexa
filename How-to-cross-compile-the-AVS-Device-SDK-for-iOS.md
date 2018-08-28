@@ -1,6 +1,12 @@
 
 These are step-by-step instructions to cross-compile and build the AVS Device SDK for iOS. If you encounter any errors or have questions, please check our issues list before creating a new issue.
 
+## Requirements
+
+* You must use curl 7.50.2 or greater
+
+## Install dependencies and cross-compile
+
 1. Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Skip to the next step if previously installed.  
 2. Install [Homebrew](https://brew.sh/). Skip to the next step if previously installed.
 
@@ -13,6 +19,8 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
    brew install cmake
    brew install pkg-config
    ```
+
+
 4. Create a folder for your project. In this example project, we've named the folder `cross-compile`, however you can use whatever you'd like:  
 
    ```
@@ -98,7 +106,7 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
      ```  
    * To build what's required for the iOS proof of concept run these commands:  
      ```
-     make AuthDelegate
+     make CBLAuthDelegate
      make DefaultClient
      make KWD
      make PlaylistParser
