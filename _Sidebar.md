@@ -5,6 +5,7 @@
 * [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
 * [Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
+* [Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
 
 **Reference Guide**  
