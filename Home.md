@@ -20,6 +20,7 @@ Quickly build the SDK and run the sample app on these platforms:
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
 * [Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)  
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
+* [Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
 
 You can also prototype with a third party development kit
 * [XMOS VocalFusion 4-Mic Kit](https://github.com/xmos/vocalfusion-avs-setup) - Learn More [Here](https://developer.amazon.com/alexa-voice-service/dev-kits/xmos-vocal-fusion)
