@@ -2,12 +2,12 @@ This is a list of requirements and dependencies for the AVS Device SDK. Quick st
 
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide)  
 * [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
-
 * [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)  
-
 * [Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
+* [Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
 
-### Core dependencies  
+### Core dependencies
+
 * C++ 11 or later
 * [GNU Compiler Collection (GCC) 4.8.5](https://gcc.gnu.org/) or later **OR** [Clang 3.9](http://clang.llvm.org/get_started.html) or later. **NOT required for Android builds.***
 * [CMake 3.1](https://cmake.org/download/) or later
@@ -29,7 +29,7 @@ Building the reference implementation of the `MediaPlayerInterface` (the class `
 * [GStreamer Libav Plugin 1.8.3](https://gstreamer.freedesktop.org/releases/gst-libav/1.8.3.html) or later **OR**
 * [GStreamer Ugly Plugins 1.8.3](https://gstreamer.freedesktop.org/releases/gst-plugins-ugly/1.8.3.html) or later, for decoding MP3 data.
 
-**NOTE**: The plugins may depend on libraries which need to be installed for the GStreamer based `MediaPlayer` to work correctly.  
+**NOTE**: The plugins may depend on libraries which need to be installed for the GStreamer-based `MediaPlayer` to work correctly.  
 
 ### Sample app dependencies
 
@@ -49,13 +49,15 @@ The following codecs and packages are required:
 
 ### Bluetooth Dependencies
 
-Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi platforms. This release supports `A2DP-SINK` and `AVRCP` profiles. If you choose to build with Bluetooth, these dependencies must be installed:
+Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi. `A2DP-SINK`, `A2DP-SOURCE` (Linux only), `AVRCPTarget` (Linux only), and `AVRCPController` profiles are supported. If you choose to build with Bluetooth, these dependencies must be installed:
 * [SBC Library](https://git.kernel.org/pub/scm/bluetooth/sbc.git/tree/)
 * [BlueZ 5.37](http://www.bluez.org/download/) or later.
+* PulseAudio and PulseAudio bluetooth modules, which are used to handle audio routing. Note: You may substitute PulseAudio with a comparable application of your choice.
 
 ### Android Dependencies
 
-* Requires cmake 3.6 or greater.
+* Requires Cmake 3.6 or greater.
 * [Android SDK tools](https://developer.android.com/studio/#comand-tools). Included in [Android Studio](https://developer.android.com/studio/#downloads) by default.
 * [Android Native Development Kit (NDK)](https://developer.android.com/ndk/downloads/). Required for the `MediaPlayerInterface` and sample app integration.
 * [FFmpeg 4.0.0](https://www.ffmpeg.org/download.html) or greater.
+* *Optional*: Make sure that your Android environment has OpenSL ES with equalizer support. Any full-featured Android OS or a third-party equalizer software should meet these requirements.
