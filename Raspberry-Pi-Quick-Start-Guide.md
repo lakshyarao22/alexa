@@ -6,16 +6,21 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 
 Follow these [instructions](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile) to register your product and create a security profile. You can skip this step if you have a registered product you'd like to test with.
 
-**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.  
-
-## Setup
+## Setup your environment
 
 Let's create a few folders to organize our files. This guide presumes that everything is built in `/home/pi`, which we will presume is your home directory. If you choose to use different folder names, please update the commands throughout this guide accordingly.
 
 Open terminal and run this command from your home directory (~/):
 
-```
-cd /home/pi/ && mkdir sdk-folder && cd sdk-folder && mkdir sdk-build sdk-source third-party application-necessities && cd application-necessities && mkdir sound-files
+```sh
+cd /home/pi/
+mkdir sdk-folder
+
+cd sdk-folder
+mkdir sdk-build sdk-source third-party application-necessities
+
+cd application-necessities
+mkdir sound-files
 ```
 
 ### Install dependencies
@@ -29,95 +34,134 @@ The AVS Device SDK requires libraries to:
 
 The first step is to update `apt-get`. This ensures that you have access to required dependencies.
 
-```
+```sh
 sudo apt-get update
 ```
 
 Then run:
 
-```
-sudo apt-get -y install git gcc cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev libsoup2.4-dev libgcrypt20-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-good libasound2-dev doxygen
+```sh
+sudo apt-get -y
+install git gcc
+
+cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev \
+libsoup2.4-dev libgcrypt20-dev libgstreamer-plugins-bad1.0-dev \
+gstreamer1.0-plugins-good libasound2-dev doxygen
 ```
 
 PortAudio is required to record microphone data. Run this command to install and configure PortAudio:  
 
-```
-cd /home/pi/sdk-folder/third-party && wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz && tar zxf pa_stable_v190600_20161030.tgz && cd portaudio && ./configure --without-jack && make
+```sh
+cd /home/pi/sdk-folder/third-party
+
+wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+tar zxf pa_stable_v190600_20161030.tgz
+
+cd portaudio
+./configure --without-jack
+
+make
 ```  
 
 commentjson is required to parse comments in `AlexaClientSDKConfig.json`. Run this command to install commentjson:
 
-```
+```sh
 pip install commentjson
 ```
 
 ### Clone the AVS Device SDK and the Sensory wake word engine
 
-1. Let's clone the SDK into the sdk-source folder:  
-    `cd /home/pi/sdk-folder/sdk-source && git clone git://github.com/alexa/avs-device-sdk.git`
+1. Let's clone the SDK into the sdk-source folder:
+```sh
+cd /home/pi/sdk-folder/sdk-source
+git clone git://github.com/alexa/avs-device-sdk.git
+```
 2. Next, let's clone the sensory wake word engine into our third-party directory:   
-    `cd /home/pi/sdk-folder/third-party && git clone git://github.com/Sensory/alexa-rpi.git`
-3. Now let's run the licensing script and accept the licensing agreement. This is required to use Sensory's wake word engine:   
-     `cd /home/pi/sdk-folder/third-party/alexa-rpi/bin/ && ./license.sh`
+```sh
+cd /home/pi/sdk-folder/third-party
+git clone git://github.com/Sensory/alexa-rpi.git
+```
+3. Now let's run the licensing script and accept the licensing agreement. This is required to use Sensory's wake word engine:
+```sh
+cd /home/pi/sdk-folder/third-party/alexa-rpi/bin/
+./license.sh
+```
 
 ## Build the SDK
 
 1. Run cmake to generate the build dependencies. This command declares that the wake word engine and gstreamer are enabled, and provides paths to the wake word engine and PortAudio:
-     ```
-     cd /home/pi/sdk-folder/sdk-build && cmake /home/pi/sdk-folder/sdk-source/avs-device-sdk -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=/home/pi/sdk-folder/third-party/alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=/home/pi/sdk-folder/third-party/alexa-rpi/include -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=/home/pi/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=/home/pi/sdk-folder/third-party/portaudio/include
-     ```  
+```sh
+cd /home/pi/sdk-folder/sdk-build
+cmake /home/pi/sdk-folder/sdk-source/avs-device-sdk \
+-DSENSORY_KEY_WORD_DETECTOR=ON \
+-DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=/home/pi/sdk-folder/third-party/alexa-rpi/lib/libsnsr.a \
+-DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=/home/pi/sdk-folder/third-party/alexa-rpi/include \
+-DGSTREAMER_MEDIA_PLAYER=ON \
+-DPORTAUDIO=ON \
+-DPORTAUDIO_LIB_PATH=/home/pi/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a \
+-DPORTAUDIO_INCLUDE_DIR=/home/pi/sdk-folder/third-party/portaudio/include
+```  
 
-   **NOTE**: This is sample cmake command configured for the sample app. There are other cmake options available for use outside of this project -- for the full list [click here](https://github.com/alexa/avs-device-sdk/wiki/Build-Options).  
+   **NOTE**: This is sample CMake command configured for the sample app. There are other CMake options available for use outside of this project, here's the full list of [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options).  
 
 2. Here's the fun part, let's build! For this project we're only building the sample app. Run this command:
-    `make SampleApp -j2`
-
+```ch
+make SampleApp -j2
+```
    **NOTE**: The `j2` flag allows you to run 2 proccesses in parallel, which should speed up the build. Try the `-j3` or `-j4` option if you're feeling bold, but you run the risk of overheating the Pi (maybe even melting it).
 
 If you want to build the rest of the SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
 ## Setup your configuration
 
-The sample app uses data in `AlexaClientSDKConfig.json` to obtain a refresh token which, along with your **Client ID** and **Product ID**, will be exchanged with LWA for access tokens. An access token is included in the header of every request made to Alexa.  
+### `genConfig.sh`
 
-Using your favorite editor, open `~/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json` and replace the contents with the JSON provided below. You'll need to do two things:
-* Update the **deviceInfo** object in the config file with your **Product ID** and **Client ID** from the Developer Console.
-* Replace all instances of `"databaseFilePath":"/home/pi/sdk-folder/application-necessities/{{dataBase}}.db"` with the absolute path to that file.
+`genConfig.sh` is a configuration file generator script that is included with v1.10.0 or greater of the SDK, located in the **tools/Install** folder. It uses data from **config.json** and the arguments below, to populate `AlexaClientSDKConfig.json` in order to authorize with LWA.
 
-Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
+Follow these steps to setup `AlexaClientSDKConfig.json` using `genConfig.sh`:
 
-```
-{
-  "deviceInfo":{
-    "deviceSerialNumber":"123456",
-    "clientId":"YOUR_CLIENT_ID",
-    "productId":"YOUR_PRODUCT_ID"
-  },
-  "cblAuthDelegate":{
-      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/cblAuthDelegate.db"
-  },
-  "miscDatabase":{
-      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/miscDatabase.db"
-  },
-  "alertsCapabilityAgent":{
-      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/alerts.db"
-  },
-  "settings":{
-      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/settings.db",
-      "defaultAVSClientSettings":{
-          "locale":"en-US"
-      }
-  },
-  "certifiedSender":{
-     "databaseFilePath":"/home/pi/sdk-folder/application-necessities/certifiedSender.db"
-  },
-  "notifications":{
-      "databaseFilePath":"/home/pi/sdk-folder/application-necessities/notifications.db"
-  }
-}
-```
+1. Move the **config.json** you downloaded when you [created your security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile) into the **tools/Install** folder of the SDK.
 
-IMPORTANT: Save a backup copy of your edited `AlexaClientSDKConfig.json`. Subsequent builds will reset the contents of this file.
+    ```sh
+    mv ~/{{download location}}/config.json
+    {{path to source folder}}/avs-device-sdk/tools/Install
+    ```
+
+    **config.json** should be populated with the `clientID` and `productID` values generate in the Security Profile process.
+
+    Example:
+
+    ```sh
+        {
+         "deviceInfo": {
+          "clientId": "amzn1.application-oa2-client.{{string}}",
+          "productId": "Test_123"
+         }
+        }
+    ```
+
+2. Run `genConfig.sh`, including the following as arguments:
+
+    ```sh
+    genConfig.sh config.json {device serial number} \
+    /{{path to database}} \
+    /{{path to source folder}}/avs-device-sdk \
+    {{path to build}}/Integration/AlexaClientSDKConfig.json
+    ```
+
+    Parameters:
+
+    * `config.json`: Downloaded when you created your security profile. It should contain the following:
+    ```
+    "clientId": "{OAuth client ID}"
+    "productId": "{product name for the device}"
+    ```
+    * **{{device serial number}}**: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you, and in some instances may match your product's SKU. By default the value is `123456`.
+    * **{{path to database}}**: Specifies where the databases will be located.
+    * **{{path to source folder}}**: Specifies the root directory where the avs-device-sdk source code is located.
+    * **{{path to build}}**: Specifies where the build folder is, which contains the **Integration/AlexaClientSDKConfig.json** file.
+
+**IMPORTANT**: Create a backup of your `AlexaClientSDKConfig.json` file. Subsequent builds will reset the contents of this file.
 
 ## Test the microphone  
 
@@ -144,7 +188,7 @@ pcm.!default {
 
 To ensure the microphone is capturing audio data, run this command:  
 
-```
+```sh
 sudo apt-get install sox -y && rec test.wav
 ```
 
@@ -153,11 +197,11 @@ If everything works, you should see a message indicating that audio is recording
 ## Run and authorize  
 Navigate to your *BUILD* folder, then:
 1. Start the sample app:
-```
+```sh
 ./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json
 ```
 2. Wait for the sample app to display a message like this:
-```
+```sh
 ##################################
 #       NOT YET AUTHORIZED       #
 ##################################
@@ -169,8 +213,8 @@ Navigate to your *BUILD* folder, then:
 4. If requested to do so, authenticate using your Amazon user credentials.
 5. Enter the code specified in the message from sample app.
 6. Select “Allow”.
-7. Wait (it may take as few seconds) for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
-```
+7. Wait for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
+```sh
 ###########################
 #       Authorized!       #
 ###########################
@@ -188,7 +232,7 @@ A couple more details:
 
 Run this command to launch the sample app. This includes the path to your configuration file and the Sensory wake word model:
 
-```
+```sh
 cd /home/pi/sdk-folder/sdk-build/SampleApp/src
 ./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json ../third-party/alexa-rpi/models
 ```  
@@ -196,7 +240,7 @@ cd /home/pi/sdk-folder/sdk-build/SampleApp/src
 ## Enabling debug logs
 **IMPORTANT**: If you encounter any issues, use the debug option for additional information. `debug1` through `debug9` are accepted values. For example:  
 
-```
+```sh
 ./SampleApp /home/pi/sdk-folder/sdk-build/Integration/AlexaClientSDKConfig.json /home/pi/sdk-folder/third-party/alexa-rpi/models debug9
 ```  
 
@@ -207,32 +251,32 @@ Building with Bluetooth is optional, and is currently limited to Linux and Raspb
 ### BlueALSA
 
 1. If you are using `BlueALSA`, you must disable Bluetooth by running this command:
-        ```
-        ps aux | grep bluealsa
-        sudo kill <bluealsa pid>
-        ```
+    ```sh
+    ps aux | grep bluealsa
+    sudo kill <bluealsa pid>
+    ```
 
 ### PulseAudio
 If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
 
 1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
-        ```
-        ### Automatically load driver modules for Bluetooth hardware
-        #.ifexists module-bluetooth-policy.so
-        #load-module module-bluetooth-policy
-        #.endif
+    ```sh
+    ### Automatically load driver modules for Bluetooth hardware
+    #.ifexists module-bluetooth-policy.so
+    #load-module module-bluetooth-policy
+    #.endif
 
-        #.ifexists module-bluetooth-discover.so
-        #load-module module-bluetooth-discover
-        #.endif
-        ```
+    #.ifexists module-bluetooth-discover.so
+    #load-module module-bluetooth-discover
+    #.endif
+    ```
 
 2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
-        ```
-        pulseaudio --kill
-        pulseaudio --start
-        ```
-        
+    ```sh
+    pulseaudio --kill
+    pulseaudio --start
+    ```
+
 ## Next Steps  
 
 * [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options)  
