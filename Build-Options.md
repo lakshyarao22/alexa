@@ -107,7 +107,7 @@ To enable Bluetooth, use this CMake option. Note: Bluetooth is currently only av
 -DBLUETOOTH_BLUEZ=ON
 ```
 
-## Build with Amazon for Business (A4B)
+## Build with Alexa for Business (A4B)
 
 To enable A4B support in the SDK, you can use the following CMake command:
 
