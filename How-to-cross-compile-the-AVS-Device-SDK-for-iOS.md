@@ -39,8 +39,15 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
    ```
    cd ~/cross-compile
    git clone https://github.com/google/googletest.git
-   mkdir googletest_build && cd googletest_build
-   cmake ../googletest -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS
+   mkdir googletest_build
+
+   cd googletest_build
+
+   cmake ../googletest \
+   -DIOS_DEPLOYMENT_TARGET=10.0 \
+   -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake \
+   -DIOS_PLATFORM=OS \
+
    make
    ```
 7. Download and cross-compile OpenSSL and curl. For this step, we're going to use an open source script from GitHub. Heads-up, this may take a while:
@@ -94,15 +101,39 @@ These are step-by-step instructions to cross-compile and build the AVS Device SD
      ```
      cd ~/cross-compile
      mkdir avs_build
+
      cd avs_build
-     cmake ../avs-device-sdk -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DGSTREAMER_MEDIA_PLAYER=OFF -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config
+
+     cmake ../avs-device-sdk
+     -DIOS_DEPLOYMENT_TARGET=10.0 \
+     -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake \
+     -DIOS_PLATFORM=OS \
+     -DGSTREAMER_MEDIA_PLAYER=OFF \
+     -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a \
+     -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include \
+     -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a \
+     -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a \
+     -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ \
+     -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config
      ```  
    * Run these commands to build with the ability to run in the iOS Simulator:  
      ```  
      cd ~/cross-compile
+
      mkdir avs_build_sim
      cd avs_build_sim
-     cmake ../avs-device-sdk -DIOS_DEPLOYMENT_TARGET=10.0 -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR64 -DGSTREAMER_MEDIA_PLAYER=OFF -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config  
+
+     cmake ../avs-device-sdk
+     -DIOS_DEPLOYMENT_TARGET=10.0 \
+     -DCMAKE_TOOLCHAIN_FILE=../ios-cmake/ios.toolchain.cmake \
+     -DIOS_PLATFORM=SIMULATOR64 \
+     -DGSTREAMER_MEDIA_PLAYER=OFF \
+     -DCURL_LIBRARY=../Build-OpenSSL-cURL/archive/libcurl-7.54.1-openssl-1.0.2l-nghttp2-1.24.0/libcurl_iOS.a \
+     -DCURL_INCLUDE_DIR=../Build-OpenSSL-cURL/curl/curl-7.55.1/include \
+     -DGTEST_LIBRARY=../googletest_build/googlemock/libgmock.a \
+     -DGTEST_MAIN_LIBRARY=../googletest_build/googlemock/libgmock_main.a \
+     -DGTEST_INCLUDE_DIR=../googletest/googletest/include/ \
+     -DPKG_CONFIG_EXECUTABLE=/usr/local/bin/pkg-config
      ```  
    * To build what's required for the iOS proof of concept run these commands:  
      ```
