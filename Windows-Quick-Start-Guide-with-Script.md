@@ -1,5 +1,3 @@
-# Windows Quick Start Guide with Script
-
 This guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device SDK on 64-bit Windows. When finished, you'll have a working sample app to test interactions with Alexa.
 
 **WARNING**: This guide doesn't include instructions to enable wake word.
@@ -13,38 +11,45 @@ This guide provides step-by-step instructions to set up the Alexa Voice Service 
 
 2. Update Pacman, the package management system included with MSYS2. The latest version of Pacman is required to build the SDK. Open the MinGW64 shell, and run this command:
 
-    ```
+    ```sh
     pacman -Syu
     ```
 
 3. Close MinGW64. Reopen MinGW64, and run this command to finish updating Pacman:
 
-    ```
+    ```sh
     pacman -Su
     ```
 
 ## Register a product
+
 Follow these instructions to [register your product and create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile).
 
-Make sure you save the **Product ID** from the **Product information** tab, and your **Client ID** from the **Other devices and platforms** tab from within the **Security Profile** section.
+During this process, you'll download a **config.json** file to your machine that will be used by the SDK to authorize your build of the SDK with Login With Amazon (LWA).
 
-Note: If you already have a registered product that you can use for testing, you may use it but it must be enabled for use with Code Based Linking (CBL). You can find steps for enabling CBL for your device [Here](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1) (Step 1).
+**Note**: If you already have a registered product that you can use for testing, you may use it, but it must be enabled for use with Code Based Linking (CBL).
 
-**IMPORTANT**: When you capture the **Client ID**, make sure it is from the **Other devices and platforms** tab within the **Security Profile** section, and **NOT** from the **Client ID** from the top of the **Product information**, **Security Profile**, or **Capabilities** tabs. The **Client ID** generated within your **Security Profile** is the required **Client ID**.
+Here are the instructions on [how to enable CBL for your device](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1).
 
-## Setup
-1. Open the MinGW64 shell, and run this command to download the installation script and configuration file:
-    ```
-    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/mingw.sh &&wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt
+## Setup your configuration
+
+1. Open the MinGW64 shell, and run this command to download the installation and configuration scripts:
+    ```sh
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh \
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/genConfig.sh \
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
     ```
     Note: we recommend running these commands from your home directory (`C:/msys64/home/<user_name>`) or your desktop, however, you can run the script anywhere.
 
-2. Using your favorite text editor, update the `config.txt` file with the **Product ID** and **Client ID** (from the 'Other devices and platforms' tab of your device's security profile) for your registered product and **save**.
+2. Move the **config.json** file that you downloaded when you [created your Security Profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile) to your **home** directory.
 
-3. Using the MinGW64 shell, run the setup script with your configuration as an argument:
-```
-bash setup.sh config.txt
-```
+3. Using the MinGW64 shell, run the setup script with `config.json` and the `{device serial number, ex. 123456}` as arguments.
+
+    ```sh
+    bash setup.sh config.json [-s {device serial number}]
+    ```
+
+    Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you, and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
 
 ## Authorize and run
 
@@ -53,7 +58,7 @@ When you run the sample app for the first time, you'll need to authorize your cl
 1. Start the sample app using the `startsample.bat` file. Note: this script is a batch file, and not a bash script. You can run the script either from the Windows command line, or by using the Windows File Explorer to locate the file and then double-clicking it.
 
 2. Wait for the sample app to display a message like this:
-```
+```sh
 ##################################
 #       NOT YET AUTHORIZED       #
 ##################################
@@ -65,8 +70,8 @@ When you run the sample app for the first time, you'll need to authorize your cl
 4. If requested to do so, authenticate using your Amazon user credentials.
 5. Enter the code specified in the message from sample app.
 6. Select “Allow”.
-7. Wait (it may take a few seconds) for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
-```
+7. Wait for the sample app to report that it is authorized, and that Alexa is idle.  It will look something like this:
+```sh
 ###########################
 #       Authorized!       #
 ###########################
@@ -80,12 +85,17 @@ Note: if you exit out of sample app via the `k` command, the `CBLAuthDelegate` d
 
 ## Optional configurations
 **To run the sample app manually**:
-Open the MinGW64 shell. Run the following commands:
-`cd <msys64_installed_path>/alexa_sdk/build/bin`
-`./SampleApp.exe ../Integration/AlexaClientSDKConfig.json DEBUG9`
-
+Open the MinGW64 shell.
+Run the following commands:
+```sh
+cd <msys64_installed_path>/alexa_sdk/build/bin
+./SampleApp.exe ../Integration/AlexaClientSDKConfig.json DEBUG9
+```
 **To run the sample app using the Windows command line**:
-Add `<msys64_installed_path>/mingw64/bin` into the path. Note: For this option, use `mingw32-make.exe` instead of `make`.
+
+Add `<msys64_installed_path>/mingw64/bin` into the path.
+
+For this option, use `mingw32-make.exe` instead of `make`.
 
 **To build the SDK after making custom changes**:
 Open the MinGW64 shell, and run `make` inside of the the `alexa_sdk/build` folder.
