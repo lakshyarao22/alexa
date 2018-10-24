@@ -12,11 +12,19 @@ This guide uses a handful of scripts to download, build, and run the AVS Device 
 4. **USB 2.0 Mini Microphone** - Raspberry Pi does not have a built-in microphone; to interact with Alexa you'll need an external one to plug in - [Buy on Amazon](http://amzn.com/B00IR8R7WQ)
 5. **External Speaker** with 3.5mm audio cable - [Buy on Amazon](http://amzn.com/B007OYAVLI)
 6. A **USB Keyboard & Mouse**, and an external **HDMI Monitor** - we also recommend having a USB keyboard and mouse as well as an HDMI monitor handy if you're unable to [remote(SSH)](Setup-SSH-&-VNC) into your Pi.
-7. Internet connection (Ethernet or WiFi)
+7. **Internet connection** (Ethernet or WiFi)
 8. (Optional) WiFi Wireless Adapter for Pi 2 ([Buy on Amazon](http://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498/)).
    **Note:** Pi 3 has built-in WiFi.
 
+## Required dependencies
+
+Starting with v1.10.0 of the SDK, we require that:
+
+* BlueAlsa is disabled.
+* PulseAudio **must be installed** in order to handle audio routing. PulseAudio is not installed by default.
+
 ## Register a product  
+
 Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. [Click here](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile) for step-by-step instructions.
 
 If you already have a registered product that you can use for testing, feel free to skip ahead.
@@ -24,29 +32,36 @@ If you already have a registered product that you can use for testing, feel free
 ## Setup  
 
 1. The first step is to upgrade `apt-get`. This ensures that you have access to required dependencies.
-   ```
+   ```sh
    sudo apt-get upgrade
    ```  
 
-2. Download the install script and configuration file. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
+2. Download the installation and configuration scripts. We recommend running these commands from the home directory (`~/`) or Desktop; however, you can run the script anywhere.  
+    ```sh
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh \
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/genConfig.sh \
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
     ```
-    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/config.txt && wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
-    ```
-3. Update `config.txt` with the **Client ID** and **Product ID** for your registered product and **save**.   
-4. Run the setup script with your configuration as an argument:
-    ```
-    sudo bash setup.sh config.txt
+3. Move the **config.json** file that you downloaded when you [created your Security Profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile) to your home directory.
+
+4. Run the setup script with `config.json` and the `{device serial number, ex. 123456}` as arguments.
+
+    ```sh
+    sudo bash setup.sh config.json [-s {{device serial number}}]
     ```
 
+    Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you, and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
+
 ## Authorize and run
+
 When you run the sample app for the first time, you'll need to authorize your client for access to AVS.
 
 1. Initialize the sample app:
-   ```
+   ```sh
    sudo bash startsample.sh
    ```  
 2. Wait for the sample app to display a message like this:
-   ```
+   ```sh
    ######################################################
    #       > > > > > NOT YET AUTHORIZED < < < < <       #
    ######################################################
@@ -60,7 +75,7 @@ When you run the sample app for the first time, you'll need to authorize your cl
 5. Enter the code specified in the message from sample app.
 6. Select “Allow”.
 7. Wait (it may take as long as 30 seconds) for `CBLAuthDelegate` to successfully get an access and refresh token from Login With Amazon (LWA). This may take At this point the sample app will print a message like this:
-   ```
+   ```sh
    ########################################
    #       Alexa is currently idle!       #
    ########################################
@@ -68,8 +83,9 @@ When you run the sample app for the first time, you'll need to authorize your cl
 8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
 
 ## Integration and unit tests
+
 You can run integration and unit tests using this command:
-```
+```sh
 sudo bash test.sh
 ```
 
@@ -80,7 +96,7 @@ Building with Bluetooth is optional, and is currently limited to Linux and Raspb
 ### BlueALSA
 
 1. If you are using `BlueALSA`, you must disable Bluetooth by running this command:
-   ```
+   ```sh
    ps aux | grep bluealsa
    sudo kill <bluealsa pid>
    ```
@@ -89,7 +105,7 @@ Building with Bluetooth is optional, and is currently limited to Linux and Raspb
 If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
 
 1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
-   ```
+   ```sh
    ### Automatically load driver modules for Bluetooth hardware
    #.ifexists module-bluetooth-policy.so
    #load-module module-bluetooth-policy
@@ -101,7 +117,7 @@ If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugi
    ```
 
 2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
-   ```
+   ```sh
    pulseaudio --kill
    pulseaudio --start
    ```
