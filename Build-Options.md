@@ -99,6 +99,22 @@ Note: All of the `ANDROID_*` variables are only relevant if the `ANDROID` variab
 
 * `ANDROID_DEVICE_INSTALL_PREFIX`: The SDK installation path on the Android device or emulator.
 
+## Build with Bluetooth
+
+To enable Bluetooth, use this CMake option. Note: Bluetooth is currently only available for Linux and Raspberry Pi.
+
+```
+-DBLUETOOTH_BLUEZ=ON
+```
+
+## Build with Amazon for Business (A4B)
+
+To enable A4B support in the SDK, you can use the following CMake command:
+
+`-DA4B=ON`
+
+By default, this option is `OFF`. Turning this option `ON` will enable A4B, including support for handling [`RevokeAuthorization`](https://developer.amazon.com/docs/alexa-voice-service/system.html#revokeauth) directives.
+
 ## Logging sensitive data
 
 Logging of potentially sensitive data is disabled by default, but can be enabled in `DEBUG` builds by including this `cmake` command:
