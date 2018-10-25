@@ -5,7 +5,7 @@ After you've registered for an Amazon developer account, you'll need to create a
 1. Login to [Amazon Developer Portal](https://developer.amazon.com/login.html)
 
 2. Navigate to the Alexa > [Alexa Voice Service](https://developer.amazon.com/avs/home.html#/avs/home) console.
-3. Choose [Create Product](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/create-product._CB1539978229_.png), and follow then instructions below to 1). [register a product](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#product-information), 2). [create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile), and 3). [authorize your security profile]((https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#enable-your-security-profile) to use Login With Amazon (LWA).
+3. Choose [Create Product](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/create-product._CB1539978229_.png), and follow then instructions below to 1). [register a product](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#product-information), 2). [create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile), and 3). [authorize your security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#enable-your-security-profile) to use Login With Amazon (LWA).
 	![](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/create-product._CB1539978229_.png)
 
 ### Product information
