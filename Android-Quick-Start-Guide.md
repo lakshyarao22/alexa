@@ -16,6 +16,7 @@ Installing onto external storage may result in installation failures, depending 
 
 You can specify any directory you prefer to run the scripts and download these files to. The following commands will download all necessary files.
 ```sh
+wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/androidConfig.txt
 wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh
 wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/genConfig.sh
 wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/android.sh
@@ -122,11 +123,13 @@ Follow these steps:
 | `DEVICE_INSTALL_PATH`  | The file path on the device where the script should install the sample app and dependencies.  <br> <br> **Note:** Make sure this path exists on the device, and that you have write permissions.                                                                  |
 | `BUILD_TYPE`           | The type of build that will be used.  <br> <br> **Accepted values**: `debug`, `release`, `MinSizeRel`, and `RelWithDebInfo`.                                                                                                                                      |
 
-3. Run the setup script with your configuration as an argument:
+3. Run the setup script with `config.json` and the `{device serial number, ex. 123456}` as arguments.:
 
 ```sh
-bash setup.sh config.json -a androidConfig.txt [-s <serial number>]
+bash setup.sh config.json -a androidConfig.txt [-s {device serial number}]
 ```
+
+Note: Each instance of the SDK requires a unique **Device Serial Number** (also found in the **deviceInfo** object). This is provided by you, and in some instances may match your product's SKU. For this sample, it's pre-populated with `123456`.
 
 ## Run and authorize
 
