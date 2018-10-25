@@ -37,7 +37,7 @@ Here are the instructions on [how to enable CBL for your device](https://develop
     ```sh
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/setup.sh \
     wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/genConfig.sh \
-    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/pi.sh
+    wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/mingw.sh
     ```
     Note: we recommend running these commands from your home directory (`C:/msys64/home/<user_name>`) or your desktop, however, you can run the script anywhere.
 
