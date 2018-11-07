@@ -166,7 +166,7 @@ Follow these steps to setup `AlexaClientSDKConfig.json` using `genConfig.sh`:
     ```sh
     cd {{path to source folder}}/avs-device-sdk/tools/Install
 
-    genConfig.sh config.json {device serial number} \
+    bash genConfig.sh config.json {device serial number} \
     /{{path to database}} \
     /{{path to source folder}}/avs-device-sdk \
     {{path to build}}/Integration/AlexaClientSDKConfig.json
