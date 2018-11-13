@@ -32,7 +32,9 @@ On [this page](https://developer.amazon.com/avs/home.html#/avs/products/new), yo
 
    ![](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/product-category.png)
 
-7. When asked how users will interact with your product, select **Touch-initiated** and **Hands-free**. **Note**: For a commercial product, you should select the options that best describe your product's functionality.
+7. When asked how users will interact with your product, select the option(s) that best describe your product's functionality.
+
+    Example:
 
     ![](https://m.media-amazon.com/images/G/01/mobile-apps/dex/avs/sdk/interact.png)
 
