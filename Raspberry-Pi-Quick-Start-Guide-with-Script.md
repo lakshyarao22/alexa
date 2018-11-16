@@ -74,7 +74,7 @@ When you run the sample app for the first time, you'll need to authorize your cl
 4. Authenticate using your Amazon user credentials.
 5. Enter the code specified in the message from sample app.
 6. Select “Allow”.
-7. Wait (it may take as long as 30 seconds) for `CBLAuthDelegate` to successfully get an access and refresh token from Login With Amazon (LWA). This may take At this point the sample app will print a message like this:
+7. Wait (it may take as long as 30 seconds) for `CBLAuthDelegate` to successfully get an access and refresh token from Login With Amazon (LWA). At this point the sample app will print a message like this:
    ```sh
    ########################################
    #       Alexa is currently idle!       #
