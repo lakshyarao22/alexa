@@ -1,11 +1,11 @@
 ## [Home](https://github.com/alexa/avs-device-sdk/wiki)
 
 **Quickstarts**    
-* [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)  
-* [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
-* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
-* [Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
-* [Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
+* [For Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)  
+* [For Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
+* [For macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
+* [For Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
+* [For Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
 
 **Reference Guide**  
