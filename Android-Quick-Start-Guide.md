@@ -25,7 +25,7 @@ wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install
 
 You can install Android tools either by downloading [Android Studio](https://developer.android.com/studio/#downloads) (which includes the tools by default) or [via the command line](https://developer.android.com/studio/#command-tools).
 
-### Install `platformtools`
+### Install platformtools
 
 After you've installed Android tools, you'll need to install `platformtools` using the Android `sdkmanager`, which is part of the Android tools package.
 
