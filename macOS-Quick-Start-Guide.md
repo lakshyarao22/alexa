@@ -73,9 +73,7 @@ The AVS Device SDK requires libraries to:
 3. Now run:
 
      ```shell
-     brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav sqlite3 repo
-
-     cmake clang-format doxygen
+     brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav sqlite3 repo cmake clang-format doxygen
 
      wget git
      ```  
@@ -86,7 +84,8 @@ The AVS Device SDK requires libraries to:
 
      ```shell
      cd ~/sdk-folder/third-party
-     wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz tar xf pa_stable_v190600_20161030.tgz
+     wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz 
+     tar xf pa_stable_v190600_20161030.tgz
 
      cd portaudio
      ./configure
@@ -114,7 +113,7 @@ git clone git://github.com/alexa/avs-device-sdk.git
 
 1. Run CMake to generate the build dependencies. This command declares that gstreamer is enabled, and provides the path to PortAudio.
 
-    **IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`  
+    **IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`. 
 
     ```shell
     cd ~/sdk-folder/sdk-build
