@@ -1,18 +1,61 @@
-## CMake build types and options
+# CMake build types and options
 
-The following build types are supported:
+The following CMake build types are supported:
 
 * `DEBUG` - Shows debug logs with `-g` compiler flag.
 * `RELEASE` - Adds `-O2` flag and removes `-g` flag.
 * `MINSIZEREL` - Compiles with `RELEASE` flags and optimizations (`-O`s) for a smaller build size.
 
-To specify a build type, use this command in place of step 4 below:  
+To specify a build type, you can use this command:  
 
-```
+```sh
 cmake <absolute-path-to-source> -DCMAKE_BUILD_TYPE=<build-type>
 ```
 
-## Build with a wake word detector  
+## Debug builds
+
+Debug logs are available in Debug builds. You can enable them by adding the following to the end of your CMake command:
+
+```shell
+cmake <absolute-path-to-source> <other_cmake_parameters> -DCMAKE_BUILD_TYPE=DEBUG
+```
+
+### Specify log level
+
+You can specify the level of debug logging, by including a `DEBUG<x>` variable when you invoke the sample app. The allowed values are `DEBUG0`, `DEBUG1`, ... `DEBUG9`, where `DEBUG9` provides the most information.
+
+ For example:
+
+```shell
+./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json DEBUG9
+```  
+
+### Log sensitive data
+
+Logging of potentially sensitive data is disabled by default, but can be enabled in Debug builds by including this CMake command:
+
+`-DACSDK_EMIT_SENSITIVE_LOGS=ON`
+
+Note: If you want to post logs generated with this setting to a public forum, please be sure to review them and redact any data you consider sensitive before doing so.
+
+
+## Build with PortAudio  
+
+**Required** - PortAudio is required to build and run the sample app. This is covered in the quickstart guides for [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide), [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide), and [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script).
+
+These options must be declared in your CMake command to build with PortAudio. Please note, GStreamer is also included, as it is required to run the sample app:  
+
+* `-DGSTREAMER_MEDIA_PLAYER=ON`
+* `-DPORTAUDIO=ON`
+* `-DPORTAUDIO_LIB_PATH=<absolute-path-to-portaudio-lib>`
+* `-DPORTAUDIO_INCLUDE_DIR=<absolute-path-to-portaudio-include-dir`
+
+This is a sample CMake command:
+```
+cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=<absolute-path>/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=<absolute-path>/portaudio/include
+```
+
+## Build with wake word detector  
 
 **Note**: Wake word detector and key word detector (KWD) are used interchangeably.
 
@@ -28,7 +71,7 @@ The AVS Device SDK supports wake word detectors from [Sensory](https://github.co
 
 If using the Sensory wake word detector, version [5.0.0-beta.10.2](https://github.com/Sensory/alexa-rpi) or later is required.
 
-This is an example `cmake` command to build with Sensory:
+This is an example CMake command to build with Sensory:
 
 ```
 cmake <absolute-path-to-source> -DSENSORY_KEY_WORD_DETECTOR=ON -DSENSORY_KEY_WORD_DETECTOR_LIB_PATH=<absolute-path>/alexa-rpi/lib/libsnsr.a -DSENSORY_KEY_WORD_DETECTOR_INCLUDE_DIR=<absolute-path>/alexa-rpi/include
@@ -42,52 +85,37 @@ A matrix calculation library, known as BLAS, is required to use KITT.ai. To inst
 * Generic Linux - `apt-get install libatlas-base-dev`
 * macOS -  `brew install homebrew/science/openblas`
 
-This is an example `cmake` command to build with KITT.ai:
+This is an example CMake command to build with KITT.ai:
 
 ```
 cmake <absolute-path-to-source> -DKITTAI_KEY_WORD_DETECTOR=ON -DKITTAI_KEY_WORD_DETECTOR_LIB_PATH=<absolute-path>/snowboy-1.2.0/lib/libsnowboy-detect.a -DKITTAI_KEY_WORD_DETECTOR_INCLUDE_DIR=<absolute-path>/snowboy-1.2.0/include
 ```
 
-## Build with an implementation of `MediaPlayer`
+## Build with a MediaPlayer implementation
 
-`MediaPlayer` (the reference implementation of the `MediaPlayerInterface`) is based upon [GStreamer](https://gstreamer.freedesktop.org/), and is not built by default. To build 'MediaPlayer' use this option:
+**Optional** - `MediaPlayer`, the reference implementation of the `MediaPlayerInterface`, is based upon [GStreamer](https://gstreamer.freedesktop.org/). By default, it **is not** included. To build 'MediaPlayer' use this option:
 
 ```
 -DGSTREAMER_MEDIA_PLAYER=ON
 ```
 
-If GStreamer was [installed from source](https://gstreamer.freedesktop.org/documentation/frequently-asked-questions/getting.html), the prefix path provided when building must be specified to CMake with:
+If GStreamer was [installed from source](https://gstreamer.freedesktop.org/documentation/frequently-asked-questions/getting.html), you must specify the prefix path:
 
 ```
 -DCMAKE_PREFIX_PATH==<absolute-path-to-GStreamer-build>
 ```
 
-This is a sample `cmake` command:
+For this example, This is a sample CMake command:
 
 ```
 cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DCMAKE_PREFIX_PATH=<absolute-path-to-GStreamer-build>
 ```
 
-## Build with PortAudio (required to run the sample app)  
-
-PortAudio is required to build and run the sample app. This is covered in the quick start guides for Linux, macOS, and Raspberry Pi.
-
-These options must be declared in your `cmake` command to build with PortAudio. Please note, GStreamer is also included, as it is required to run the SampleApp:  
-
-* `-DGSTREAMER_MEDIA_PLAYER=ON`
-* `-DPORTAUDIO=ON`
-* `-DPORTAUDIO_LIB_PATH=<absolute-path-to-portaudio-lib>`
-* `-DPORTAUDIO_INCLUDE_DIR=<absolute-path-to-portaudio-include-dir`
-
-This is a sample `cmake` command:
-```
-cmake <absolute-path-to-source> -DGSTREAMER_MEDIA_PLAYER=ON -DPORTAUDIO=ON -DPORTAUDIO_LIB_PATH=<absolute-path>/portaudio/lib/.libs/libportaudio.a -DPORTAUDIO_INCLUDE_DIR=<absolute-path>/portaudio/include
-```
 ## Build for Android
 
-The following variables can be declared in your `cmake` command to build for Android.
+The following variables can be declared in your CMake command to build for Android.
 
-Note: All of the `ANDROID_*` variables are only relevant if the `ANDROID` variable is `ON`.
+Note: All of the `ANDROID_*` variables are only relevant if the `ANDROID` variable is `ON` (`-DANDROID=ON`)
 
 * `ANDROID`: Enables the android build (`OFF` by default).
 
@@ -99,26 +127,13 @@ Note: All of the `ANDROID_*` variables are only relevant if the `ANDROID` variab
 
 * `ANDROID_DEVICE_INSTALL_PREFIX`: The SDK installation path on the Android device or emulator.
 
-## Build with Bluetooth
+## Additional options
 
-To enable Bluetooth, use this CMake option. Note: Bluetooth is currently only available for Linux and Raspberry Pi.
+You can build the SDK with the following options. To enable these features, you can include in your CMake build command.
 
-```
--DBLUETOOTH_BLUEZ=ON
-```
-
-## Build with Alexa for Business (A4B)
-
-To enable A4B support in the SDK, you can use the following CMake command:
-
-`-DA4B=ON`
-
-By default, this option is `OFF`. Turning this option `ON` will enable A4B, including support for handling [`RevokeAuthorization`](https://developer.amazon.com/docs/alexa-voice-service/system.html#revokeauth) directives.
-
-## Logging sensitive data
-
-Logging of potentially sensitive data is disabled by default, but can be enabled in `DEBUG` builds by including this `cmake` command:
-
-`-DACSDK_EMIT_SENSITIVE_LOGS=ON`
-
-Note: If you want to post logs generated with this setting to a public forum, please be sure to review them and redact any data you consider sensitive before doing so.
+| Feature | Command | Description |
+|--|--|--|
+| **Alexa for Business (A4B)** | `-DA4B=ON` | By default, this option is `OFF`. Turning this option `ON` will enable A4B, including support for handling [`RevokeAuthorization`](https://developer.amazon.com/docs/alexa-voice-service/system.html#revokeauth) directives. |
+| **Bluetooth** | `-DBLUETOOTH_BLUEZ=ON` | Currently, Bluetooth is only available for Linux and Raspberry Pi.|
+| **Opus** | `-DOPUS=ON` | Opus is an interactive audio codec that is supported by v1.11 or greater of the SDK. In order to enable Opus, this flag must be on, and you must have [libopus](http://opus-codec.org/release/stable/2018/10/18/libopus-1_3.html) installed. For information about Opus, see [http://opus-codec.org/](http://opus-codec.org/) |
+| **SAMPLE-AES decryption** | `-DENABLE_SAMPLE_AES=ON -DFFMPEG_INCLUDE_DIR=<absolute-path-to-ffmpeg-include-dir> -DFFMPEG_LIB_PATH=<absolute-path-to-ffmpeg-lib>` | Note: to enable SAMPLE-AES decryption for HLS playlists, the [FFMPEG dependency]() is required, and the build options `FFMPEG_INCLUDE_DIR` & `FFMPEG_LIB_PATH` must be provided. |
