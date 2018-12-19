@@ -16,13 +16,6 @@ This guide uses a handful of scripts to download, build, and run the AVS Device 
 8. (Optional) WiFi Wireless Adapter for Pi 2 ([Buy on Amazon](http://www.amazon.com/CanaKit-Raspberry-Wireless-Adapter-Dongle/dp/B00GFAN498/)).
    **Note:** Pi 3 has built-in WiFi.
 
-## Required dependencies
-
-Starting with v1.10.0 of the SDK, we require that:
-
-* BlueAlsa is disabled.
-* PulseAudio **must be installed** in order to handle audio routing. PulseAudio is not installed by default.
-
 ## Register a product  
 
 Before we get started, you'll need to register a device and create a security profile at developer.amazon.com. [Click here](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile) for step-by-step instructions.
@@ -93,33 +86,12 @@ sudo bash test.sh
 
 ## Bluetooth
 
-Building with Bluetooth is optional, and is currently limited to Linux and Raspberry Pi. This release supports `A2DP-SINK` and `AVRCP` profiles. In order to use Bluetooth for these platforms, you must install all Bluetooth [dependencies]() and **disable any processes which obtain an incoming Bluetooth audio stream**, such as:
+Building with Bluetooth is optional, and is currently limited to Linux and Raspberry Pi. This release supports `A2DP-SINK` and `AVRCP` profiles. In order to use Bluetooth for these platforms, you must install all Bluetooth [dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies#bluetooth-dependencies) and **disable any processes which obtain an incoming Bluetooth audio stream**, such as:
 
 ### BlueALSA
 
-1. If you are using `BlueALSA`, you must disable Bluetooth by running this command:
+If you are using `BlueALSA`, you must disable Bluetooth by running this command:
    ```sh
    ps aux | grep bluealsa
    sudo kill <bluealsa pid>
-   ```
-
-### PulseAudio
-If you are using `PulseAudio`, you **must** disable `PulseAudio` Bluetooth plugins. To do this:
-
-1. Navigate to `/etc/pulse/default.pa` (or equivalent file), and comment out the following lines:
-   ```sh
-   ### Automatically load driver modules for Bluetooth hardware
-   #.ifexists module-bluetooth-policy.so
-   #load-module module-bluetooth-policy
-   #.endif
-
-   #.ifexists module-bluetooth-discover.so
-   #load-module module-bluetooth-discover
-   #.endif
-   ```
-
-2. Next, stop and restart PulseAudio with these commands (if auto-respawn is disabled):
-   ```sh
-   pulseaudio --kill
-   pulseaudio --start
    ```
