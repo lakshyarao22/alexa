@@ -53,38 +53,65 @@ The AVS Device SDK requires libraries to:
 * Record audio from the microphone  
 * Store records in a database (persistent storage)  
 
-
 1. Update Homebrew. This ensures that you have access to required dependencies:
 
     ```shell
     brew update
     ```
 
-2. Run this command to configure `curl` with **http2**. This is required to connect to AVS:  
+2. Now use Homebrew to install and link openSSL:
+
+    ```sh
+    brew install openssl
+    brew link --force openssl
+    ```
+
+On macOS, when you try to link openSSL, you may encounter this error:
+
+    ```sh
+    $ brew link --force openssl
+    Warning: Refusing to link: openssl
+    Linking keg-only openssl means you may end up linking against the insecure,
+    deprecated system OpenSSL while using the headers from Homebrew's openssl.
+    Instead, pass the full include/library paths to your compiler e.g.:
+       -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
+    ```
+
+If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process. To do this, follow these steps:
+
+    1. Manually link openSSL to your profile:
+
+    ```sh
+    echo export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH" >> ~/.bash_profile
+    source ~/.bash_profile
+    ```
+    2. Delete your <sdk build> directory.
+    3. Start a new shell session, then continue with the steps below.
+
+3. Run this command to configure `curl` with **http2**. This is required to connect to AVS:  
 
      ```shell
      brew install curl --with-nghttp2
      brew link curl --force
 
-     echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> ~/.bash_profile
+     echo export PATH="/usr/local/opt/curl/bin:$PATH" >> ~/.bash_profile
      source ~/.bash_profile
      ```
 
-3. Now run:
+4. Now install the [SDK dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies):
 
      ```shell
-     brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav sqlite3 repo cmake clang-format doxygen
-
-     wget git
+     brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-libav sqlite3 repo cmake clang-format doxygen wget git
      ```  
 
      **IMPORTANT**: Make sure that command ran successfully, and that no errors were thrown. If for any reason the install command fails, run brew install for each dependency individually.  
 
-4. PortAudio is required to record microphone data. Run this command to install and configure PortAudio:  
+
+5. PortAudio is required to record microphone data. Run this command to install and configure PortAudio:
 
      ```shell
      cd ~/sdk-folder/third-party
-     wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz 
+     wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
      tar xf pa_stable_v190600_20161030.tgz
 
      cd portaudio
@@ -111,9 +138,11 @@ git clone git://github.com/alexa/avs-device-sdk.git
 
 ## Build the SDK  
 
-1. Run CMake to generate the build dependencies. This command declares that gstreamer is enabled, and provides the path to PortAudio.
+1. Run CMake to generate the build dependencies. To get debug logs from the sample app, add `-DCMAKE_BUILD_TYPE=DEBUG` to the end of your command. For more information, see [Debug builds](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#debug-builds).
 
-    **IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`. 
+In this example it is declared that gstreamer is enabled, and provides the path to PortAudio, and also enables debug logging (which is optional):
+
+    **IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`.
 
     ```shell
     cd ~/sdk-folder/sdk-build
@@ -123,6 +152,7 @@ git clone git://github.com/alexa/avs-device-sdk.git
     -DPORTAUDIO=ON \
     -DPORTAUDIO_LIB_PATH=/{home}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a \
     -DPORTAUDIO_INCLUDE_DIR=/{home}/sdk-folder/third-party/portaudio/include
+    -DCMAKE_BUILD_TYPE=DEBUG
 
     make
     ```
@@ -186,9 +216,9 @@ Follow these steps to setup `AlexaClientSDKConfig.json` using `genConfig.sh`:
         "clientId": "{OAuth client ID}"
         "productId": "{product name for the device}"
         ```
-    * **{{device serial number}}**: You can provide your own device serial number (DSN), or use the system default 
-    (`123456`). The DSN can be any unique alpha-numeric string (up to 64 characters). You should use this string 
-    to identify your product or application instance. Many developers choose to use a product's SKU for this 
+    * **{{device serial number}}**: You can provide your own device serial number (DSN), or use the system default
+    (`123456`). The DSN can be any unique alpha-numeric string (up to 64 characters). You should use this string
+    to identify your product or application instance. Many developers choose to use a product's SKU for this
     value.
 
         For example:
@@ -237,17 +267,6 @@ Navigate to your *BUILD* folder, then:
 A couple more details:
 * If you exit out of sample app via the `k` command, the `CBLAuthDelegate` database will be cleared and you will need to reauthorize your client.
 * If you want to move this authorization to another sample app installation, you need to copy the **deviceInfo** object within `AlexaClientSDKConfig.json` to the new installation. You will also need to copy the file `"/{home}/sdk-folder/application-necessities/cblAuthDelegate.db"` to the new installation, and update **AlexaClientSDKConfig.json** in the new installation so that the **cblAuthDelegate's databaseFilePath** property points to it.
-
-## Enabling debug logs
-
-Debug logs are available in `DEBUG` builds. You can enable them by adding the following to the end of your CMake command line:
-```shell
-cmake < other cmake parameters > -DCMAKE_BUILD_TYPE=DEBUG
-```
-An additional sample app command line parameter allows you to select the level of debug logging to be output. The allowed values are `DEBUG0`, `DEBUG1`, ... `DEBUG9`, where `DEBUG9` provides the most information. For example:
-```shell
-./SampleApp/src/SampleApp ./Integration/AlexaClientSDKConfig.json DEBUG9
-```  
 
 ## Setup shortcuts
 
