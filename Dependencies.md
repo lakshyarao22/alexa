@@ -1,63 +1,136 @@
-This is a list of requirements and dependencies for the AVS Device SDK. Quick start guides are available for the following platforms:  
+This is a list of requirements and dependencies for the Alexa Voice Service (AVS) Device SDK.  
 
-* [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide)  
-* [macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
-* [Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)  
-* [Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
-* [Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
+## Requirements
 
-### Core dependencies
+The AVS Device SDK runs on Raspberry Pi, macOS, Ubuntu Linux, Android, and Windows 64-bit. It requires **C++11 or later**.
 
-* C++ 11 or later
-* [GNU Compiler Collection (GCC) 4.8.5](https://gcc.gnu.org/) or later **OR** [Clang 3.9](http://clang.llvm.org/get_started.html) or later. **NOT required for Android builds.**
-* [CMake 3.1](https://cmake.org/download/) or later
-* [libcurl 7.50.2](https://curl.haxx.se/download.html) or later
-* [nghttp2 1.0](https://github.com/nghttp2/nghttp2) or later
-* [OpenSSL 1.0.2](https://www.openssl.org/source/) or later
-* [Doxygen 1.8.13](http://www.stack.nl/~dimitri/doxygen/download.html) or later (required to build API documentation)  
-* [SQLite 3.19.3](https://www.sqlite.org/download.html) or later (required for Alerts)  
-* For Alerts to work as expected:  
-  * The device system clock must be set to UTC time. We recommend using `NTP` to do this   
-  * A file system is required  
+### Compiler
 
-### MediaPlayer reference implementation dependencies
+The AVS Device SDK libraries are tested with the following compilers:
 
-Building the reference implementation of the `MediaPlayerInterface` (the class `MediaPlayer`) is optional, but requires:  
-* [GStreamer 1.8.3](https://gstreamer.freedesktop.org/releases/1.8/) (or later) and the following GStreamer plug-ins:  
-* [GStreamer Base Plugins 1.8.3](https://gstreamer.freedesktop.org/releases/gst-plugins-base/1.8.3.html) or later.
-* [GStreamer Good Plugins 1.8.3](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.8.3.html) or later.
-* [GStreamer Libav Plugin 1.8.3](https://gstreamer.freedesktop.org/releases/gst-libav/1.8.3.html) or later **OR**
-* [GStreamer Ugly Plugins 1.8.3](https://gstreamer.freedesktop.org/releases/gst-plugins-ugly/1.8.3.html) or later, for decoding MP3 data.
+*For Ubuntu, Raspberry Pi, and macOS*:
 
-**NOTE**: The plugins may depend on libraries which need to be installed for the GStreamer-based `MediaPlayer` to work correctly.  
+| Compiler | Minimum Version     |
+| :------------- | :------------- |
+| [GNU Compiler Collection (GCC)](https://gcc.gnu.org/)     | 4.8.5 |
+| [Clang](http://clang.llvm.org/get_started.html)     | 3.9  |
 
-### Sample app dependencies
+### Build tools
 
-Building the sample app is optional. If you are building for Mac, Linux, Raspberry Pi, Windows, or Android *without using the Android Microphone and Media Player*, these dependencies are required:
-* [PortAudio v190600_20161030](http://www.portaudio.com/download.html)
-* GStreamer
+The AVS Device SDK can be built with CMake. The minimum version of CMAke that we test with is:
 
-**NOTE**: The sample app will work with or without a wake word engine. If built without a wake word engine, hands-free mode will be disabled in the sample app.  
+| Tool | Minimum Version    |
+| :------------- | :------------- |
+| [CMake](https://cmake.org/download/)       | 3.1|
 
-### Music provider dependencies  
+### Libraries
 
-The following codecs and packages are required:  
-* [GStreamer Bad Plugins 1.10.4](https://gstreamer.freedesktop.org/releases/gst-plugins-bad/1.10.4.html) or later.  
-* [Crypto Library](https://gnupg.org/software/libgcrypt/index.html) for HLS demuxers.
-* [libsoup]( https://wiki.gnome.org/Projects/libsoup) an HTTP client/server library used by GStreamer.
-* [libfaad-dev](https://github.com/dsvensson/faad2) - AAC and HE-AAC decoding.
+The SDK depends on libcurl, nghttp2, OpenSSL and the dependencies of those libraries. The AVS Device SDK C++ client libraries are tested with the following versions of these dependencies:
 
-### Bluetooth Dependencies
+| Library     | Minimum versions    |
+| :------------- | :------------- |
+| [libcurl](https://curl.haxx.se/download.html)      | 7.50.2       |
+| [nghttp2](https://github.com/nghttp2/nghttp2)      | 1.0       |
+| [OpenSSL](https://www.openssl.org/source/) | 1.0.2       |
+| [Doxygen](http://www.stack.nl/~dimitri/doxygen/download.html)      | 1.8.13       |
 
-Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi. `A2DP-SINK`, `A2DP-SOURCE` (Linux only), `AVRCPTarget` (Linux only), and `AVRCPController` profiles are supported. If you choose to build with Bluetooth, these dependencies must be installed:
-* [SBC Library](https://git.kernel.org/pub/scm/bluetooth/sbc.git/tree/)
-* [BlueZ 5.37](http://www.bluez.org/download/) or later.
-* PulseAudio and PulseAudio bluetooth modules, which are used to handle audio routing. Note: You may substitute PulseAudio with a comparable application of your choice.
+### Core music provider dependencies  
 
-### Android Dependencies
+Your build of the SDK is required to support playback of music. To enable support for [AVS music service providers](https://developer.amazon.com/docs/alexa-voice-service/music-service-providers.html) the following libraries and packages, and their dependencies, are required:
 
-* Requires Cmake 3.6 or greater.
-* [Android SDK tools](https://developer.android.com/studio/#comand-tools). Included in [Android Studio](https://developer.android.com/studio/#downloads) by default.
-* [Android Native Development Kit (NDK)](https://developer.android.com/ndk/downloads/). Required for the `MediaPlayerInterface` and sample app integration.
-* [FFmpeg 4.0.0](https://www.ffmpeg.org/download.html) or greater.
-* *Optional*: Make sure that your Android environment has OpenSL ES with equalizer support. Any full-featured Android OS or a third-party equalizer software should meet these requirements.
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [Crypto library](https://gnupg.org/software/libgcrypt/index.html) - For HLS demuxers | 1.8.4 or earlier     |
+| [libsoup](https://wiki.gnome.org/Projects/libsoup) - An HTTP client/server library used by GStreamer. | 2.6.5 or earlier       |
+| [libfaad-dev](https://github.com/dsvensson/faad2) - AAC and HE-AAC decoding | 1.10.4       |
+
+| Plug-In     | Minimum version    |
+| :------------- | :------------- |
+| [GStreamer Bad Plug-ins](https://gstreamer.freedesktop.org/releases/gst-plugins-bad/1.10.4.html) | 1.10.4       |
+
+## Optional features and their dependencies
+
+In additional to the requirements above, if you choose to build any of the following features, they will require the following libraries and components:
+
+### Alexa alerts
+
+If you choose to use Alexa alerts, the SQLite library is required, and your client must meet these additional requirements:
+
+* The device system clock must be set to UTC time. We recommend using the [network time protocol (NTP)](http://support.ntp.org/bin/view/Main/WebHome).
+* A file system is required.
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [SQLite](ttps://www.sqlite.org/download.html) | 3.19.3       |
+
+### AVS sample app
+
+Building the AVS sample app is optional. If you are building for Mac, Linux, Raspberry Pi, Windows, or Android (without using the Android Microphone and Media Player), these libraries and their dependencies are required:
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [PortAudio](https://www.sqlite.org/download.html) | v190600_20161030       |
+| [GStreamer](https://gstreamer.freedesktop.org/releases/1.8/) | 1.8.3       |
+
+**NOTE**: The sample app will work with or without a wake word engine (WWE). If the SDK is built without a WWE, hands-free mode will be disabled in the sample app.
+
+### Bluetooth
+
+Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi. `A2DP-SINK`, `A2DP-SOURCE` (Linux only), `AVRCPTarget` (Linux only), and `AVRCPController` profiles are supported.
+
+If you choose to build with Bluetooth these libraries and modules, and their dependencies, must be installed:
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [SBC Library](https://git.kernel.org/pub/scm/bluetooth/sbc.git/tree/) |   1.3     |
+| [BlueZ 5.37](http://www.bluez.org/download/) |   5.37     |
+
+Note: You may substitute PulseAudio with a comparable application of your choice.
+
+| Module     | Minimum version    |
+| :------------- | :------------- |
+| [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) and [PulseAudio Bluetooth](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Bluetooth/) *(or equivalent)* - Used to handle audio routing |   12.2 or earlier     |
+
+### MediaPlayerInterface
+
+Building the reference implementation of the `MediaPlayerInterface` is optional; but requires these libraries and plug-ins, and their dependencies:
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [GStreamer](https://gstreamer.freedesktop.org/releases/1.8/) | 1.8.3       |
+
+| Plug-in     | Minimum version    |
+| :------------- | :------------- |
+| [GStreamer Base Plug-ins](https://gstreamer.freedesktop.org/releases/gst-plugins-base/1.8.3.html) | 1.8.3       |
+| [GStreamer Good Plug-ins](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.8.3.html) | 1.8.3       |
+| [GStreamer Libav Plug-ins](https://gstreamer.freedesktop.org/releases/gst-plugins-good/1.8.3.html) OR <Br> [GStreamer Ugly Plug-ins](https://gstreamer.freedesktop.org/releases/gst-plugins-ugly/1.8.3.html) <br>For decoding MP3 data | 1.8.3       |
+
+### Opus encoding
+
+[Opus](http://opus-codec.org/) encoding is optional. To enable Opus, [libopus](http://opus-codec.org/docs/) must be installed, and you must include the [`-DOPUS=ON`](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#additional-options) flag in your CMake command.
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [libopus](http://opus-codec.org/) |   1.2.1     |
+
+### SAMPLE-AES decryption
+
+SAMPLE-AES decryption is optional. To enable SAMPLE-AES decryption for audio streamed to your device, the FFMPEG library is required, and this option [must be enabled in your CMake command](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#additional-options).
+
+This option is available for all platforms, however, FFMEG is required for Android builds.
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [FFmpeg](https://www.ffmpeg.org/download.html) |   4.0.0     |
+
+
+## Build for Android
+
+In additional to the requirements above, to build for Android the following libraries and packages, and their dependencies, are required:
+
+| Library     | Minimum version    |
+| :------------- | :------------- |
+| [Android SDK tools](https://developer.android.com/studio/#comand-tools) - Included in [Android Studio](https://developer.android.com/studio/#downloads) by default. |   1.0.39     |
+| [Android Native Development Kit (NDK)](https://developer.android.com/ndk/downloads/). Required for the `MediaPlayerInterface` and sample app integration. |   -     |
+| [FFmpeg](https://www.ffmpeg.org/download.html) |   4.0.0     |
+| [OpenSL ES](https://developer.android.com/ndk/guides/audio/opensl/opensl-for-android) *(with equalizer support)* - Any full-featured Android OS or a third-party equalizer software should meet these requirements. |   -    |
