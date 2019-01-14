@@ -187,7 +187,7 @@ Follow these steps to setup `AlexaClientSDKConfig.json` using `genConfig.sh`:
         For example:
 
         ```sh
-        sudo bash setup.sh config.json -s 998987
+        sudo bash config.json -s 998987
         ```
     * **{{path to database}}**: Specifies where the databases will be located.
     * **{{path to source folder}}**: Specifies the root directory where the avs-device-sdk source code is located.
