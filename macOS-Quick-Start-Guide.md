@@ -79,14 +79,16 @@ On macOS, when you try to link openSSL, you may encounter this error:
 
 If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process. To do this, follow these steps:
 
-    1. Manually link openSSL to your profile:
+* **Manually link openSSL to your profile**:
 
     ```sh
     echo export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH" >> ~/.bash_profile
     source ~/.bash_profile
     ```
-    2. Delete your <sdk build> directory.
-    3. Start a new shell session, then continue with the steps below.
+
+* **Delete your <sdk build> directory**.
+
+* **Start a new shell session**, then continue with the steps below.
 
 3. Run this command to configure `curl` with **http2**. This is required to connect to AVS:  
 
