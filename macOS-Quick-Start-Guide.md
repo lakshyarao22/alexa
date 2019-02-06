@@ -77,7 +77,7 @@ On macOS, when you try to link openSSL, you may encounter this error:
        -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
     ```
 
-If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process.
+If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process:
 
 ```
 $ ln -s /usr/local/opt/openssl/include/openssl /usr/local/include
