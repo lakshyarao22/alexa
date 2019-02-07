@@ -66,7 +66,7 @@ The AVS Device SDK requires libraries to:
     brew link --force openssl
     ```
 
-On macOS, when you try to link openSSL, you may encounter this error:
+    On macOS, when you try to link openSSL, you may encounter this error:
 
     ```sh
     $ brew link --force openssl
@@ -83,14 +83,11 @@ If so, you'll need to manually link openSSL to your local profile, **/usr/local/
 $ ln -s /usr/local/opt/openssl/include/openssl /usr/local/include
 ```
 
-3. Run this command to configure `curl` with **http2**. This is required to connect to AVS:  
+3. Run this command to configure curl with **http2**, using curl-openssl. This is required to connect to AVS.  
 
      ```shell
-     brew install curl --with-nghttp2
-     brew link curl --force
-
-     echo export PATH="/usr/local/opt/curl/bin:$PATH" >> ~/.bash_profile
-     source ~/.bash_profile
+     brew install curl-openssl
+     echo export PATH="/usr/local/opt/curl-openssl/bin:$PATH" >> ~/.bash_profile
      ```
 
 4. Now install the [SDK dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies):
@@ -133,33 +130,34 @@ git clone git://github.com/alexa/avs-device-sdk.git
 
 ## Build the SDK  
 
-1. Run CMake to generate the build dependencies. To get debug logs from the sample app, add `-DCMAKE_BUILD_TYPE=DEBUG` to the end of your command. For more information, see [Debug builds](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#debug-builds).
+1. First, run CMake to generate the build dependencies. To get debug logs from the sample app, add `-DCMAKE_BUILD_TYPE=DEBUG` to the end of your command. For more information, see [Debug builds](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#debug-builds).
 
 In this example it is declared that gstreamer is enabled, and provides the path to PortAudio, and also enables debug logging (which is optional):
 
-    **IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`.
+**IMPORTANT**: Replace all instances of `{home}` with the absolute path to your home directory. For example: `/Users/courtneybarnett/`.
 
-    ```shell
-    cd ~/sdk-folder/sdk-build
+```shell
+cd ~/sdk-folder/sdk-build
 
-    cmake /{home}/sdk-folder/sdk-source/avs-device-sdk \
-    -DGSTREAMER_MEDIA_PLAYER=ON \
-    -DPORTAUDIO=ON \
-    -DPORTAUDIO_LIB_PATH=/{home}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a \
-    -DPORTAUDIO_INCLUDE_DIR=/{home}/sdk-folder/third-party/portaudio/include
-    -DCMAKE_BUILD_TYPE=DEBUG
+cmake /{home}/sdk-folder/sdk-source/avs-device-sdk \
+-DGSTREAMER_MEDIA_PLAYER=ON \
+-DCURL_LIBRARY=/usr/local/opt/curl-openssl/lib/libcurl.dylib \
+-DCURL_INCLUDE_DIR=/usr/local/opt/curl-openssl/include \
+-DPORTAUDIO=ON \
+-DPORTAUDIO_LIB_PATH=/{home}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a \
+-DPORTAUDIO_INCLUDE_DIR=/{home}/sdk-folder/third-party/portaudio/include
+-DCMAKE_BUILD_TYPE=DEBUG
 
-    make
-    ```
+make
+```
 
-2. Here's the fun part, let's build! For this project we're only building the sample app.
+2. Now, you can build the SDK by running this command:
 
-    Run this command:
-    ```shell
-    make SampleApp -j2
-    ```
+```shell
+ make SampleApp -j2
+ ```
 
-   **Note**: Try the `-j3` or `j4` to run processes in parallel during make.
+**Note**: You can use `-j3` or `j4` to run processes in parallel during make.
 
    If you want to build the full SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
