@@ -77,11 +77,19 @@ The AVS Device SDK requires libraries to:
        -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
     ```
 
-If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process:
+If so, you'll need to manually link openSSL to your local profile, **/usr/local/<include>**, which is where the compiler looks during the linking process. Follow these steps:
 
-```
-$ ln -s /usr/local/opt/openssl/include/openssl /usr/local/include
-```
+  **a**. Manually link openSSL to your profile:
+
+    ```sh
+    echo export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH" >> ~/.bash_profile
+    source ~/.bash_profile
+    ```
+
+  **b**. Delete your **sdk build** directory.
+
+  **c**. Start a new shell session, then continue with the steps below.
+ 
 
 3. Run this command to configure curl with **http2**, using curl-openssl. This is required to connect to AVS.  
 
