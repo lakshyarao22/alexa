@@ -27,7 +27,7 @@ mkdir sound-files
 
 The AVS Device SDK requires libraries to:  
 
-1. Maintain an `HTTP2` connection with AVS  
+1. Maintain an HTTP/2 connection with AVS  
 2. Play Alexa TTS and music  
 3. Record audio from the microphone  
 4. Store records in a database (persistent storage)  
@@ -41,10 +41,8 @@ sudo apt-get update
 Then run:
 
 ```sh
-sudo apt-get -y
-install git gcc
-
-cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev \
+sudo apt-get -y install \
+git gcc cmake build-essential libsqlite3-dev libcurl4-openssl-dev libfaad-dev \
 libsoup2.4-dev libgcrypt20-dev libgstreamer-plugins-bad1.0-dev \
 gstreamer1.0-plugins-good libasound2-dev doxygen
 ```
