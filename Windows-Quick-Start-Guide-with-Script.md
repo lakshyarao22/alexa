@@ -53,7 +53,7 @@ Open the MinGW64 shell, and run `make` inside of the the `alexa_sdk/build` folde
 
 See the [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide).
 
-## Next Steps
+## Additional Resources
 
 * [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  
