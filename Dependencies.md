@@ -1,4 +1,4 @@
-This is a list of requirements and dependencies for the Alexa Voice Service (AVS) Device SDK.  
+This is a list of requirements and dependencies for the Alexa Voice Service (AVS) Device SDK for C++.
 
 ## Requirements
 
@@ -17,7 +17,9 @@ The AVS Device SDK libraries are tested with the following compilers:
 
 ### Build tools
 
-The AVS Device SDK can be built with CMake. The minimum version of CMAke that we test with is:
+[CMake](https://cmake.org/) is a cross-platform set of tools that can be used to manage your application's dependencies and create native makefiles and workspaces suitable for the platform you're building on. It's an easy way to create, build, and test projects using the AVS Device SDK for C++.
+
+The minimum version we test with is:
 
 | Tool | Minimum Version    |
 | :------------- | :------------- |
@@ -25,7 +27,7 @@ The AVS Device SDK can be built with CMake. The minimum version of CMAke that we
 
 ### Libraries
 
-The SDK depends on libcurl, nghttp2, OpenSSL and the dependencies of those libraries. The AVS Device SDK C++ client libraries are tested with the following versions of these dependencies:
+The SDK depends on libcurl, nghttp2, OpenSSL and the dependencies of those libraries. The AVS Device SDK client libraries are tested with the following versions of these dependencies:
 
 | Library     | Minimum versions    |
 | :------------- | :------------- |
@@ -78,12 +80,13 @@ Building the AVS sample app is optional. If you are building for Mac, Linux, Ras
 
 Building with Bluetooth is optional and is currently limited to Linux and Raspberry Pi. `A2DP-SINK`, `A2DP-SOURCE` (Linux only), `AVRCPTarget` (Linux only), and `AVRCPController` profiles are supported.
 
-If you choose to build with Bluetooth these libraries and modules, and their dependencies, must be installed:
+If you choose to build with Bluetooth, these libraries and modules, and their dependencies, must be installed:
 
 | Library     | Minimum version    |
 | :------------- | :------------- |
 | [SBC Library](https://git.kernel.org/pub/scm/bluetooth/sbc.git/tree/) |   1.3     |
 | [BlueZ 5.37](http://www.bluez.org/download/) |   5.37     |
+| [libpulse-dev](https://packages.debian.org/sid/libpulse-dev) - Only required if enabling this [Cmake variable](https://github.com/alexa/avs-device-sdk/wiki/Dependencies#bluetooth): `BLUETOOTH_BLUEZ_PULSEAUDIO_OVERRIDE_ENDPOINTS` | 8.0 |
 
 Note: You may substitute PulseAudio with a comparable application of your choice.
 
@@ -107,7 +110,7 @@ Building the reference implementation of the `MediaPlayerInterface` is optional;
 
 ### Opus encoding
 
-[Opus](http://opus-codec.org/) encoding is optional. To enable Opus, [libopus](http://opus-codec.org/docs/) must be installed, and you must include the [`-DOPUS=ON`](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#additional-options) flag in your CMake command.
+[Opus](http://opus-codec.org/) encoding is optional. To enable Opus, [libopus](http://opus-codec.org/docs/) must be installed, and you must include the [`-DOPUS=ON`](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#additional-options) flag in your CMake command.
 
 | Library     | Minimum version    |
 | :------------- | :------------- |
@@ -115,7 +118,7 @@ Building the reference implementation of the `MediaPlayerInterface` is optional;
 
 ### SAMPLE-AES decryption
 
-SAMPLE-AES decryption is optional. To enable SAMPLE-AES decryption for audio streamed to your device, the FFMPEG library is required, and this option [must be enabled in your CMake command](https://github.com/alexa/avs-device-sdk/wiki/Build-Options#additional-options).
+SAMPLE-AES decryption is optional. To enable SAMPLE-AES decryption for audio streamed to your device, the FFMPEG library is required, and this option [must be enabled in your CMake command](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#additional-options).
 
 This option is available for all platforms, however, FFMEG is required for Android builds.
 
