@@ -94,7 +94,7 @@ To install Homebrew:
     git clone git://github.com/alexa/avs-device-sdk.git
     ```
 
-## Set build options
+## Build the SDK
 
 1. Use the [CMake](https://cmake.org/) parameters in this section to customize how the SDK builds. To get debug logs from the sample app, include the `-DCMAKE_BUILD_TYPE=DEBUG` option. For more information, see [Debug builds](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#debug-builds).
 
