@@ -1,45 +1,48 @@
-These instructions will get you up and running quickly on a machine running **Ubuntu Linux 16.04 LTS**. For all other distributions, please review dependencies, build options, and make commands for Generic Linux.  
+These instructions will get you up and running on a machine running **Ubuntu Linux 16.04 LTS**. For all other distributions, please review dependencies and Cmake parameters for Generic Linux.
 
 ## Prerequisites  
-This guide assumes that:
 
-* you are running Ubuntu Linux 16.04 LTS  
-* you have a microphone
-* your Ubuntu box is capable of audio output through headphones or a speaker  
+* Ubuntu Linux 16.04 LTS  
+* Hardware audio input/output (microphone and speakers or headphones)
 
-## Register a product
+## Get started
 
-Follow these instructions to [register your product and create a security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile). During this process, you will download a config.json to your machine that is used to complete configuration of the sample app.
+1. [Register an AVS Product and Create a Security Profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile), if you haven't already. It must be enabled for [Code-Based Linking](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1).
 
-Note: If you already have a registered product that you can use for testing, you may use it, but it must be enabled for use with Code Based Linking (CBL).
-
-Here are the instructions on [how to enable CBL for your device](https://developer.amazon.com/docs/alexa-voice-service/code-based-linking-other-platforms.html#step1).
-
-## Setup
-
-1. The first step is to make sure your machine has the latest package lists and then install the latest version of each package in that list:
+2. Update and install the latest packages:
    ```shell
    sudo apt-get update && sudo apt-get upgrade -y
    ```
-2. We need somewhere to put everything, so let's create some folders. This guide presumes that everything is built in `{home}`, which we will presume is your home directory. If you choose to use different folder names, please update the commands throughout this guide accordingly:
-   ```shell
-   mkdir sdk-folder
+3. Set up your build environment. Create a **my_project** folder, and these subfolders: **build**, **source**, **third-party**, **application-necessities** > **sound-files**.
 
-   cd sdk-folder
-   mkdir sdk-build sdk-source third-party application-necessities
-   ```  
-3. Now, let's set up our toolchain:  
+    ```shell
+    mkdir my_project
+
+    cd {my_project}
+    mkdir build source third-party application-necessities
+
+    cd application-necessities
+    mkdir sound-files
+
+    cd {home}/{my_project}
+    ```
+
+4. Install toolchain: git, gcc, cmake, openssl, clang-format:
    ```shell
    sudo apt-get install -y git gcc cmake openssl clang-format
    ```
-4. Next, we need to download dependencies available from apt-get:
-   ```shell
-   sudo apt-get install -y openssl libgstreamer1.0-dev \
-   libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good \
-   libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev \
-   gstreamer1.0-libav pulseaudio doxygen libsqlite3-dev repo libasound2-dev
-   ```  
-5. The AVS Device SDK relies on an HTTP2 connection with the Alexa service. To address this requirement, we're going to build curl with nghttp2 and openssl. If you would prefer to build with mbed TLS, [click here for instructions](https://github.com/alexa/avs-device-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2):
+5. Install the core [SDK dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies):
+
+    ```shell
+    sudo apt-get install -y libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-good \
+    libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev \
+    gstreamer1.0-libav pulseaudio doxygen libsqlite3-dev repo libasound2-dev
+    ```
+
+     **IMPORTANT**: Make sure that command ran successfully, and that no errors were thrown. If for any reason the install command fails, run brew install for each dependency individually.  
+
+6. The AVS Device SDK relies on an HTTP2 connection with the Alexa service. To address this requirement, we're going to build curl with nghttp2 and openssl. If you would prefer to build with mbed TLS, [click here for instructions](https://github.com/alexa/avs-device-sdk/wiki/Build-libcurl-with-mbed-TLS-and-nghttp2):
    * Let's install nghttp2. **Note:** This command will download and install dependencies for nghttp2:  
      ```shell
      sudo apt-get
@@ -99,181 +102,77 @@ Here are the instructions on [how to enable CBL for your device](https://develop
      x-xss-protection: 1; mode=block
      x-content-type-options: nosniff
      ```
-6. PortAudio is required to record microphone data. Run this command to install and configure PortAudio:  
-   ```shell
-   cd ~/sdk-folder/third-party
-   wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz \
-   tar zxf pa_stable_v190600_20161030.tgz
+7. Install and configure PortAudio. Portaudio is required to stream microphone input/output data.
 
-   cd portaudio
-   ./configure --without-jack && make  
-   ```
-7. Now it's time to clone the AVS Device SDK. Navigate to your sdk-source folder and run this command:  
-   ```shell
-   cd ~/sdk-folder/sdk-source
-   git clone git://github.com/alexa/avs-device-sdk.git
-   ```
-8. Assuming the download succeeded, the next step is to build the SDK. This command does a few things:  
-   * It declares that PortAudio is used to capture microphone data and points to its lib path and includes directory
-   * It declares that gstreamer is installed and will be used when you build the SampleApp
-   * It declares that the wake word detector is **OFF**  
-     * Linux supports wake word detectors from Sensory and Kitt.ai. Each requires a license from the provider. For instructions to build with a wake word detector, please see [Build Options](https://github.com/alexa/avs-device-sdk/wiki/Build-Options).  
+     ```shell
+     cd {home}/my_project/third-party
+     wget -c http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
+     tar xf pa_stable_v190600_20161030.tgz
 
-   **IMPORTANT**: Replace `{home}` with the full path to your home directory (do not use `~/`):  
-   ```shell
-   cd /{home}/sdk-folder/sdk-build
+     cd portaudio
+     ./configure --without-jack && make
 
-   cmake /{home}/sdk-folder/sdk-source/avs-device-sdk \
-   -DSENSORY_KEY_WORD_DETECTOR=OFF \
-   -DGSTREAMER_MEDIA_PLAYER=ON \
-   -DPORTAUDIO=ON \
-   -DPORTAUDIO_LIB_PATH=/{home}/sdk-folder/third-party/portaudio/lib/.libs/libportaudio.a \
-   -DPORTAUDIO_INCLUDE_DIR=/{home}/sdk-folder/third-party/portaudio/include
+     make
+     ```  
+8. Clone the SDK into the **~/my_project/source** folder:  
 
-   make
-   ```   
-
-## Setup your configuration
-
-### `genConfig.sh`
-
-`genConfig.sh` is a configuration file generator script that is included with v1.10.0 or greater of the SDK, located in the **tools/Install** folder. It uses data from **config.json** and the arguments below, to populate `AlexaClientSDKConfig.json` in order to authorize with LWA.
-
-Follow these steps to setup `AlexaClientSDKConfig.json` using `genConfig.sh`:
-
-1. Move the **config.json** you downloaded when you [created your security profile](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile#create-a-security-profile) into the **tools/Install** folder of the SDK.
-
-    ```sh
-    mv ~/{{download location}}/config.json
-    {{path to source folder}}/avs-device-sdk/tools/Install
+    ```shell
+    cd {home}/{my_project}/source
+    git clone git://github.com/alexa/avs-device-sdk.git
     ```
 
-    **config.json** should be populated with the `clientID` and `productID` values generate in the Security Profile process.
+## Set build options
 
-    Example:
+1. Use the [CMake](https://cmake.org/) parameters in this section to customize how the SDK builds. To get debug logs from the sample app, include the `-DCMAKE_BUILD_TYPE=DEBUG` option. For more information, see [Debug builds](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#debug-builds).
 
-    ```sh
-        {
-         "deviceInfo": {
-          "clientId": "amzn1.application-oa2-client.{{string}}",
-          "productId": "Test_123"
-         }
-        }
-    ```
+In this example it is declared that gstreamer is enabled, and provides the path to PortAudio, and also enables debug logging (which is optional):
 
-2. Run `genConfig.sh`, including the following as arguments:
-
-    ```sh
-    cd {{path to source folder}}/avs-device-sdk/tools/Install
-
-    bash genConfig.sh config.json {device serial number} \
-    /{{path to database}} \
-    /{{path to source folder}}/avs-device-sdk \
-    {{path to build}}/Integration/AlexaClientSDKConfig.json
-    ```
-
-    Parameters:
-
-    * `config.json`: Downloaded when you created your security profile. It should contain the following:
-        ```
-        "clientId": "{OAuth client ID}"
-        "productId": "{product name for the device}"
-        ```
-    * **{{device serial number}}**: You can provide your own device serial number (DSN), or use the system default 
-    (`123456`). The DSN can be any unique alpha-numeric string (up to 64 characters). You should use this string 
-    to identify your product or application instance. Many developers choose to use a product's SKU for this 
-    value. If you don't supply a DSN, then the default value `123456` will be generated by the SDK.
-
-        For example:
-
-        ```sh
-        sudo bash config.json -s 998987
-        ```
-    * **{{path to database}}**: Specifies where the databases will be located.
-    * **{{path to source folder}}**: Specifies the root directory where the avs-device-sdk source code is located.
-    * **{{path to build}}**: Specifies where the build folder is, which contains the **Integration/AlexaClientSDKConfig.json** file.
-
-**IMPORTANT**: Create a backup of your `AlexaClientSDKConfig.json` file. Subsequent builds will reset the contents of this file.
-
-## Run and authorize
-
-Navigate to your build folder (~/sdk-folder/sdk-build), then:
-1. Start the sample app:
 ```shell
-./SampleApp/src/SampleApp Integration/AlexaClientSDKConfig.json
+cd {home}/my_project/build
+
+cmake /{home}/{my_project}/source/avs-device-sdk \
+-DGSTREAMER_MEDIA_PLAYER=ON \
+-DCURL_LIBRARY=/usr/local/opt/curl-openssl/lib/libcurl.dylib \
+-DCURL_INCLUDE_DIR=/usr/local/opt/curl-openssl/include \
+-DPORTAUDIO=ON \
+-DPORTAUDIO_LIB_PATH=/{home}/{my_project}/third-party/portaudio/lib/.libs/libportaudio.a \
+-DPORTAUDIO_INCLUDE_DIR=/{home}/{my_project}/third-party/portaudio/include
+-DCMAKE_BUILD_TYPE=DEBUG
+
+make
 ```
-2. Wait for the sample app to display a message like this:
+
+2. Build the SDK:
+
 ```shell
-##################################
-#       NOT YET AUTHORIZED       #
-##################################
-################################################################################################
-#       To authorize, browse to: 'https://amazon.com/us/code' and enter the code: {XXXX}       #
-################################################################################################
-```
-3. Use a browser to navigate to the URL specified in the message from the sample app.
-4. If requested to do so, authenticate using your Amazon user credentials.
-5. Enter the code specified in the message from sample app.
-6. Select “Allow”.
-7. Wait for `CBLAuthDelegate` to successfully get an access token and refresh token from Login With Amazon (LWA). At this point the sample app will print a message like this:
-```shell
-########################################
-#       Alexa is currently idle!       #
-########################################
-```
-8. You are now ready to use the sample app. The next time you start the sample app, you will not need to go through the authorization process.
+ make SampleApp -j2
+ ```
 
-A couple more details:
-* If you exit out of sample app via the `k` command, the `CBLAuthDelegate` database will be cleared and you will need to reauthorize your client.
-* If you want to move this authorization to another sample app installation, you need to copy the **deviceInfo** object within `AlexaClientSDKConfig.json` to the new installation.  You will also need to copy the file `"/{home}/sdk-folder/application-necessities/cblAuthDelegate.db"` to the new installation, and update **AlexaClientSDKConfig.json** in the new installation so that the **cblAuthDelegate's databaseFilePath** property points to it.
+ **Note**: You can use `-j3` or `j4` to run processes in parallel during make.
 
-## Integration and unit tests
+    If you want to build the full SDK, including unit and integration tests, run `make` instead of `make SampleApp`.
 
-1. Run integration and unit tests to ensure that the AVS Device SDK is functioning as designed.
-    * Use this command to run integration tests:
-       ```shell
-      make all integration
-       ```
-    * Use this command to run unit tests:  
-       ```shell
-       make all test
-       ```
-    For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).
-
-## Bluetooth
+### Include Bluetooth (optional)
 
 Building with Bluetooth is optional, and is currently limited to Linux and Raspberry Pi. The `A2DP-SINK`, `A2DP-SOURCE`, `AVRCPTarget`, and `AVRCPController` profiles are supported for Linux/Ubuntu.
 
 To enable Bluetooth on Linux, follow these steps:
 
-### 1. Install Dependencies
-
-In order to use Bluetooth, you must install these dependencies:
+1. Install dependencies: In order to use Bluetooth, you must install these dependencies:
 
 * Core [Bluetooth dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies#bluetooth-dependencies)
+* [libpulse-dev](https://packages.debian.org/sid/libpulse-dev)
 * PulseAudio
 * PulseAudio bluetooth modules:
 ```
 sudo apt-get install pulseaudio-module-bluetooth
 ```
 
-### 2. Initialize the SDK
+2. Include the following CMake option in your build:
 
-To use Bluetooth with the SDK, you must build and initialize the SDK before you load the PulseAudio bluetooth modules. This establishes order-of-priority for sink audio handing, setting the SDK as the controller.
+`BLUETOOTH_BLUEZ_PULSEAUDIO_OVERRIDE_ENDPOINTS`
 
-### 3. Load bluetooth modules
-
-After the SDK has been initialized, you'll need to unload and then load the PulseAudio bluetooth modules.
-
-For example:
-
-```
-pactl unload-module module-bluetooth-discover; pactl unload-module module-bluetooth-policy; pactl load-module module-bluetooth-discover; pactl load-module module-bluetooth-policy
-```
-
-Note: When installing these modules, if they fail upon unload (because they weren't originally loaded), this is not a critical error -- and should not affect your Bluetooth integration.
-
-### 4. AVRCPTarget
+3. AVRCPTarget (*if applicable*)
 
 If you are using the `AVRCPTarget` profile, you'll need to enable permissions for BlueZ to interact with `"org.mpris.MediaPlayer2.Player"`.
 
@@ -297,3 +196,20 @@ For example:
 
 </busconfig>
 ```
+
+## Authorization
+
+After you have built the SDK, you'll need to configure and authorize it to access AVS using Login with Amazon (LWA). To do this, follow [these authorization instructions](https://github.com/alexa/avs-device-sdk/wiki/Authorization#macOS,-Ubuntu-Linux-16.04-LTS,-and-Raspberry Pi).
+
+## Integration and unit tests
+
+1. After you've built the AVS Device SDK, we recommend running integration and unit tests to make sure that the SDK is functioning as designed.
+    * Use this command to run integration tests:
+       ```shell
+      make all integration
+       ```
+    * Use this command to run unit tests:  
+       ```shell
+       make all test
+       ```
+    For additional details, see [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests).
