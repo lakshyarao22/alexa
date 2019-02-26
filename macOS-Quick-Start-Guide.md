@@ -152,7 +152,7 @@ You can designate aliases to launch the sample app. To do this:
 
 See the [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide).
 
-## Next steps  
+## Additional resources  
 
 * [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)  
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  
