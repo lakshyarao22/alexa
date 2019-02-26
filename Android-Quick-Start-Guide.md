@@ -99,7 +99,7 @@ wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install
 wget https://raw.githubusercontent.com/alexa/avs-device-sdk/master/tools/Install/android.sh
 ```
 
-8. You'll need to configure and authorize it to access AVS using Login with Amazon (LWA). To do this, follow [these authorization instructions](https://github.com/alexa/avs-device-sdk/wiki/Authorization#Android).
+8. Finally, you'll need to configure and authorize it to access AVS using Login with Amazon (LWA). To do this, follow [these authorization instructions](https://github.com/alexa/avs-device-sdk/wiki/Authorization#Android).
 
 ## Additional resources
 
