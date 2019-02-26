@@ -6,7 +6,7 @@ Select your platform:
 
 * [Android](https://github.com/alexa/avs-device-sdk/wiki/Authorization#Android)
 * [Generic Linux](https://github.com/alexa/avs-device-sdk/wiki/Authorization#Generic-Linux)
-* [macOS or Ubuntu Linux 16.04 LTS]
+* [macOS or Ubuntu Linux 16.04 LTS](https://github.com/alexa/avs-device-sdk/wiki/authorization#macos-ubuntu-linux-1604-lts)
 * [Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Authorization#raspberry-pi)
 * [Windows](https://github.com/alexa/avs-device-sdk/wiki/Authorization#Windows)
 
