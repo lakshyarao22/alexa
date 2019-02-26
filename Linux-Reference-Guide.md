@@ -8,13 +8,15 @@ Follow these steps:
 
 2. Install the [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies).
 
-3. Now, set up your build environment. The SDK must be built out-of-source. Create these folders: **build**, **source**, **third-party**, **application-necessities** > **sound-files**.
+3. Set up your build environment by creating these folders: **build**, **source**, **third-party**, **application-necessities** > **sound-files**. Note: the SDK must be built out-of-source.
 
 4. Clone the AVS Device SDK into your **source** folder:  
 
 ```shell
 git clone https://github.com/alexa/avs-device-sdk.git
 ```
+
+Then proceed to build the AVS Device SDK.
 
 ## Build the AVS Device SDK
 
