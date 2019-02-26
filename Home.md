@@ -11,7 +11,7 @@ The AVS Device SDK for C++ provides a C++ (11 or later) interface for the Alexa 
 
 ## Authorization
 
-The AVS Device SDK for C++ relies on Login With Amazon (LWA) to authorize your client to use AVS. The SDK [authorization guide](https://github.com/alexa/avs-device-sdk/wiki/Authorization#) provides instructions on how to authorize the sample app with AVS using LWA. For general information about authorization, view the AVS [Authorization](https://developer.amazon.com/alexa-voice-service/auth) page.
+The AVS Device SDK for C++ relies on Login With Amazon (LWA) to authorize your client to use AVS. The [SDK authorization guide](https://github.com/alexa/avs-device-sdk/wiki/Authorization#) provides instructions on how to authorize the sample app with AVS using LWA. For general information about authorization, view the AVS [authorization](https://developer.amazon.com/alexa-voice-service/auth) page.
 
 ## Documentation
 
