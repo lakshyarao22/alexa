@@ -25,7 +25,7 @@
 * [AVS Development Kits](https://developer.amazon.com/alexa-voice-service/dev-kits)
 
 **Resources**
-* [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)
+* [Cmake Options](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)
 * [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies)
 * [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide)
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)   
