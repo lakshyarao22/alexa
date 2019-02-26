@@ -3,16 +3,15 @@
 **API Reference**
 * [API Reference](https://alexa.github.io/avs-device-sdk/)
 
-**Guides**
+**Developer Guides**
 * [For Android](https://github.com/alexa/avs-device-sdk/wiki/Android-Quick-Start-Guide)
 * [Cross-compile for iOS](https://github.com/alexa/avs-device-sdk/wiki/How-to-cross-compile-the-AVS-Device-SDK-for-iOS)
+* [Generic Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide)  
 * [For macOS](https://github.com/alexa/avs-device-sdk/wiki/macOS-Quick-Start-Guide)
 * [For Raspberry Pi](https://github.com/alexa/avs-device-sdk/wiki/Raspberry-Pi-Quick-Start-Guide-with-Script)  
 * [For Ubuntu Linux](https://github.com/alexa/avs-device-sdk/wiki/Ubuntu-Linux-Quick-Start-Guide)
 * [For Windows 64-bit](https://github.com/alexa/avs-device-sdk/wiki/Windows-Quick-Start-Guide-with-Script)
 
-**Reference Guide**  
-* [Generic Linux](https://github.com/alexa/avs-device-sdk/wiki/Linux-Reference-Guide)  
 
 **Other Guides + Optimizations**
 * [Authorizing AVS Device SDK Software with AVS](https://github.com/alexa/avs-device-sdk/wiki/Authorizing-AVS-Device-SDK-Software-with-AVS)
@@ -25,6 +24,7 @@
 * [AVS Development Kits](https://developer.amazon.com/alexa-voice-service/dev-kits)
 
 **Resources**
+* [Authorization](https://github.com/alexa/avs-device-sdk/wiki/authorization)
 * [Cmake Parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters)
 * [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies)
 * [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide)
