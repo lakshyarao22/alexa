@@ -22,12 +22,10 @@ Then proceed to build the AVS Device SDK.
 
 Navigate to your **build** folder, and use Came to configure and build the SDK. You can customize your build of the SDK by introducing different [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options) for a additional configuration options.
 
-This sample command does a few things:  
-* It declares that PortAudio is used to capture microphone data and points to its lib path and includes directory
-   * It declares that gstreamer is installed and will be used when you build the SampleApp
-   * It declares that the wake word detector is **OFF**  
-
-*Linux supports wake word detectors from Sensory and Kitt.ai. Each requires a license from the provider. For instructions to build with a wake word detector, please see [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options).*  
+In the following build example:  
+* It declares that PortAudio is used to capture microphone data and points to its lib path and directory.
+   * It declares that gstreamer is installed and will be used when you build the sample app.
+   * It declares that the wake word detector is **OFF**.
 
 ```shell
 cmake /{source}/avs-device-sdk \
@@ -39,6 +37,8 @@ cmake /{source}/avs-device-sdk \
 
 make
 ```
+
+*Linux supports wake word detectors from Sensory and Kitt.ai. Each requires a license from the provider. For instructions to build with a wake word detector, please see [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options).*  
 
 ### Include Bluetooth (optional)
 
