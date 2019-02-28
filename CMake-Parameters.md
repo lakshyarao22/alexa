@@ -6,17 +6,17 @@ You can use the CMake variables and options listed on this page to customize how
 
 **Build types**:
 
-* [Build types](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#build-types)
-  * [Specify log level](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Specify-log-level)
-  * [Log sensitive data](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Log-sensitive-data)
+* [Build types](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#build-types)
+  * [Specify log level](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Specify-log-level)
+  * [Log sensitive data](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Log-sensitive-data)
 
 **Build Options**
 
-* [Bluetooth](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Bluetooth)
-* [MediaPlayer](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#MediaPlayer)
-* [Wake word detector](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Wake-word-detector )
-* [Additional options](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Additional-options)
-* [Android CMake parameters and variables](https://github.com/alexa/avs-device-sdk/wiki/cmake-options#Android-CMake-variables-and-options)
+* [Bluetooth](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Bluetooth)
+* [MediaPlayer](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#MediaPlayer)
+* [Wake word detector](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Wake-word-detector )
+* [Additional options](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Additional-options)
+* [Android CMake parameters and variables](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters#Android-CMake-variables-and-options)
 
 ## Build types
 
