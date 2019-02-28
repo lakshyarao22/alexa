@@ -25,7 +25,7 @@
 
 **Resources**
 * [Authorization](https://github.com/alexa/avs-device-sdk/wiki/authorization)
-* [Cmake Parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters)
+* [CMake Parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-parameters)
 * [Dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies)
 * [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Troubleshooting-Guide)
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)   
