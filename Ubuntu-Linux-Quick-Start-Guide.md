@@ -132,8 +132,6 @@ cd {home}/my_project/build
 
 cmake /{home}/{my_project}/source/avs-device-sdk \
 -DGSTREAMER_MEDIA_PLAYER=ON \
--DCURL_LIBRARY=/usr/local/opt/curl-openssl/lib/libcurl.dylib \
--DCURL_INCLUDE_DIR=/usr/local/opt/curl-openssl/include \
 -DPORTAUDIO=ON \
 -DPORTAUDIO_LIB_PATH=/{home}/{my_project}/third-party/portaudio/lib/.libs/libportaudio.a \
 -DPORTAUDIO_INCLUDE_DIR=/{home}/{my_project}/third-party/portaudio/include
