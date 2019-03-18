@@ -55,6 +55,7 @@ To install Homebrew:
      ```shell
      cd ~
      brew install curl-openssl
+     echo export PATH="/usr/local/opt/curl-openssl/bin:$PATH" >> ~/.bash_profile
      ```
 
 6. Install the core [SDK dependencies](https://github.com/alexa/avs-device-sdk/wiki/Dependencies):
@@ -154,5 +155,5 @@ See the [Troubleshooting Guide](https://github.com/alexa/avs-device-sdk/wiki/Tro
 
 ## Additional resources  
 
-* [Cmake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)  
+* [CMake parameters](https://github.com/alexa/avs-device-sdk/wiki/cmake-options)  
 * [Unit and Integration Tests](https://github.com/alexa/avs-device-sdk/wiki/Unit-and-Integration-Tests)  
